@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+//@ts-ignore
 const SignupPage: NextPage<Props> = () => {
     const classes = useStyles();
 

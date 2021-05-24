@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+// @ts-ignore
 const Login: NextPage<Props> = () => {
     const classes = useStyles();
     const router = useRouter();
