@@ -2,23 +2,32 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import ProTip from '../src/ProTip';
-import Link from '../src/Link';
-import Copyright from '../src/Copyright';
+import Link from '../components/Link';
+import { Button, Card, CardContent, Grid } from '@material-ui/core';
+import { signIn, signOut, useSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 
 export default function Index() {
+  const [session, loading] = useSession();
+  const router = useRouter();
   return (
-    <Container maxWidth="sm">
-      <Box my={4}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Next.js with TypeScript example
-        </Typography>
-        <Link href="/about" color="secondary">
-          Go to the about page
-        </Link>
-        <ProTip />
-        <Copyright />
-      </Box>
+    <Container maxWidth="md" style={{ marginTop: 200 }}>
+      <Grid container>
+        <Grid item sm={12} md={12} style={{ textAlign: 'center' }}>
+          <Typography variant="h4" component="h1" gutterBottom>
+            WiroForce
+          </Typography>
+          <Typography variant="h4" component="h1" gutterBottom>
+            Plataforma de monetizacion
+          </Typography>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => router.push('/dashboard')}>
+            Ir al Dashboard
+          </Button>
+        </Grid>
+      </Grid>
     </Container>
   );
 }
