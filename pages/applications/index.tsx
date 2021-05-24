@@ -55,7 +55,7 @@ const Applications = ({ session }) => {
         try {
             const response = await Api().get('/applications', {
                 headers: {
-                     //@ts-ignore
+                    //@ts-ignore
                     'Authorization': 'Bearer ' + session.user.token
                 }
             });
@@ -102,6 +102,7 @@ const Applications = ({ session }) => {
                         message={toastMessage}
                         action={
                             <>
+                                {/* @ts-ignore */}
                                 <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
                                     <Close fontSize="small" />
                                 </IconButton>
