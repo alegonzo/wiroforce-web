@@ -33,6 +33,7 @@ export async function getServerSideProps(context) {
     const session = await getSession(context);
     const iframeUrl = session ? generateDashboard(
         { dashboard: 4 },
+        //@ts-ignore
         { "id": session.user.company.id }
     ) : null;
 

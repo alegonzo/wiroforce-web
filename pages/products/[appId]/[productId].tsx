@@ -23,9 +23,8 @@ const Product = () => {
         setLoading(true);
         try {
             const response = await Api().get(`/products/${productId}`, {
-                headers: {
-                    'Authorization': 'Bearer ' + session.user.token
-                }
+                //@ts-ignore
+                headers: { 'Authorization': 'Bearer ' + session.user.token }
             });
             setProduct(response.data);
         } catch (e) {

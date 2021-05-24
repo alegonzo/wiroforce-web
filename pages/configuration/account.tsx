@@ -20,7 +20,9 @@ const AccountConfig = () => {
     const getProfile = async () => {
         setLoading(true);
         try {
+            //@ts-ignore
             const response = await Api().get(`/users/${session.user.id}`, {
+                //@ts-ignore
                 headers: { 'Authorization': 'Bearer ' + session.user.token }
             });
             setUser(response.data);

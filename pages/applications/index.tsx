@@ -55,6 +55,7 @@ const Applications = ({ session }) => {
         try {
             const response = await Api().get('/applications', {
                 headers: {
+                     //@ts-ignore
                     'Authorization': 'Bearer ' + session.user.token
                 }
             });

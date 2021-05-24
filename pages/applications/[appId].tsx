@@ -48,6 +48,7 @@ const ApplicationView = () => {
         try {
             const response = await Api().get(`/applications/${appId}`, {
                 headers: {
+                    //@ts-ignore
                     'Authorization': 'Bearer ' + session.user.token
                 }
             });

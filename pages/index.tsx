@@ -1,8 +1,6 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Link from '../components/Link';
 import { Button, Card, CardContent, Grid } from '@material-ui/core';
 import { signIn, signOut, useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
