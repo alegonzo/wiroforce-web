@@ -21,7 +21,7 @@ export default function MyApp(props: AppProps) {
       options={{
         clientMaxAge: 0,
         keepAlive: 0,
-        //baseUrl: 'htt'
+        basePath: `/wiroforce/api/auth` 
       }}
       session={pageProps.session} >
       <React.Fragment>
