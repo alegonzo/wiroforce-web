@@ -20,7 +20,8 @@ export default function MyApp(props: AppProps) {
     <Provider
       options={{
         clientMaxAge: 0,
-        keepAlive: 0
+        keepAlive: 0,
+        //baseUrl: 'htt'
       }}
       session={pageProps.session} >
       <React.Fragment>
