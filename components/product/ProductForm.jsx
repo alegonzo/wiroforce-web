@@ -20,19 +20,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const formSchema = Yup.object({
-    name: Yup.string().required('Requerido'),
-    itemId: Yup.string().required('Requerido'),
-    price: Yup.number().required('Requerido').oneOf([4, 25], 'Deben ser 4 o 25 CUP'),
-    description: Yup.string(),
-    resourceAmount: Yup.string().required('Requerido'),
-    offline: Yup.boolean(),
-    appId: Yup.string().required('Falta el id de app')
-});
-
 const ProductForm = ({ session, handleSubmit, handleCloseForm, appId, edit, product }) => {
     const classes = useStyles();
     const imageFile = useRef();
+    console.log(product);
     let values = {
         name: '',
         itemId: '',
@@ -42,8 +33,23 @@ const ProductForm = ({ session, handleSubmit, handleCloseForm, appId, edit, prod
         offline: false,
         appId: appId
     };
+    let formSchema = Yup.object({
+        name: Yup.string().required('Requerido'),
+        itemId: Yup.string().required('Requerido'),
+        price: Yup.number().required('Requerido').oneOf([4, 25], 'Deben ser 4 o 25 CUP'),
+        description: Yup.string(),
+        resourceAmount: Yup.string().required('Requerido'),
+        offline: Yup.boolean(),
+        appId: Yup.string().required('Falta el id de app')
+    });
     if (product) {
         values = product;
+        formSchema = Yup.object({
+            //price: Yup.number().required('Requerido').oneOf([4, 25], 'Deben ser 4 o 25 CUP'),
+            description: Yup.string(),
+            resourceAmount: Yup.string(),
+            offline: Yup.boolean()
+        });
     }
 
     return (
@@ -73,13 +79,14 @@ const ProductForm = ({ session, handleSubmit, handleCloseForm, appId, edit, prod
                         });
                         response = "Producto Insertado";
                     }
+                    setSubmitting(false);
                     await handleSubmit(response);
                 } catch (e) {
                     if (e.response.status === 400) {
+                        setSubmitting(false);
                         setErrors(e.response.data.errors);
                     }
                 }
-                setSubmitting(false);
             }}
         >
             {({ submitForm, isSubmitting, handleChange, values, errors }) => (
@@ -112,7 +119,7 @@ const ProductForm = ({ session, handleSubmit, handleCloseForm, appId, edit, prod
                                     <MenuItem value={4}>4 CUP</MenuItem>
                                     <MenuItem value={25}>25 CUP</MenuItem>
                                 </Select>
-                                {errors.price ? <FormHelperText style={{ color: 'red' }}>{errors.price}</FormHelperText> : null}
+                                {errors && errors.price ? <FormHelperText style={{ color: 'red' }}>{errors.price}</FormHelperText> : null}
                             </FormControl>
                             <Field
                                 component={TextField}

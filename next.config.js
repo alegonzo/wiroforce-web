@@ -1,6 +1,6 @@
 module.exports = {
-    basePath: '/wiroforce',
+    basePath: process.env.BASE_PATH || '',
     publicRuntimeConfig: {
-        basePath: '/wiroforce',
+        basePath: process.env.BASE_PATH || ''
     },
 }
