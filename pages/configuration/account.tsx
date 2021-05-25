@@ -38,7 +38,7 @@ const AccountConfig = () => {
             <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20, marginLeft: 20 }}>
                 <Button variant="text" onClick={() => router.push('/dashboard')}>
                     Dashboard
-                    </Button>
+                </Button>
                 <Typography color="textPrimary">Cuenta</Typography>
             </Breadcrumbs>
             <Container>

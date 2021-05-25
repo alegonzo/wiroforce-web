@@ -2,7 +2,7 @@ import * as jwt from 'jsonwebtoken';
 
 const generateDashboard = (resource, params) => {
     const METABASE_SITE_URL = process.env.METABASE_URL;
-    const METABASE_SECRET_KEY = "d0f6385a7663d712bf8709fa4a659b4a6611648e130ded0eac173c967cc8fc70";
+    const METABASE_SECRET_KEY = "2c3ae795a357276b05b110b54d6e729546f9ab79d48ca213ca6a39d1d7c94314";
     const payload = {
         resource: resource,
         params: params,
