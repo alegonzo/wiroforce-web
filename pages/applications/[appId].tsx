@@ -10,7 +10,8 @@ import ApplicationCard from '../../components/application/ApplicationCard';
 import { useRouter } from 'next/router';
 import Layout from '../../components/layouts/Layout';
 import { getSession, useSession } from 'next-auth/client';
-
+import generateDashboard from '../../utils/metabase';
+import axios from 'axios';
 
 function a11yProps(index) {
     return {
@@ -25,40 +26,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ApplicationView = () => {
-    const [session] = useSession()
+const ApplicationView = ({ application, iframeUrl }) => {
+    const [session, loading] = useSession()
     const router = useRouter();
-    const { appId } = router.query;
     const classes = useStyles();
-    const [application, setApplication] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [value, setValue] = useState(0);
-
-    useEffect(() => {
-        getApp();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    const getApp = async () => {
-        setLoading(true);
-        try {
-            const response = await Api().get(`/applications/${appId}`, {
-                headers: {
-                    //@ts-ignore
-                    'Authorization': 'Bearer ' + session.user.token
-                }
-            });
-            setApplication(response.data);
-            setLoading(false);
-        } catch (e) {
-            console.log(e.message);
-        }
-        setLoading(false);
-    }
+    if (typeof window !== 'undefined' && loading) return null;
 
     return (
         <Layout>
@@ -87,7 +65,16 @@ const ApplicationView = () => {
                         </Tabs>
                     </Paper>
                     <TabPanel value={value} index={0}>
-
+                        <Grid container>
+                            <Grid item md={12}>
+                                <iframe
+                                    src={iframeUrl}
+                                    frameBorder="0"
+                                    width="100%"
+                                    height="600"
+                                ></iframe>
+                            </Grid>
+                        </Grid>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
                         {application && <ProductTab
@@ -105,10 +92,32 @@ const ApplicationView = () => {
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
+    const appId = context.params.appId;
+    let application = null;
+    try {
+        const response = await axios.get(`${process.env.API_INTERNAL_URL}/applications/${appId}`, {
+            //@ts-ignore
+            headers: { 'Authorization': 'Bearer ' + session.user.token }
+        });
+        application = response.data;
+    } catch (e) {
+        console.log(e.message);
+    }
+    const iframeUrl = session ? generateDashboard(
+        { dashboard: 2 },
+        {
+            //@ts-ignore
+            "id": session.user.company.id,
+            "id_1": context.params.appId
+        }
+    ) : null;
+
     if (session) {
         return {
             props: {
-                session
+                session,
+                iframeUrl,
+                application: application
             }
         }
     }
