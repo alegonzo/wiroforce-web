@@ -56,7 +56,7 @@ const Header = ({ handleDrawerToggle }) => {
                 <Typography variant="h6" style={{ flexGrow: 1 }}>
                     WiroForce
             </Typography>
-                <Button color="inherit" onClick={() => signOut({callbackUrl: `${window.location.origin}/`})}>Logout({session.user.email})</Button>
+                <Button color="inherit" onClick={() => signOut({callbackUrl: `${window.location.origin}/wiroforce`})}>Logout({session.user.email})</Button>
             </Toolbar>
         </AppBar>
     );

@@ -1,9 +1,11 @@
+import getConfig from 'next/config';
 import axios from 'axios';
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig()
 
 const AxiosHelper = () => {
-    console.log(process.env.NEXT_PUBLIC_API_URL);
+    console.log(publicRuntimeConfig.apiUrl);
     return axios.create({
-        baseURL: `${process.env.NEXT_PUBLIC_API_URL}`
+        baseURL: `${publicRuntimeConfig.apiUrl}`
     });
 }
 
