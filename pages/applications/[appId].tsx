@@ -92,27 +92,26 @@ const ApplicationView = ({ application, iframeUrl }) => {
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
-    const appId = context.params.appId;
-    let application = null;
-    try {
-        const response = await axios.get(`${process.env.API_INTERNAL_URL}/applications/${appId}`, {
-            //@ts-ignore
-            headers: { 'Authorization': 'Bearer ' + session.user.token }
-        });
-        application = response.data;
-    } catch (e) {
-        console.log(e.message);
-    }
-    const iframeUrl = session ? generateDashboard(
-        { dashboard: 2 },
-        {
-            //@ts-ignore
-            "id": session.user.company.id,
-            "id_1": context.params.appId
-        }
-    ) : null;
-
     if (session) {
+        const appId = context.params.appId;
+        let application = null;
+        try {
+            const response = await axios.get(`${process.env.API_INTERNAL_URL}/applications/${appId}`, {
+                //@ts-ignore
+                headers: { 'Authorization': 'Bearer ' + session.user.token }
+            });
+            application = response.data;
+        } catch (e) {
+            console.log(e.message);
+        }
+        const iframeUrl = session ? generateDashboard(
+            { dashboard: 2 },
+            {
+                //@ts-ignore
+                "id": session.user.company.id,
+                "id_1": application.id
+            }
+        ) : null;
         return {
             props: {
                 session,
