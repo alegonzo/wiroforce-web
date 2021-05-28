@@ -54,7 +54,7 @@ const ProductCard = ({ product, getProduct, session }) => {
     const handleCloseForm = () => {
         setShowForm(!showForm);
     }
-
+ 
     return (
         <>
             <Card className={classes.root}>
