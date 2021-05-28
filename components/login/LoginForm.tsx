@@ -52,7 +52,7 @@ const LoginForm = () => {
                     signIn('credentials',
                         {
                             ...values,
-                            callbackUrl: `${window.location.origin}/dashboard`
+                            callbackUrl: `${window.location.origin}/wiroforce/dashboard`
                         }
                     )
                 }

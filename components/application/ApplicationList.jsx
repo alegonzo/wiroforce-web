@@ -22,18 +22,11 @@ const ApplicationList = ({ applications }) => {
                     return (
                         <Grid item md={3} key={item.id}>
                             <Card className={classes.root}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        className={classes.media}
-                                        image="/static/images/cards/contemplative-reptile.jpg"
-                                        title="Contemplative Reptile"
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            {item.name}
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
+                                <CardContent>
+                                    <Typography gutterBottom variant="h4" component="h2">
+                                        {item.name}
+                                    </Typography>
+                                </CardContent>
                                 <CardActions>
                                     <Button
                                         size="small"

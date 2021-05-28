@@ -59,9 +59,7 @@ const ProductTab = ({ appId, session }) => {
         setLoading(true);
         try {
             const response = await Api().get(`/products`, {
-                headers: {
-                    'Authorization': 'Bearer ' + session.user.token
-                },
+                headers: { 'Authorization': 'Bearer ' + session.user.token },
                 params: { appId: appId }
             });
             setProducts(response.data);
