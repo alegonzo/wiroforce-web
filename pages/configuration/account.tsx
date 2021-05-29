@@ -6,8 +6,7 @@ import { useRouter } from 'next/router';
 import Layout from '../../components/layouts/Layout';
 import { getSession, useSession } from 'next-auth/client';
 
-const AccountConfig = () => {
-    const [session] = useSession();
+const AccountConfig = ({ session }) => {
     const router = useRouter();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -25,7 +24,9 @@ const AccountConfig = () => {
                 //@ts-ignore
                 headers: { 'Authorization': 'Bearer ' + session.user.token }
             });
-            setUser(response.data);
+            const user = { ...response.data, ...response.data.profile };
+            delete user['profile'];
+            setUser(user);
             setLoading(false);
         } catch (e) {
             console.log(e.message);
@@ -42,7 +43,7 @@ const AccountConfig = () => {
                 <Typography color="textPrimary">Cuenta</Typography>
             </Breadcrumbs>
             <Container>
-                {user ? <UserProfile user={user} /> : 'Cargando...'}
+                {user ? <UserProfile user={user} getProfile={getProfile} /> : 'Cargando...'}
             </Container>
         </Layout>
     );
@@ -50,13 +51,8 @@ const AccountConfig = () => {
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
-    if (session) {
-        return {
-            props: {
-                session
-            }
-        }
-    }
+    if (session)
+        return { props: { session } }
     return {
         redirect: {
             destination: '/login',

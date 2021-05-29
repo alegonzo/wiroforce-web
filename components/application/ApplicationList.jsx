@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        backgroundColor: theme.palette.background.paper,
         paddingTop: theme.spacing(4)
     },
 }));

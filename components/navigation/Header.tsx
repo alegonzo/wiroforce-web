@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Header = ({ handleDrawerToggle }) => {
     const classes = useStyles();
-    const [ session, loading ] = useSession();
+    const [session, loading] = useSession();
     return (
         <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
@@ -56,7 +56,7 @@ const Header = ({ handleDrawerToggle }) => {
                 <Typography variant="h6" style={{ flexGrow: 1 }}>
                     WiroForce
             </Typography>
-                <Button color="inherit" onClick={() => signOut({callbackUrl: `${window.location.origin}/wiroforce`})}>Logout({session.user.email})</Button>
+                <Button color="inherit" onClick={() => signOut({ callbackUrl: `${window.location.origin}/wiroforce` })}>Logout({session.user.email})</Button>
             </Toolbar>
         </AppBar>
     );

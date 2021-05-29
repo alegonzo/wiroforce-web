@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Card, CardContent, LinearProgress } from '@material-ui/core';
 import LoginLayout from '../../components/layouts/LoginLayout';
-import SignupForm from '../../components/user/SignupForm';
+import ProfileForm from '../../components/user/ProfileForm';
 import { NextPage } from 'next';
 //import { authService } from '../services/AuthService';
 
@@ -41,10 +41,6 @@ const useStyles = makeStyles((theme) => ({
 const SignupPage: NextPage<Props> = () => {
     const classes = useStyles();
 
-    useEffect(() => {
-        //mandar pal dashboard si esta logueado
-    });
-
     return (
         <LoginLayout>
             <Container component="main" maxWidth="xs">
@@ -54,7 +50,8 @@ const SignupPage: NextPage<Props> = () => {
                         <Typography component="h1" variant="h5">
                             Crear cuenta
                         </Typography>
-                        <SignupForm />
+                        {/*@ts-ignore*/}
+                        <ProfileForm />
                     </CardContent>
                 </Card>
 
