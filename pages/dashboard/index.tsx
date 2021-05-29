@@ -3,6 +3,7 @@ import Layout from '../../components/layouts/Layout';
 import { Grid } from '@material-ui/core';
 import { getSession, useSession } from 'next-auth/client';
 import generateDashboard from '../../utils/metabase';
+import IframeResizer from 'iframe-resizer-react';
 
 const Dashboard = ({ iframeUrl }) => {
     const [session, loading] = useSession();
@@ -14,12 +15,10 @@ const Dashboard = ({ iframeUrl }) => {
             <Layout>
                 <Grid container>
                     <Grid item md={12}>
-                        <iframe
-                            src={iframeUrl}
-                            frameBorder="0"
-                            width="100%"
-                            height="600"
-                        ></iframe>
+                        <IframeResizer
+                            src={iframeUrl} frameBorder={0}
+                            style={{ width: '1px', minWidth: '100%' }}
+                        />
                     </Grid>
                 </Grid>
             </Layout>

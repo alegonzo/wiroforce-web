@@ -3,7 +3,6 @@ import { Breadcrumbs, Button, Container, Grid, Paper, Typography } from '@materi
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Api from '../../utils/api';
 import TabPanel from '../../components/generic/TabPanel';
 import ProductTab from '../../components/product/ProductTab';
 import ApplicationCard from '../../components/application/ApplicationCard';
@@ -12,6 +11,7 @@ import Layout from '../../components/layouts/Layout';
 import { getSession, useSession } from 'next-auth/client';
 import generateDashboard from '../../utils/metabase';
 import axios from 'axios';
+import IframeResizer from 'iframe-resizer-react';
 
 function a11yProps(index) {
     return {
@@ -67,12 +67,10 @@ const ApplicationView = ({ application, iframeUrl }) => {
                     <TabPanel value={value} index={0}>
                         <Grid container>
                             <Grid item md={12}>
-                                <iframe
-                                    src={iframeUrl}
-                                    frameBorder="0"
-                                    width="100%"
-                                    height="600"
-                                ></iframe>
+                                <IframeResizer
+                                    src={iframeUrl} frameBorder={0}
+                                    style={{ width: '1px', minWidth: '100%' }}
+                                />
                             </Grid>
                         </Grid>
                     </TabPanel>

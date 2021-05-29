@@ -10,7 +10,7 @@ const generateDashboard = (resource, params) => {
     };
     const token = jwt.sign(payload, METABASE_SECRET_KEY);
 
-    return METABASE_SITE_URL + "/embed/dashboard/" + token + "#theme=night&bordered=true&titled=true";
+    return METABASE_SITE_URL + "/embed/dashboard/" + token + "#theme=night&bordered=false&titled=true";
 }
 
 export default generateDashboard;
