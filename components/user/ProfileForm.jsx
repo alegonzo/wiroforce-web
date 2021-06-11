@@ -27,9 +27,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
+    const router = useRouter();
     const [session] = useSession();
     const classes = useStyles();
-    const router = useRouter();
+
     const initialValues = edit ? user : {
         fullName: '',
         email: '',
@@ -67,7 +68,7 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
                         const response = await Api().post('/auth/signup', values);
                         router.push('/login');
                     } else {
-                        const response = await Api().put(`/users/${values.id}`, values, {
+                        const response = await Api().put(`/users/editProfile`, values, {
                             headers: { 'Authorization': 'Bearer ' + session.user.token }
                         });
                         await updateProfile();
@@ -77,6 +78,8 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
                     console.log(e.message);
                     if (e.response.status === 400)
                         setErrors({ serverSide: e.response.data.message })
+                    if(e.response.status === 401)
+                        router.push('/login')
                     return false;
                 }
             }}
@@ -196,7 +199,7 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
                     <br />
                     <div style={{ color: 'red' }}>
                         {
-                            errors.serverSide && errors.serverSide.map((item, idx) => <Typography key={idx} variant="body1">-{item}</Typography>)
+                            errors.serverSide && errors.serverSide.map((item, idx) => <Typography key={idx} variant="body1">{item}</Typography>)
                         }
                     </div>
                     <br />

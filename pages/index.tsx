@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 export default function Index() {
   const [session, loading] = useSession();
   const router = useRouter();
+
   return (
     <Container maxWidth="md" style={{ marginTop: 200 }}>
       <Grid container>

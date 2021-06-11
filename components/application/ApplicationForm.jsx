@@ -44,9 +44,7 @@ const ApplicationForm = ({ handleCloseForm, setShowForm, getApplications, setToa
                 }
                 try {
                     await Api().post('/applications', formBody, {
-                        headers: {
-                            'Authorization': 'Bearer ' + session.user.token
-                        }
+                        headers: { 'Authorization': 'Bearer ' + session.user.token }
                     });
                     setSubmitting(false);
                     setToastMessage('Aplicacion insertada');
@@ -56,9 +54,11 @@ const ApplicationForm = ({ handleCloseForm, setShowForm, getApplications, setToa
                 } catch (e) {
                     setToastMessage('Ha ocurrido un error');
                     setOpenToast(true);
-                    setErrors({
-                        name: e.response.data.message
-                    });
+                    if(e.response.status === 400)
+                        setErrors({name: e.response.data.message});
+                    if(e.response.status === 401)
+                        router.push('/login')
+                    
                     return false;
                 }
             }}>

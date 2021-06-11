@@ -54,12 +54,9 @@ const Applications = ({ session }) => {
         setLoading(true);
         try {
             const response = await Api().get('/applications', {
-                headers: {
-                    //@ts-ignore
-                    'Authorization': 'Bearer ' + session.user.token
-                }
+                //@ts-ignore
+                headers: { 'Authorization': 'Bearer ' + session.user.token }
             });
-            console.log(response.data);
             setApplications(response.data);
         } catch (e) {
             setToastMessage(e.message);
@@ -121,13 +118,8 @@ const Applications = ({ session }) => {
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
-    if (session) {
-        return {
-            props: {
-                session
-            }
-        }
-    }
+    if (session)
+        return { props: { session } }
     return {
         redirect: {
             destination: '/login',

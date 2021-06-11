@@ -17,10 +17,6 @@ const useStyles = makeStyles({
 
 const columns = [
     {
-        name: '',
-        maxWidth: 40
-    },
-    {
         name: 'Nombre',
         maxWidth: 250
     },
@@ -31,6 +27,10 @@ const columns = [
     {
         name: 'Activo',
         maxWidth: 250
+    },
+    {
+        name: '',
+        maxWidth: 40
     }
 ]
 
@@ -49,9 +49,6 @@ const ProductTable = ({ products, updateActiveProduct, appId }) => {
                 <TableBody>
                     {products.map((row, idx) => (
                         <TableRow key={idx}>
-                            <TableCell><Button onClick={() => router.push(`/products/${appId}/${row.id}`)}>
-                                <Visibility /></Button>
-                            </TableCell>
                             <TableCell>{row.name}</TableCell>
                             <TableCell>{row.itemId}</TableCell>
                             <TableCell>
@@ -61,6 +58,11 @@ const ProductTable = ({ products, updateActiveProduct, appId }) => {
                                     name="check-active-product"
                                     inputProps={{ 'aria-label': 'secondary checkbox' }}
                                 />
+                            </TableCell>
+                            <TableCell>
+                                <Button color="primary" onClick={() => router.push(`/products/${appId}/${row.id}`)}>
+                                    Gestionar
+                                </Button>
                             </TableCell>
                         </TableRow>
                     ))}
