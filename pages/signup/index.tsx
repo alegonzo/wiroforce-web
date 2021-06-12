@@ -42,7 +42,7 @@ const SignupPage: NextPage<Props> = () => {
     const classes = useStyles();
 
     return (
-        <LoginLayout>
+        <LoginLayout title="WiroForce - Crear cuenta">
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Card className={classes.paper}>

@@ -103,10 +103,10 @@ const ProductCard = ({ product, getProduct, session }) => {
                                 Activo {bull} {active}
                             </Typography>
                             <Typography variant="body1" component="h2">
-                                Version {bull} {product.version}
+                                Versión {bull} {product.version}
                             </Typography>
                             <Typography variant="body1" component="h2">
-                                Descripcion {bull} {product.description}
+                                Descripción {bull} {product.description}
                             </Typography>
                         </Grid>
                     </Grid>

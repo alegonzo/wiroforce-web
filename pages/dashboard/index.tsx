@@ -8,13 +8,11 @@ import IframeResizer from 'iframe-resizer-react';
 const Dashboard = ({ iframeUrl }) => {
     const [session, loading] = useSession();
 
-    document.title = 'Dashboard';
-
     if (typeof window !== 'undefined' && loading) return null
 
     if (session) {
         return (
-            <Layout>
+            <Layout title="Dashboard">
                 <Grid container>
                     <Grid item md={12}>
                         <IframeResizer

@@ -47,7 +47,7 @@ const ApplicationForm = ({ handleCloseForm, setShowForm, getApplications, setToa
                         headers: { 'Authorization': 'Bearer ' + session.user.token }
                     });
                     setSubmitting(false);
-                    setToastMessage('Aplicacion insertada');
+                    setToastMessage('Aplicación insertada');
                     setOpenToast(true);
                     await getApplications();
                     setShowForm(false);
@@ -62,7 +62,7 @@ const ApplicationForm = ({ handleCloseForm, setShowForm, getApplications, setToa
                     return false;
                 }
             }}>
-            {({ submitForm, isSubmitting }) => (
+            {({ submitForm, isSubmitting, errors }) => (
                 <Form>
                     <DialogContent>
                         <Field

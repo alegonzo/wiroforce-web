@@ -67,7 +67,7 @@ const Applications = ({ session }) => {
 
     if (!loading) {
         return (
-            <Layout>
+            <Layout title="Aplicaciones">
                 <Container>
                     <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20 }}>
                         <Button variant="text" onClick={() => router.push('/')}>
@@ -76,10 +76,10 @@ const Applications = ({ session }) => {
                         <Typography color="textPrimary">Aplicaciones</Typography>
                     </Breadcrumbs>
                     <Button variant="contained" color="primary" onClick={handleCloseModal}>
-                        Registrar Aplicacion
+                        Registrar Aplicación
                     </Button>
                     <Dialog className={classes.form} open={showForm} onClose={handleCloseModal} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">Registrar Aplicacion</DialogTitle>
+                        <DialogTitle id="form-dialog-title">Registrar Aplicación</DialogTitle>
                         <ApplicationForm
                             handleCloseForm={handleCloseModal}
                             setShowForm={setShowForm}

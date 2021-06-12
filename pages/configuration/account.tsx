@@ -35,7 +35,7 @@ const AccountConfig = ({ session }) => {
     }
 
     return (
-        <Layout>
+        <Layout title="Cuenta">
             <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20, marginLeft: 20 }}>
                 <Button variant="text" onClick={() => router.push('/dashboard')}>
                     Dashboard

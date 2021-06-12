@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
+import Head from 'next/head';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,13 +12,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const LoginLayout = (props) => {
+const LoginLayout = ({children, title}) => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
+            <Head>
+                <title>{title}</title>  
+            </Head>
             <main className={classes.content}>
-                {props.children}
+                {children}
             </main>
         </div>
     );

@@ -39,7 +39,7 @@ const ApplicationView = ({ application, iframeUrl }) => {
     if (typeof window !== 'undefined' && loading) return null;
 
     return (
-        <Layout>
+        <Layout title={application.name}>
             <Container>
                 {application !== null &&
                     <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20 }}>

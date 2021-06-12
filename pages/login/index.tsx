@@ -72,7 +72,7 @@ const Login: NextPage<Props> = () => {
     });
 
     return (
-        <LoginLayout>
+        <LoginLayout title="Wiroforce - Login">
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Card className={classes.paper}>
