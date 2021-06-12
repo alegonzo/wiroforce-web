@@ -16,7 +16,8 @@ const Dashboard = ({ iframeUrl }) => {
                 <Grid container>
                     <Grid item md={12}>
                         <IframeResizer
-                            src={iframeUrl} frameBorder={0}
+                            src={iframeUrl} 
+                            frameBorder={0}
                             style={{ width: '1px', minWidth: '100%' }}
                         />
                     </Grid>

@@ -3,12 +3,16 @@ import Container from "@material-ui/core/Container";
 import { signIn, signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { Grid, Divider, Button, Typography, Box } from "@material-ui/core";
+import Head from "next/head";
 
 export default function Index(props) {
     const [session, loading] = useSession();
     const router = useRouter();
     return (
         <React.Fragment>
+            <Head>
+                <title>Wiroforce</title>
+            </Head>
             <Container
                 style={{
                     display: "flex",
@@ -114,7 +118,7 @@ export default function Index(props) {
                 >
                     <img
                         style={{ width: "100%" }}
-                        src="/wiroforce/images/wiroforceLogo.PNG"
+                        src="/wiroforce/images/wiroforceLogo.png"
                         alt="Image"
                     />
                 </div>
