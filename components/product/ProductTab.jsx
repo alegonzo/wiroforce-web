@@ -5,6 +5,7 @@ import Api from '../../utils/api';
 import { Close } from '@material-ui/icons';
 import ProductTable from './ProductTable';
 import ProductForm from './ProductForm';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -17,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductTab = ({ appId, session }) => {
+    const router = useRouter();
     const classes = useStyles();
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
@@ -51,7 +53,10 @@ const ProductTab = ({ appId, session }) => {
             });
             setProducts(updatedList);
         } catch (e) {
-            console.log(e.message);
+            setToastMessage(e.message);
+            setOpenToast(true);
+            if(e.response.status === 401)
+                router.push('/login')
         }
     }
 
@@ -67,6 +72,8 @@ const ProductTab = ({ appId, session }) => {
         } catch (e) {
             setToastMessage(e.message);
             setOpenToast(true);
+            if(e.response.status === 401)
+                router.push('/login')
         }
         setLoading(false);
     }

@@ -20,7 +20,7 @@ const AccountConfig = ({ session }) => {
         setLoading(true);
         try {
             //@ts-ignore
-            const response = await Api().get(`/users/${session.user.id}`, {
+            const response = await Api().get(`/users/profile`, {
                 //@ts-ignore
                 headers: { 'Authorization': 'Bearer ' + session.user.token }
             });
@@ -35,7 +35,7 @@ const AccountConfig = ({ session }) => {
     }
 
     return (
-        <Layout>
+        <Layout title="Cuenta">
             <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20, marginLeft: 20 }}>
                 <Button variant="text" onClick={() => router.push('/dashboard')}>
                     Dashboard

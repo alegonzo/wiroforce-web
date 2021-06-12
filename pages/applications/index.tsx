@@ -54,12 +54,9 @@ const Applications = ({ session }) => {
         setLoading(true);
         try {
             const response = await Api().get('/applications', {
-                headers: {
-                    //@ts-ignore
-                    'Authorization': 'Bearer ' + session.user.token
-                }
+                //@ts-ignore
+                headers: { 'Authorization': 'Bearer ' + session.user.token }
             });
-            console.log(response.data);
             setApplications(response.data);
         } catch (e) {
             setToastMessage(e.message);
@@ -70,7 +67,7 @@ const Applications = ({ session }) => {
 
     if (!loading) {
         return (
-            <Layout>
+            <Layout title="Aplicaciones">
                 <Container>
                     <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20 }}>
                         <Button variant="text" onClick={() => router.push('/')}>
@@ -79,10 +76,10 @@ const Applications = ({ session }) => {
                         <Typography color="textPrimary">Aplicaciones</Typography>
                     </Breadcrumbs>
                     <Button variant="contained" color="primary" onClick={handleCloseModal}>
-                        Registrar Aplicacion
+                        Registrar Aplicación
                     </Button>
                     <Dialog className={classes.form} open={showForm} onClose={handleCloseModal} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">Registrar Aplicacion</DialogTitle>
+                        <DialogTitle id="form-dialog-title">Registrar Aplicación</DialogTitle>
                         <ApplicationForm
                             handleCloseForm={handleCloseModal}
                             setShowForm={setShowForm}
@@ -121,13 +118,8 @@ const Applications = ({ session }) => {
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
-    if (session) {
-        return {
-            props: {
-                session
-            }
-        }
-    }
+    if (session)
+        return { props: { session } }
     return {
         redirect: {
             destination: '/login',

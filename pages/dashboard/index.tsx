@@ -12,7 +12,7 @@ const Dashboard = ({ iframeUrl }) => {
 
     if (session) {
         return (
-            <Layout>
+            <Layout title="Dashboard">
                 <Grid container>
                     <Grid item md={12}>
                         <IframeResizer

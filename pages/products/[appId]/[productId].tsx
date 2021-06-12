@@ -39,7 +39,7 @@ const Product = () => {
         );
     }
     return (
-        <Layout>
+        <Layout title={`Producto - ${productId}`}>
             <Grid container spacing={3}>
                 <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20 }}>
                     <Button variant="text" onClick={() => router.push('/dashboard')}>

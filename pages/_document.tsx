@@ -9,6 +9,7 @@ export default class MyDocument extends Document {
             <Html lang="en">
                 <Head>
                     {/* PWA primary color */}
+                    <title>Wiroforce</title>
                     <meta
                         name="theme-color"
                         content={theme.palette.primary.main}
@@ -17,7 +18,6 @@ export default class MyDocument extends Document {
                         rel="stylesheet"
                         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
                     />
-                    <script src="http://localhost:3005/app/iframeResizer.js"></script>
                 </Head>
                 <body>
                     <Main />

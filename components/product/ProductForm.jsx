@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { Field, Form, Formik } from 'formik';
 import { TextField, CheckboxWithLabel } from 'formik-material-ui';
 import Api from '../../utils/api';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -21,9 +22,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductForm = ({ session, handleSubmit, handleCloseForm, appId, edit, product }) => {
+    const router = useRouter();
     const classes = useStyles();
     const imageFile = useRef();
-    console.log(product);
     let values = {
         name: '',
         itemId: '',
@@ -57,7 +58,6 @@ const ProductForm = ({ session, handleSubmit, handleCloseForm, appId, edit, prod
             initialValues={values}
             validationSchema={formSchema}
             onSubmit={async (values, { setSubmitting, setErrors }) => {
-                console.log('form');
                 setSubmitting(true);
                 const formBody = new FormData();
                 for (let key in values)
@@ -68,7 +68,6 @@ const ProductForm = ({ session, handleSubmit, handleCloseForm, appId, edit, prod
                 let response = '';
                 try {
                     if (edit) {
-                        console.log('edit');
                         await Api().put(`/products/${product.id}`, formBody, {
                             headers: { 'Authorization': 'Bearer ' + session.user.token }
                         });
@@ -86,6 +85,9 @@ const ProductForm = ({ session, handleSubmit, handleCloseForm, appId, edit, prod
                         setSubmitting(false);
                         setErrors(e.response.data.errors);
                     }
+                    if (e.response.status === 401)
+                        router.push('/login');
+                    return false;
                 }
             }}
         >

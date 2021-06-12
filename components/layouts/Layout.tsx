@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Layout = (props) => {
+const Layout = ({ children, title }) => {
     const classes = useStyles();
     const [mobileOpen, setMobileOpen] = useState(false);
     const handleDrawerToggle = () => {
@@ -30,6 +30,9 @@ const Layout = (props) => {
 
     return (
         <div className={classes.root}>
+            <Head>
+                <title>{title}</title>
+            </Head>
             <Header
                 handleDrawerToggle={handleDrawerToggle} />
             <SidebarDrawer
@@ -37,7 +40,7 @@ const Layout = (props) => {
                 mobileOpen={mobileOpen} />
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                {props.children}
+                {children}
             </main>
         </div>
     );
