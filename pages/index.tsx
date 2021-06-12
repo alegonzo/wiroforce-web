@@ -391,7 +391,7 @@ export default function Index(props) {
                             marginTop: 10,
                         }}
                     >
-                        <Grid item md={3} xs={3} sm={3} lg={3}>
+                        <Grid item md={3} xs={12} sm={12} lg={3}>
                             <Box>
                                 <img
                                     style={{
@@ -410,12 +410,12 @@ export default function Index(props) {
                                         marginTop: 10,
                                     }}
                                 >
-                                    <Grid item md={6} xs={6} sm={6} lg={6}>
+                                    <Grid item md={6} xs={12} sm={12} lg={6}>
                                         <Typography variant="h6">
                                             Contacto
                                         </Typography>
                                     </Grid>
-                                    <Grid item md={6} xs={6} sm={6} lg={6}>
+                                    <Grid item md={6} xs={12} sm={12} lg={6}>
                                         <Typography
                                             variant="body2"
                                             style={{ fontSize: "small" }}
@@ -437,8 +437,8 @@ export default function Index(props) {
                                 </Grid>
                             </Box>
                         </Grid>
-                        <Grid item md={6} xs={6} sm={6} lg={6}></Grid>
-                        <Grid item md={3} xs={3} sm={3} lg={3}>
+                        <Grid item md={6} xs={12} sm={12} lg={6}></Grid>
+                        <Grid item md={3} xs={12} sm={12} lg={3}>
                             <Box>
                                 <Typography
                                     variant="body2"
