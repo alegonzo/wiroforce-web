@@ -18,6 +18,11 @@ import { Facebook, Instagram, Twitter } from "@material-ui/icons";
 export default function Index(props) {
     const [session, loading] = useSession();
     const router = useRouter();
+
+    const goSignup = () => {
+        router.push('/signup');
+    };
+
     return (
         <React.Fragment>
             <Head>
@@ -41,7 +46,7 @@ export default function Index(props) {
                         variant="h6"
                         style={{ flexGrow: 1 }}
                     ></Typography>
-                    <Button color="inherit" variant="outlined">
+                    <Button color="inherit" variant="outlined" onClick={() => router.push('/login')}>
                         Login
                     </Button>
                 </Toolbar>
@@ -81,7 +86,7 @@ export default function Index(props) {
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={() => {}}
+                            onClick={goSignup}
                         >
                             Comienza ahora
                         </Button>
@@ -174,7 +179,7 @@ export default function Index(props) {
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={() => {}}
+                            onClick={goSignup}
                         >
                             Comienza ahora
                         </Button>
@@ -230,7 +235,7 @@ export default function Index(props) {
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={() => {}}
+                            onClick={goSignup}
                         >
                             Comienza ahora
                         </Button>
@@ -320,7 +325,7 @@ export default function Index(props) {
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={() => {}}
+                            onClick={goSignup}
                         >
                             Comienza ahora
                         </Button>

@@ -1,5 +1,5 @@
 import { ListItemText, ListItem, ListItemIcon, Collapse, makeStyles, List } from '@material-ui/core';
-import { ExpandLess, ExpandMore, Collections } from '@material-ui/icons';
+import { ExpandLess, ExpandMore, Collections, TrendingUp } from '@material-ui/icons';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
