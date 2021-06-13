@@ -7,9 +7,8 @@ import { useRouter } from 'next/router';
 import { getSession, useSession } from 'next-auth/client';
 import Layout from '../../../components/layouts/Layout';
 
-const Product = () => {
+const Product = ({ session }) => {
     const router = useRouter();
-    const [session] = useSession();
     const { appId, productId } = router.query;
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -39,14 +38,15 @@ const Product = () => {
         );
     }
     return (
-        <Layout title={`Producto - ${productId}`}>
+        <Layout title={`Producto - ${product ? product.name : ''}`}>
             <Grid container spacing={3}>
                 <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20 }}>
                     <Button variant="text" onClick={() => router.push('/dashboard')}>
                         Dashboard
                     </Button>
-                    <Button variant="text" onClick={() => router.push(`/applications/${appId}`)}>
-                        {appId}
+                    <Typography color="textPrimary">{appId}</Typography>
+                    <Button variant="text" onClick={() => router.push(`/applications/${appId}/products`)}>
+                        Productos
                     </Button>
                     <Typography color="textPrimary">{product ? product.name : ''}</Typography>
                 </Breadcrumbs>

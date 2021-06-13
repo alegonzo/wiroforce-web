@@ -1,46 +1,61 @@
-import React from 'react';
-import { Button, Card, CardActionArea, CardContent, CardMedia, CardActions, Grid, Typography, makeStyles } from '@material-ui/core';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { List, ListItem, makeStyles, ListItemText, ListItemIcon } from '@material-ui/core';
+import Api from '../../utils/api';
+import { useSession } from 'next-auth/client';
+import ApplicationListItem from './ApplicationListItem';
+import ApplicationForm from './ApplicationForm';
+import { Add } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        paddingTop: theme.spacing(4)
-    },
+    nested: {
+        color: theme.palette.primary
+    }
 }));
 
-const ApplicationList = ({ applications }) => {
-    const router = useRouter();
+const ApplicationList = () => {
+    const [session, loading] = useSession();
+    const [applications, setApplications] = useState([]);
+    const [showForm, setShowForm] = useState(false);
     const classes = useStyles();
 
+    useEffect(() => {
+        if (!loading)
+            getApplications();
+    }, [loading]);
+
+    const getApplications = async () => {
+        try {
+            const response = await Api().get('/applications', {
+                //@ts-ignore
+                headers: { 'Authorization': 'Bearer ' + session.user.token }
+            });
+            setApplications(response.data);
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
+
     return (
-        <div className={classes.root}>
-            <Grid container spacing={3}>
-                {applications.map((item) => {
-                    const labelId = `checkbox-list-secondary-label-${item.id}`;
+        <>
+            <List component="div" disablePadding>
+                {applications.map((item, idx) => {
                     return (
-                        <Grid item md={3} key={item.id}>
-                            <Card className={classes.root}>
-                                <CardContent>
-                                    <Typography gutterBottom variant="h4" component="h2">
-                                        {item.name}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Button
-                                        size="small"
-                                        color="primary"
-                                        onClick={() => router.push(`/applications/${item.appId}`)}
-                                    >
-                                        Administrar
-                                    </Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
+                        <ApplicationListItem key={idx} application={item} />
                     );
                 })}
-            </Grid>
-        </div>
+                <ListItem button  className={classes.nested} onClick={() => setShowForm(true)}>
+                    <ListItemIcon color="primary">
+                        <Add />
+                    </ListItemIcon>
+                    <ListItemText primary="Nueva Aplicación" />
+                </ListItem>
+            </List>
+            <ApplicationForm
+                showForm={showForm}
+                setShowForm={setShowForm}
+                callback={getApplications}
+            />
+        </>
     );
 }
 

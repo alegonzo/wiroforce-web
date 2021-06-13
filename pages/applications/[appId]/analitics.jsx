@@ -1,24 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Breadcrumbs, Button, Container, Grid, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import TabPanel from '../../components/generic/TabPanel';
-import ProductTab from '../../components/product/ProductTab';
-import ApplicationCard from '../../components/application/ApplicationCard';
+import ApplicationCard from '../../../components/application/ApplicationCard';
 import { useRouter } from 'next/router';
-import Layout from '../../components/layouts/Layout';
+import Layout from '../../../components/layouts/Layout';
 import { getSession, useSession } from 'next-auth/client';
-import generateDashboard from '../../utils/metabase';
+import generateDashboard from '../../../utils/metabase';
 import axios from 'axios';
 import IframeResizer from 'iframe-resizer-react';
-
-function a11yProps(index) {
-    return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
-    };
-}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,20 +15,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ApplicationView = ({ application, iframeUrl }) => {
-    const [session, loading] = useSession()
+const Analitics = ({ application, iframeUrl }) => {
     const router = useRouter();
     const classes = useStyles();
-    const [value, setValue] = useState(0);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
-    if (typeof window !== 'undefined' && loading) return null;
 
     return (
-        <Layout title={application.name}>
+        <Layout title={`Analitica - ${application.name}`}>
             <Container>
                 {application !== null &&
                     <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20 }}>
@@ -56,32 +37,16 @@ const ApplicationView = ({ application, iframeUrl }) => {
                         {application !== null && <ApplicationCard application={application} />}
                     </Grid>
                 </Grid>
+                <br />
                 <div className={classes.root}>
-                    <Paper>
-                        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                            <Tab label="Estadisticas" {...a11yProps(0)} />
-                            <Tab label="Productos" {...a11yProps(1)} />
-                            <Tab label="Canales" {...a11yProps(2)} />
-                        </Tabs>
-                    </Paper>
-                    <TabPanel value={value} index={0}>
-                        <Grid container>
-                            <Grid item md={12}>
-                                <IframeResizer
-                                    src={iframeUrl} frameBorder={0}
-                                    style={{ width: '1px', minWidth: '100%' }}
-                                />
-                            </Grid>
+                    <Grid container>
+                        <Grid item md={12}>
+                            <IframeResizer
+                                src={iframeUrl} frameBorder={0}
+                                style={{ width: '1px', minWidth: '100%' }}
+                            />
                         </Grid>
-                    </TabPanel>
-                    <TabPanel value={value} index={1}>
-                        {application && <ProductTab
-                            session={session}
-                            appId={application.appId} />}
-                    </TabPanel>
-                    <TabPanel value={value} index={2}>
-                        {/*<ChannelView appId={app.id} name={app.appId} />*/}
-                    </TabPanel>
+                    </Grid>
                 </div>
             </Container>
         </Layout>
@@ -126,4 +91,4 @@ export async function getServerSideProps(context) {
     }
 }
 
-export default ApplicationView;
+export default Analitics;

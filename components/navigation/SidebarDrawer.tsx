@@ -7,9 +7,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import {
     Dashboard as DashboardIcon,
     Apps as AppsIcon,
-    People,
-    AttachMoney,
-    Settings,
     ExpandLess,
     ExpandMore,
     AccountBox,
@@ -18,6 +15,7 @@ import {
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Collapse, Drawer, Hidden, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router';
+import ApplicationList from '../application/ApplicationList'
 
 const drawerWidth = 240;
 
@@ -56,7 +54,7 @@ const SidebarDrawer = (props) => {
     const classes = useStyles();
     const router = useRouter();
     const theme = useTheme();
-    const [config, setConfig] = useState(false);
+    const [appsOpen, setAppsOpen] = useState(true);
 
     const drawer = (
         <div>
@@ -66,33 +64,27 @@ const SidebarDrawer = (props) => {
                     <ListItemIcon><DashboardIcon /></ListItemIcon>
                     <ListItemText primary={'Dashboard'} />
                 </ListItem>
-                <ListItem button onClick={() => router.push('/applications')}>
+                <ListItem button onClick={() => setAppsOpen(!appsOpen)}>
                     <ListItemIcon><AppsIcon /></ListItemIcon>
                     <ListItemText primary={'Aplicaciones'} />
+                    {appsOpen ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
-                <ListItem button onClick={() => setConfig(!config)}>
-                    <ListItemIcon>
-                        <Settings />
-                    </ListItemIcon>
-                    <ListItemText primary="Configuración" />
-                    {config ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={config} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                        <ListItem button className={classes.nested} onClick={() => router.push('/configuration/account')}>
-                            <ListItemIcon>
-                                <AccountBox />
-                            </ListItemIcon>
-                            <ListItemText primary="Cuenta" />
-                        </ListItem>
-                        <ListItem button className={classes.nested} onClick={() => console.log('asd')}>
-                            <ListItemIcon>
-                                <Assessment />
-                            </ListItemIcon>
-                            <ListItemText primary="Reportes" />
-                        </ListItem>
-                    </List>
+                <Collapse in={appsOpen} timeout="auto" unmountOnExit>
+                    <ApplicationList />
                 </Collapse>
+                <Divider />
+                <ListItem button onClick={() => router.push('/configuration/account')}>
+                    <ListItemIcon>
+                        <AccountBox />
+                    </ListItemIcon>
+                    <ListItemText primary="Cuenta" />
+                </ListItem>
+                <ListItem button onClick={() => console.log('asd')}>
+                    <ListItemIcon>
+                        <Assessment />
+                    </ListItemIcon>
+                    <ListItemText primary="Reportes" />
+                </ListItem>
             </List>
         </div>
     );

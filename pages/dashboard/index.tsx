@@ -15,11 +15,11 @@ const Dashboard = ({ iframeUrl }) => {
             <Layout title="Dashboard">
                 <Grid container>
                     <Grid item md={12}>
-                        <IframeResizer
+                        {/*<IframeResizer
                             src={iframeUrl} 
                             frameBorder={0}
                             style={{ width: '1px', minWidth: '100%' }}
-                        />
+                        />*/}
                     </Grid>
                 </Grid>
             </Layout>
