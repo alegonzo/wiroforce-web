@@ -94,57 +94,52 @@ const Products = ({ session }) => {
         setShowForm(!showForm);
     }
 
-    if (!loading) {
-        return (
-            <Layout title={`Productos - ${appId}`}>
-                <Grid container spacing={3} style={{ marginTop: 20 }}>
-                    <Grid item xs={12} sm={12} md={12}>
-                        <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20 }}>
-                            <Button variant="text" onClick={() => router.push('/dashboard')}>
-                                Dashboard
-                            </Button>
-                            <Typography color="textPrimary">{appId}</Typography>
-                            <Typography color="textPrimary">Productos</Typography>
-                        </Breadcrumbs>
-                        <Button variant="contained" color="primary" onClick={handleCloseForm}>
-                            Registrar Producto
-                        </Button>
-                        <Dialog className={classes.form} open={showForm} onClose={handleCloseForm} aria-labelledby="form-dialog-title">
-                            <DialogTitle id="form-dialog-title">Registrar Producto</DialogTitle>
-                            {showForm && <ProductForm
-                                session={session}
-                                appId={appId}
-                                handleSubmit={handleSubmit}
-                                handleCloseForm={handleCloseForm} />}
-                        </Dialog>
-                        <ProductTable
-                            products={products}
-                            updateActiveProduct={updateActiveProduct}
-                            appId={appId} />
-                        <Snackbar
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            open={openToast}
-                            autoHideDuration={6000}
-                            onClose={handleClose}
-                            message={toastMessage}
-                            action={
-                                <React.Fragment>
-                                    <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-                                        <Close fontSize="small" />
-                                    </IconButton>
-                                </React.Fragment>
-                            }
-                        />
-                    </Grid>
-                </Grid>
-            </Layout>
-        );
-    }
     return (
-        <LoaderBar />
+        <Layout title={`Productos - ${appId}`}>
+            <Grid container spacing={3} style={{ marginTop: 20 }}>
+                <Grid item xs={12} sm={12} md={12}>
+                    <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20 }}>
+                        <Button variant="text" onClick={() => router.push('/dashboard')}>
+                            Dashboard
+                            </Button>
+                        <Typography color="textPrimary">{appId}</Typography>
+                        <Typography color="textPrimary">Productos</Typography>
+                    </Breadcrumbs>
+                    <Button variant="contained" color="primary" onClick={handleCloseForm}>
+                        Registrar Producto
+                        </Button>
+                    <Dialog className={classes.form} open={showForm} onClose={handleCloseForm} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Registrar Producto</DialogTitle>
+                        {showForm && <ProductForm
+                            session={session}
+                            appId={appId}
+                            handleSubmit={handleSubmit}
+                            handleCloseForm={handleCloseForm} />}
+                    </Dialog>
+                    <ProductTable
+                        products={products}
+                        updateActiveProduct={updateActiveProduct}
+                        appId={appId} />
+                    <Snackbar
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}
+                        open={openToast}
+                        autoHideDuration={6000}
+                        onClose={handleClose}
+                        message={toastMessage}
+                        action={
+                            <React.Fragment>
+                                <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                                    <Close fontSize="small" />
+                                </IconButton>
+                            </React.Fragment>
+                        }
+                    />
+                </Grid>
+            </Grid>
+        </Layout>
     );
 }
 

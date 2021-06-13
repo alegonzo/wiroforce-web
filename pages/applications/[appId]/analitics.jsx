@@ -27,11 +27,10 @@ const Analitics = ({ application, iframeUrl }) => {
                         <Button variant="text" onClick={() => router.push('/')}>
                             Dashboard
                     </Button>
-                        <Button variant="text" onClick={() => router.push('/applications')}>
-                            Aplicaciones
-                    </Button>
+                        <Typography color="textPrimary">Aplicaciones</Typography>
                         <Typography color="textPrimary">{application ? application.name : ''}</Typography>
-                    </Breadcrumbs>}
+                    </Breadcrumbs>
+                }
                 <Grid container spacing={3} style={{ marginTop: 20 }}>
                     <Grid item xs={12} sm={12} md={12}>
                         {application !== null && <ApplicationCard application={application} />}

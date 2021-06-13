@@ -16,7 +16,6 @@ import Head from "next/head";
 import { Facebook, Instagram, Twitter } from "@material-ui/icons";
 
 export default function Index(props) {
-    const [session, loading] = useSession();
     const router = useRouter();
 
     const goSignup = () => {
@@ -103,7 +102,7 @@ export default function Index(props) {
             {/*Seccion 2*/}
             <Container
                 style={{
-                    backgroundColor: "#17171f",
+                    backgroundColor: "#21222D",
                     height: 500,
                     textAlign: "center",
                 }}
@@ -189,7 +188,7 @@ export default function Index(props) {
             {/*Seccion 4*/}
             <Container
                 style={{
-                    backgroundColor: "#17171f",
+                    backgroundColor: "#21222D",
                     paddingTop: 100,
                     paddingBottom: 100,
                 }}
@@ -285,9 +284,9 @@ export default function Index(props) {
             {/*Seccion 6*/}
             <Container
                 style={{
-                    backgroundColor: "#17171f",
+                    backgroundColor: "#21222D",
                     paddingTop: 100,
-                    paddingBottom: 100,
+                    paddingBottom: 100
                 }}
                 maxWidth={false}
             >
@@ -303,7 +302,7 @@ export default function Index(props) {
                         xs={12}
                         sm={12}
                         lg={6}
-                        style={{ padding: 30 }}
+                        style={{ padding: 40 }}
                     >
                         <Typography variant="h5">
                             Obtenga los mayores rendimientos de sus campañas de
@@ -330,7 +329,7 @@ export default function Index(props) {
                             Comienza ahora
                         </Button>
                     </Grid>
-                    <Grid item md={6} xs={12} sm={12} lg={6}>
+                    <Grid item md={6} xs={12} sm={12} lg={6} style={{ padding: 40 }}>
                         <Box
                             style={{
                                 marginTop: "20px",
