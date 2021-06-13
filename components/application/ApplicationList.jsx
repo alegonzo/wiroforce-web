@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { List, ListItem, makeStyles, ListItemText, ListItemIcon } from '@material-ui/core';
+import { List, ListItem, makeStyles, ListItemText, ListItemIcon, Divider } from '@material-ui/core';
 import Api from '../../utils/api';
 import { useSession } from 'next-auth/client';
 import ApplicationListItem from './ApplicationListItem';
@@ -8,7 +8,7 @@ import { Add } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     nested: {
-        color: theme.palette.primary
+        paddingLeft: theme.spacing(4),
     }
 }));
 
@@ -38,17 +38,18 @@ const ApplicationList = () => {
     return (
         <>
             <List component="div" disablePadding>
+                <ListItem button className={classes.nested} onClick={() => setShowForm(true)}>
+                    <ListItemIcon>
+                        <Add />
+                    </ListItemIcon>
+                    <ListItemText primary="Nueva Aplicación" />
+                </ListItem>
+                <Divider />
                 {applications.map((item, idx) => {
                     return (
                         <ApplicationListItem key={idx} application={item} />
                     );
                 })}
-                <ListItem button  className={classes.nested} onClick={() => setShowForm(true)}>
-                    <ListItemIcon color="primary">
-                        <Add />
-                    </ListItemIcon>
-                    <ListItemText primary="Nueva Aplicación" />
-                </ListItem>
             </List>
             <ApplicationForm
                 showForm={showForm}
