@@ -123,10 +123,7 @@ export default function Index(props) {
                             }}
                         >
                             <Typography variant="body1" gutterBottom>
-                                Somos una de las fuerzas que impulsa el
-                                desarrollo de videojuegos y aplicaciones en Cuba
-                                mediante herramientas necesarias para impulsar
-                                el éxito
+                                Trabajamos para impulsar el desarrollo de videojuegos y aplicaciones en Cuba creando herramientas que lo guiarán al éxito.
                             </Typography>
                         </Box>
                         <Button
@@ -178,9 +175,7 @@ export default function Index(props) {
                         alt="Image"
                     />
                     <Typography variant="body1" gutterBottom>
-                        Ayudar a los desarrolladores de videojuegos y
-                        aplicaciones a que sus trabajos sean rentables y
-                        exitosos.
+                        Soñamos con que los desarrolladores de videojuegos y aplicaciones puedan hacer rentables y escalables sus creaciones.
                     </Typography>
                 </Grid>
             </Container>
@@ -219,8 +214,8 @@ export default function Index(props) {
                         >
                             <Typography variant="body1" gutterBottom>
                                 Integración de diferentes métodos de pagos que
-                                te permitirán modificar tus creaciones mediante
-                                micropagos de manera sencilla
+                                te permitirán monetizar tus creaciones mediante
+                                micropagos de manera sencilla, además podrás lanzar campañas de publicidad de aplicaciones para generar instalaciones, aumentar las conversiones y mejorar su rentabilidad.
                             </Typography>
                         </Box>
                         <Button
@@ -272,7 +267,7 @@ export default function Index(props) {
                             style={{ padding: 10 }}
                         >
                             <Typography variant="h5">
-                                Temo decisiones rápidas y certeras para
+                                Toma decisiones rápidas y certeras para
                                 redireccionar su trabajo
                             </Typography>
                             <Box
@@ -282,10 +277,7 @@ export default function Index(props) {
                                 }}
                             >
                                 <Typography variant="body1" gutterBottom>
-                                    Disponga de una serie de herramientas
-                                    basadas en datos analíticos que le dará
-                                    información en tiempo real para agilizar la
-                                    toma
+                                    Las decisiones deben ser tomadas rápidamente y de manera certera para redireccionar el trabajo en la dirección correcta.
                                 </Typography>
                             </Box>
                             <Button
