@@ -19,7 +19,7 @@ export default function Index(props) {
     const router = useRouter();
 
     const goSignup = () => {
-        router.push('/signup');
+        router.push("/signup");
     };
 
     return (
@@ -45,11 +45,58 @@ export default function Index(props) {
                         variant="h6"
                         style={{ flexGrow: 1 }}
                     ></Typography>
-                    <Button color="inherit" variant="outlined" onClick={() => router.push('/login')}>
+                    <Button
+                        color="inherit"
+                        variant="outlined"
+                        onClick={() => router.push("/login")}
+                    >
                         Login
                     </Button>
                 </Toolbar>
             </AppBar>
+            <img
+                style={{
+                    width: "25%",
+                    height: "40%",
+                    position: "absolute",
+                    transform: "rotate(-78deg)",
+                    top: "660px",
+                }}
+                src="/wiroforce/images/arrowWhite.png"
+                alt="Image"
+            />
+            <img
+                style={{
+                    width: "25%",
+                    height: "40%",
+                    position: "absolute",
+                    top: "1340px",
+                    right: "0px",
+                }}
+                src="/wiroforce/images/arrowWhite.png"
+                alt="Image"
+            />
+            <img
+                style={{
+                    width: "25%",
+                    height: "40%",
+                    position: "absolute",
+                    top: "3580px",
+                }}
+                src="/wiroforce/images/arrowOrange.png"
+                alt="Image"
+            />
+            <img
+                style={{
+                    width: "25%",
+                    height: "40%",
+                    position: "absolute",
+                    top: "3820px",
+                    right: "13px",
+                }}
+                src="/wiroforce/images/arrowDarkBlue.png"
+                alt="Image"
+            />
             {/*Seccion 1*/}
             <Container maxWidth="lg" style={{ paddingTop: 80, height: 750 }}>
                 <Grid
@@ -105,7 +152,7 @@ export default function Index(props) {
                     backgroundColor: "#21222D",
                     height: 700,
                     textAlign: "center",
-                    paddingTop: 100
+                    paddingTop: 100,
                 }}
                 maxWidth={false}
             >
@@ -202,7 +249,14 @@ export default function Index(props) {
                         justify="center"
                         alignItems="center"
                     >
-                        <Grid item md={6} xs={12} sm={12} lg={6} style={{ padding: 20 }}>
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                            sm={12}
+                            lg={6}
+                            style={{ padding: 20 }}
+                        >
                             <img
                                 style={{ width: "100%", height: "100%" }}
                                 src="/wiroforce/images/graph2Picture.png"
@@ -220,7 +274,7 @@ export default function Index(props) {
                             <Typography variant="h5">
                                 Temo decisiones rápidas y certeras para
                                 redireccionar su trabajo
-                        </Typography>
+                            </Typography>
                             <Box
                                 style={{
                                     marginTop: "20px",
@@ -228,10 +282,11 @@ export default function Index(props) {
                                 }}
                             >
                                 <Typography variant="body1" gutterBottom>
-                                    Disponga de una serie de herramientas basadas en
-                                    datos analíticos que le dará información en
-                                    tiempo real para agilizar la toma
-                            </Typography>
+                                    Disponga de una serie de herramientas
+                                    basadas en datos analíticos que le dará
+                                    información en tiempo real para agilizar la
+                                    toma
+                                </Typography>
                             </Box>
                             <Button
                                 variant="contained"
@@ -239,7 +294,7 @@ export default function Index(props) {
                                 onClick={goSignup}
                             >
                                 Comienza ahora
-                        </Button>
+                            </Button>
                         </Grid>
                     </Grid>
                 </Container>
@@ -289,7 +344,7 @@ export default function Index(props) {
                 style={{
                     backgroundColor: "#21222D",
                     paddingTop: 100,
-                    paddingBottom: 100
+                    paddingBottom: 100,
                 }}
                 maxWidth={false}
             >
@@ -332,7 +387,14 @@ export default function Index(props) {
                             Comienza ahora
                         </Button>
                     </Grid>
-                    <Grid item md={6} xs={12} sm={12} lg={6} style={{ padding: 40 }}>
+                    <Grid
+                        item
+                        md={6}
+                        xs={12}
+                        sm={12}
+                        lg={6}
+                        style={{ padding: 40, zIndex: 10 }}
+                    >
                         <Box
                             style={{
                                 marginTop: "20px",
@@ -382,7 +444,7 @@ export default function Index(props) {
                     </Grid>
                 </Grid>
             </Container>
-            {/*Header*/}
+            {/*Footer*/}
             <AppBar
                 position="static"
                 color="transparent"
