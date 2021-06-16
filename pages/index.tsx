@@ -51,7 +51,7 @@ export default function Index(props) {
                 </Toolbar>
             </AppBar>
             {/*Seccion 1*/}
-            <Container maxWidth="lg">
+            <Container maxWidth="lg" style={{ paddingTop: 80, height: 750 }}>
                 <Grid
                     container
                     direction="row"
@@ -60,10 +60,10 @@ export default function Index(props) {
                 >
                     <Grid
                         item
-                        md={6}
+                        md={5}
                         xs={12}
                         sm={12}
-                        lg={6}
+                        lg={5}
                         style={{ padding: 20 }}
                     >
                         <Typography variant="h5">
@@ -90,7 +90,7 @@ export default function Index(props) {
                             Comienza ahora
                         </Button>
                     </Grid>
-                    <Grid item md={6} xs={12} sm={12} lg={6}>
+                    <Grid item md={7} xs={12} sm={12} lg={7}>
                         <img
                             style={{ width: "100%", height: "100%" }}
                             src="/wiroforce/images/mobilePicture.png"
@@ -103,8 +103,9 @@ export default function Index(props) {
             <Container
                 style={{
                     backgroundColor: "#21222D",
-                    height: 500,
+                    height: 700,
                     textAlign: "center",
+                    paddingTop: 100
                 }}
                 maxWidth={false}
             >
@@ -194,52 +195,54 @@ export default function Index(props) {
                 }}
                 maxWidth={false}
             >
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                >
-                    <Grid item md={6} xs={12} sm={12} lg={6}>
-                        <img
-                            style={{ width: "80%", height: "80%" }}
-                            src="/wiroforce/images/graph2Picture.png"
-                            alt="Image"
-                        />
-                    </Grid>
+                <Container maxWidth="lg">
                     <Grid
-                        item
-                        md={6}
-                        xs={12}
-                        sm={12}
-                        lg={6}
-                        style={{ padding: 30 }}
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="center"
                     >
-                        <Typography variant="h5">
-                            Temo decisiones rápidas y certeras para
-                            redireccionar su trabajo
+                        <Grid item md={6} xs={12} sm={12} lg={6} style={{ padding: 20 }}>
+                            <img
+                                style={{ width: "100%", height: "100%" }}
+                                src="/wiroforce/images/graph2Picture.png"
+                                alt="Image"
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                            sm={12}
+                            lg={6}
+                            style={{ padding: 10 }}
+                        >
+                            <Typography variant="h5">
+                                Temo decisiones rápidas y certeras para
+                                redireccionar su trabajo
                         </Typography>
-                        <Box
-                            style={{
-                                marginTop: "20px",
-                                marginBottom: "30px",
-                            }}
-                        >
-                            <Typography variant="body1" gutterBottom>
-                                Disponga de una serie de herramientas basadas en
-                                datos analíticos que le dará información en
-                                tiempo real para agilizar la toma
+                            <Box
+                                style={{
+                                    marginTop: "20px",
+                                    marginBottom: "30px",
+                                }}
+                            >
+                                <Typography variant="body1" gutterBottom>
+                                    Disponga de una serie de herramientas basadas en
+                                    datos analíticos que le dará información en
+                                    tiempo real para agilizar la toma
                             </Typography>
-                        </Box>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={goSignup}
-                        >
-                            Comienza ahora
+                            </Box>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={goSignup}
+                            >
+                                Comienza ahora
                         </Button>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Container>
             </Container>
             {/*Seccion 5*/}
             <Container
