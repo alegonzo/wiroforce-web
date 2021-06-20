@@ -32,29 +32,24 @@ const Product = ({ session }) => {
         setLoading(false);
     }
 
-    if (loading) {
-        return (
-            <LoaderBar />
-        );
-    }
     return (
         <Layout title={`Producto - ${product ? product.name : ''}`}>
-            <Grid container spacing={3}>
-                <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20 }}>
-                    <Button variant="text" onClick={() => router.push('/dashboard')}>
-                        Dashboard
+            <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20 }}>
+                <Button variant="text" onClick={() => router.push('/dashboard')}>
+                    Dashboard
                     </Button>
-                    <Typography color="textPrimary">{appId}</Typography>
-                    <Button variant="text" onClick={() => router.push(`/applications/${appId}/products`)}>
-                        Productos
+                <Typography color="textPrimary">{appId}</Typography>
+                <Button variant="text" onClick={() => router.push(`/applications/${appId}/products`)}>
+                    Productos
                     </Button>
-                    <Typography color="textPrimary">{product ? product.name : ''}</Typography>
-                </Breadcrumbs>
+                <Typography color="textPrimary">{product ? product.name : ''}</Typography>
+            </Breadcrumbs>
+            <Grid container spacing={3} style={{ paddingLeft: 20, paddingRight: 20 }}>
                 <Grid item xs={12} sm={12} md={12} style={{ marginTop: 20 }}>
-                    <ProductCard
+                    {product ? <ProductCard
                         session={session}
                         product={product}
-                        getProduct={getProduct} />
+                        getProduct={getProduct} /> : <LoaderBar />}
                 </Grid>
             </Grid>
         </Layout>

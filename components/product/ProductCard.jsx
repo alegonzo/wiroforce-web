@@ -55,7 +55,6 @@ const ProductCard = ({ product, getProduct, session }) => {
         setOpenToast(false);
     };
 
-    const bull = <span className={classes.bullet}>•</span>;
     const active = product.active ? "Si" : "No";
     const offline = product.offline ? "Si" : "No";
 
@@ -130,7 +129,7 @@ const ProductCard = ({ product, getProduct, session }) => {
                             >
                                 Id
                             </TableCell>
-                            <TableCell align="start">
+                            <TableCell align="left">
                                 {product.itemId}
                             </TableCell>
                         </TableRow>
@@ -142,7 +141,7 @@ const ProductCard = ({ product, getProduct, session }) => {
                             >
                                 Nombre
                             </TableCell>
-                            <TableCell align="start">{product.name}</TableCell>
+                            <TableCell align="left">{product.name}</TableCell>
                         </TableRow>
                         <TableRow key="Cantidad de recursos">
                             <TableCell
@@ -152,7 +151,7 @@ const ProductCard = ({ product, getProduct, session }) => {
                             >
                                 Cantidad de recursos
                             </TableCell>
-                            <TableCell align="start">
+                            <TableCell align="left">
                                 {product.resourceAmount}
                             </TableCell>
                         </TableRow>
@@ -164,7 +163,7 @@ const ProductCard = ({ product, getProduct, session }) => {
                             >
                                 Precio
                             </TableCell>
-                            <TableCell align="start">
+                            <TableCell align="left">
                                 {product.price} CUP
                             </TableCell>
                         </TableRow>
@@ -176,7 +175,7 @@ const ProductCard = ({ product, getProduct, session }) => {
                             >
                                 Activo
                             </TableCell>
-                            <TableCell align="start">{active}</TableCell>
+                            <TableCell align="left">{active}</TableCell>
                         </TableRow>
                         <TableRow key="Offline">
                             <TableCell
@@ -186,9 +185,9 @@ const ProductCard = ({ product, getProduct, session }) => {
                             >
                                 Offline
                             </TableCell>
-                            <TableCell align="start">{offline}</TableCell>
+                            <TableCell align="left">{offline}</TableCell>
                         </TableRow>
-                        <TableRow key="Cantidad de recursos">
+                        <TableRow key="Version">
                             <TableCell
                                 component="th"
                                 scope="row"
@@ -196,11 +195,11 @@ const ProductCard = ({ product, getProduct, session }) => {
                             >
                                 Versión
                             </TableCell>
-                            <TableCell align="start">
+                            <TableCell align="left">
                                 {product.version}
                             </TableCell>
                         </TableRow>
-                        <TableRow key="Cantidad de recursos">
+                        <TableRow key="Descripcion">
                             <TableCell
                                 component="th"
                                 scope="row"
@@ -208,7 +207,7 @@ const ProductCard = ({ product, getProduct, session }) => {
                             >
                                 Descripción
                             </TableCell>
-                            <TableCell align="start">
+                            <TableCell align="left">
                                 {product.description}
                             </TableCell>
                         </TableRow>
@@ -220,7 +219,7 @@ const ProductCard = ({ product, getProduct, session }) => {
                             >
                                 Fecha de registro
                             </TableCell>
-                            <TableCell align="start">
+                            <TableCell align="left">
                                 {moment(product.createdAt).format("MMM Do YY")}
                             </TableCell>
                         </TableRow>

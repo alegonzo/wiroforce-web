@@ -27,15 +27,6 @@ const useStyles = makeStyles((theme: Theme) => ({
             display: "none",
         },
     },
-    // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
-    },
 }));
 
 const Header = ({ handleDrawerToggle }) => {
@@ -64,7 +55,7 @@ const Header = ({ handleDrawerToggle }) => {
                         })
                     }
                 >
-                    Logout({session.user.email})
+                    Logout({session.user.email.split('@')[0]})
                 </Button>
             </Toolbar>
         </AppBar>

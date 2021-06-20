@@ -34,32 +34,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        paddingTop: 30
     },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-            width: '25ch',
-        },
-        marginTop: '20px'
-    },
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 250,
-    },
-    input: {
-        margin: theme.spacing(1),
-    }
 }));
 
 // @ts-ignore
@@ -76,10 +52,7 @@ const Login: NextPage<Props> = () => {
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Card className={classes.paper}>
-                    <CardContent>
-                        <Avatar className={classes.avatar}>
-                            <LockOutlinedIcon />
-                        </Avatar>
+                    <CardContent style={{ textAlign: 'center' }}>
                         <Typography component="h1" variant="h5">
                             Login
                     </Typography>

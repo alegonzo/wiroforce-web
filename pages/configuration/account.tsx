@@ -42,7 +42,7 @@ const AccountConfig = ({ session }) => {
                 </Button>
                 <Typography color="textPrimary">Cuenta</Typography>
             </Breadcrumbs>
-            <Container>
+            <Container maxWidth="xl">
                 {user ? <UserProfile user={user} getProfile={getProfile} /> : 'Cargando...'}
             </Container>
         </Layout>

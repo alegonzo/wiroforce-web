@@ -96,7 +96,7 @@ const Products = ({ session }) => {
 
     return (
         <Layout title={`Productos - ${appId}`}>
-            <Grid container spacing={3} style={{ marginTop: 20 }}>
+            <Grid container spacing={3} style={{ marginTop: 20, paddingLeft: 20, paddingRight: 20 }}>
                 <Grid item xs={12} sm={12} md={12}>
                     <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20 }}>
                         <Button variant="text" onClick={() => router.push('/dashboard')}>
@@ -116,10 +116,11 @@ const Products = ({ session }) => {
                             handleSubmit={handleSubmit}
                             handleCloseForm={handleCloseForm} />}
                     </Dialog>
-                    <ProductTable
+                    {products.length > 0 ? <ProductTable
                         products={products}
                         updateActiveProduct={updateActiveProduct}
-                        appId={appId} />
+                        appId={appId} /> : <LoaderBar />}
+
                     <Snackbar
                         anchorOrigin={{
                             vertical: 'bottom',

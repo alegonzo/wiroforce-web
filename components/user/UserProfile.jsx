@@ -130,7 +130,7 @@ const UserProfile = ({ user, getProfile }) => {
                                         scope="row"
                                         style={{ fontWeight: "bold" }}
                                     >
-                                        Direccion
+                                        Dirección
                                     </TableCell>
                                     <TableCell align="start">
                                         {user.address}
@@ -154,7 +154,7 @@ const UserProfile = ({ user, getProfile }) => {
                                         scope="row"
                                         style={{ fontWeight: "bold" }}
                                     >
-                                        Telefono
+                                        Teléfono
                                     </TableCell>
                                     <TableCell align="start">
                                         {user.phone}

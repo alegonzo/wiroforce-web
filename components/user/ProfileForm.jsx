@@ -27,13 +27,17 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
     },
     submit: {
-        marginTop: theme.spacing(3),
+        marginTop: theme.spacing(2),
     },
     formControl: {
         marginTop: theme.spacing(1),
         minWidth: 300,
     },
 }));
+
+const provinces = ['Pinar del Río', 'Artemisa', 'La Habana', 'Mayabeque',
+    'Matanzas', 'Cienfuegos', 'Villa Clara', 'Sancti Spíritus', 'Ciego de Ávila',
+    'Camagüey', 'Las Tunas', 'Holguín', 'Granma', 'Santiago de Cuba', 'Guantánamo', 'Isla de la Juventud'];
 
 const ProfileForm = ({ edit, user, setEdit, updateProfile, setShowDialog }) => {
     const router = useRouter();
@@ -43,31 +47,31 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile, setShowDialog }) => {
     const initialValues = edit
         ? user
         : {
-              fullName: "",
-              email: "",
-              password: "",
-              checkPassword: "",
-              company: "",
-          };
+            fullName: "",
+            email: "",
+            password: "",
+            checkPassword: "",
+            company: "",
+        };
     const validationSchema = edit
         ? Yup.object({
-              //password: Yup.string().required('Requerido'),
-              checkPassword: Yup.string(),
-              fullName: Yup.string(),
-              phone: Yup.string(),
-              address: Yup.string(),
-              province: Yup.string(),
-              nitOnat: Yup.string(),
-          })
+            //password: Yup.string().required('Requerido'),
+            checkPassword: Yup.string(),
+            fullName: Yup.string(),
+            phone: Yup.string(),
+            address: Yup.string(),
+            province: Yup.string(),
+            nitOnat: Yup.string(),
+        })
         : Yup.object({
-              fullName: Yup.string().required("Requerido"),
-              email: Yup.string()
-                  .email("No es un email valido")
-                  .required("Requerido"),
-              password: Yup.string().required("Requerido"),
-              checkPassword: Yup.string().required("Requerido"),
-              company: Yup.string().required("Requerido"),
-          });
+            fullName: Yup.string().required("Requerido"),
+            email: Yup.string()
+                .email("No es un email valido")
+                .required("Requerido"),
+            password: Yup.string().required("Requerido"),
+            checkPassword: Yup.string().required("Requerido"),
+            company: Yup.string().required("Requerido"),
+        });
     return (
         <Formik
             initialValues={initialValues}
@@ -189,9 +193,9 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile, setShowDialog }) => {
                                     <MenuItem value="" key="">
                                         Ninguno
                                     </MenuItem>
-                                    <MenuItem value="La Habana">
-                                        La Habana
-                                    </MenuItem>
+                                    {provinces.map((item, idx) => <MenuItem value={item} key={idx}>
+                                        {item}
+                                    </MenuItem>)}
                                 </Select>
                                 {errors.price ? (
                                     <FormHelperText style={{ color: "red" }}>

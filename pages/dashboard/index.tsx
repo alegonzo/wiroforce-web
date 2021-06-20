@@ -14,7 +14,7 @@ const Dashboard = ({ iframeUrl }) => {
         return (
             <Layout title="Dashboard">
                 <Grid container>
-                    <Grid item md={12}>
+                    <Grid item md={12} xs={12} lg={12}>
                         {<IframeResizer
                             src={iframeUrl} 
                             frameBorder={0}

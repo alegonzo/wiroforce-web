@@ -29,12 +29,6 @@ const useStyles = makeStyles((theme) => ({
             flexShrink: 0,
         },
     },
-    appBar: {
-        [theme.breakpoints.up('sm')]: {
-            width: `calc(100% - ${drawerWidth}px)`,
-            marginLeft: drawerWidth,
-        },
-    },
     nested: {
         paddingLeft: theme.spacing(4),
     },

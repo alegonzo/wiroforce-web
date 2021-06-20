@@ -136,7 +136,7 @@ export default function Index(props) {
                         lg={5}
                         style={{ padding: 20 }}
                     >
-                        <Typography variant="h5">
+                        <Typography variant="h4">
                             Fuerza de Crecimiento
                         </Typography>
                         <Box
@@ -229,7 +229,7 @@ export default function Index(props) {
                         lg={6}
                         style={{ padding: 20, paddingBottom: 40 }}
                     >
-                        <Typography variant="h5">
+                        <Typography variant="h4">
                             Convierta sus videojuegos y aplicaciones en un
                             negocio rentable
                         </Typography>
@@ -296,7 +296,7 @@ export default function Index(props) {
                             lg={6}
                             style={{ padding: 10 }}
                         >
-                            <Typography variant="h5">
+                            <Typography variant="h4">
                                 Toma decisiones rápidas y certeras para
                                 redireccionar su trabajo
                             </Typography>
@@ -339,7 +339,7 @@ export default function Index(props) {
                     justify="space-around"
                     alignItems="center"
                 >
-                    <Typography variant="h5">
+                    <Typography variant="h4">
                         Potencie sus ingresos con configuraciones remotas de IAP
                     </Typography>
                     <Typography
@@ -386,7 +386,7 @@ export default function Index(props) {
                         lg={6}
                         style={{ padding: 40 }}
                     >
-                        <Typography variant="h5">
+                        <Typography variant="h4">
                             Obtenga los mayores rendimientos de sus campañas de
                             publicidad
                         </Typography>

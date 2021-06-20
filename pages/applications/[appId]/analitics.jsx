@@ -22,24 +22,24 @@ const Analitics = ({ application, iframeUrl }) => {
     return (
         <Layout title={`Analitica - ${application.name}`}>
             <Container>
-                {application !== null &&
-                    <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20 }}>
-                        <Button variant="text" onClick={() => router.push('/')}>
-                            Dashboard
-                    </Button>
-                        <Typography color="textPrimary">Aplicaciones</Typography>
-                        <Typography color="textPrimary">{application ? application.name : ''}</Typography>
-                    </Breadcrumbs>
-                }
-                <Grid container spacing={3} style={{ marginTop: 20 }}>
+                <Grid container>
                     <Grid item xs={12} sm={12} md={12}>
+                        {application !== null &&
+                            <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20 }}>
+                                <Button variant="text" onClick={() => router.push('/')}>
+                                    Dashboard
+                                </Button>
+                                <Typography color="textPrimary">Aplicaciones</Typography>
+                                <Typography color="textPrimary">{application ? application.name : ''}</Typography>
+                            </Breadcrumbs>
+                        }
                         {application !== null && <ApplicationCard application={application} />}
                     </Grid>
                 </Grid>
                 <br />
                 <div className={classes.root}>
                     <Grid container>
-                        <Grid item md={12}>
+                        <Grid item md={12} xs={12} lg={12}>
                             <IframeResizer
                                 src={iframeUrl} frameBorder={0}
                                 style={{ width: '1px', minWidth: '100%' }}
