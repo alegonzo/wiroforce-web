@@ -82,13 +82,7 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile, setShowDialog }) => {
                     return false;
                 }
                 try {
-                    if (!edit) {
-                        const response = await axios.post(
-                            `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`,
-                            values
-                        );
-                        setShowDialog(true);
-                    } else {
+                    if (edit) {
                         const response = await Api().put(
                             `/users/editProfile`,
                             values,
@@ -101,9 +95,14 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile, setShowDialog }) => {
                         );
                         await updateProfile();
                         setEdit(false);
+                    } else {
+                        const response = await axios.post(
+                            `https://conwiro.nat.cu/wiroforce-api/api/v1/auth/signup`,
+                            values
+                        );
+                        setShowDialog(true);
                     }
                 } catch (e) {
-                    console.log(e.message);
                     if (e.response.status === 400)
                         setErrors({ serverSide: e.response.data.message });
                     if (e.response.status === 401) router.push("/login");
