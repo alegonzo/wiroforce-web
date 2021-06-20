@@ -16,16 +16,15 @@ import {
     Slide,
     DialogContent,
     Button,
+    SliderProps,
+    SlideProps,
 } from "@material-ui/core";
 import { useRouter } from "next/router";
 import LoginLayout from "../../components/layouts/LoginLayout";
 import ProfileForm from "../../components/user/ProfileForm";
 import { NextPage } from "next";
+import { TransitionProps } from "@material-ui/core/transitions/transition";
 //import { authService } from '../services/AuthService';
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
 
 function Copyright() {
     return (
@@ -52,6 +51,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
 }));
+
+const Transition = React.forwardRef<unknown, SlideProps>((props, ref) => (
+    <Slide direction="up" ref={ref} {...props} />
+));
 
 //@ts-ignore
 const SignupPage: NextPage<Props> = () => {
