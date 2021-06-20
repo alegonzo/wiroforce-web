@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
 import { signIn, signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
@@ -15,29 +15,31 @@ import {
 import Head from "next/head";
 import { Facebook, Instagram, Twitter } from "@material-ui/icons";
 
-Index.getInitialProps = ({ req }) => {
-    let userAgent;
-    if (req) {
-        // if you are on the server and you get a 'req' property from your context
-        userAgent = req.headers["user-agent"]; // get the user-agent from the headers
-    } else {
-        userAgent = navigator.userAgent; // if you are on the client you can access the navigator from the window object
-    }
-
-    let isMobile = Boolean(
-        userAgent.match(
-            /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-        )
-    );
-
-    return { isMobile };
-};
-
-export default function Index({ isMobile }) {
+export default function Index(props) {
     const router = useRouter();
+    const [isMobile, setIsMobile] = useState(false);
     const goSignup = () => {
         router.push("/signup");
     };
+
+    //choose the screen size
+    const handleResize = () => {
+        if (window.innerWidth < 960) {
+            setIsMobile(true);
+        } else {
+            setIsMobile(false);
+        }
+    };
+
+    // create an event listener
+    useEffect(() => {
+        if (window.innerWidth < 960) {
+            setIsMobile(true);
+        } else {
+            setIsMobile(false);
+        }
+        window.addEventListener("resize", handleResize);
+    });
 
     return (
         <React.Fragment>

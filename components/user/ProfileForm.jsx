@@ -1,12 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import * as Yup from 'yup';
-import { Field, Form, Formik } from 'formik';
-import { TextField } from 'formik-material-ui';
-import { Button, FormControl, Typography, FormHelperText, MenuItem, InputLabel, makeStyles, Select } from '@material-ui/core';
-import { useRouter } from 'next/router';
-import Api from '../../utils/api';
-import { useSession } from 'next-auth/client';
+import React from "react";
+import PropTypes from "prop-types";
+import * as Yup from "yup";
+import { Field, Form, Formik } from "formik";
+import { TextField } from "formik-material-ui";
+import {
+    Button,
+    FormControl,
+    Typography,
+    FormHelperText,
+    MenuItem,
+    InputLabel,
+    makeStyles,
+    Select,
+} from "@material-ui/core";
+import { useRouter } from "next/router";
+import Api from "../../utils/api";
+import { useSession } from "next-auth/client";
 
 const useStyles = makeStyles((theme) => ({
     avatar: {
@@ -14,45 +23,51 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: "100%", // Fix IE 11 issue.
         marginTop: theme.spacing(2),
     },
     submit: {
-        marginTop: theme.spacing(3)
+        marginTop: theme.spacing(3),
     },
     formControl: {
         marginTop: theme.spacing(1),
         minWidth: 300,
-    }
+    },
 }));
 
-const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
+const ProfileForm = ({ edit, user, setEdit, updateProfile, setShowDialog }) => {
     const router = useRouter();
     const [session] = useSession();
     const classes = useStyles();
 
-    const initialValues = edit ? user : {
-        fullName: '',
-        email: '',
-        password: '',
-        checkPassword: '',
-        company: ''
-    };
-    const validationSchema = edit ? Yup.object({
-        //password: Yup.string().required('Requerido'),
-        checkPassword: Yup.string(),
-        fullName: Yup.string(),
-        phone: Yup.string(),
-        address: Yup.string(),
-        province: Yup.string(),
-        nitOnat: Yup.string()
-    }) : Yup.object({
-        fullName: Yup.string().required('Requerido'),
-        email: Yup.string().email('No es un email valido').required('Requerido'),
-        password: Yup.string().required('Requerido'),
-        checkPassword: Yup.string().required('Requerido'),
-        company: Yup.string().required('Requerido')
-    });
+    const initialValues = edit
+        ? user
+        : {
+              fullName: "",
+              email: "",
+              password: "",
+              checkPassword: "",
+              company: "",
+          };
+    const validationSchema = edit
+        ? Yup.object({
+              //password: Yup.string().required('Requerido'),
+              checkPassword: Yup.string(),
+              fullName: Yup.string(),
+              phone: Yup.string(),
+              address: Yup.string(),
+              province: Yup.string(),
+              nitOnat: Yup.string(),
+          })
+        : Yup.object({
+              fullName: Yup.string().required("Requerido"),
+              email: Yup.string()
+                  .email("No es un email valido")
+                  .required("Requerido"),
+              password: Yup.string().required("Requerido"),
+              checkPassword: Yup.string().required("Requerido"),
+              company: Yup.string().required("Requerido"),
+          });
     return (
         <Formik
             initialValues={initialValues}
@@ -60,26 +75,37 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
             onSubmit={async (values, { setSubmitting, setErrors }) => {
                 setSubmitting(false);
                 if (!edit && values.password !== values.checkPassword) {
-                    setErrors({ checkPassword: 'Las contraseñas no coinciden' });
+                    setErrors({
+                        checkPassword: "Las contraseñas no coinciden",
+                    });
                     return false;
                 }
                 try {
                     if (!edit) {
-                        const response = await Api().post('/auth/signup', values);
-                        router.push('/login');
+                        const response = await Api().post(
+                            "/auth/signup",
+                            values
+                        );
+                        setShowDialog(true);
                     } else {
-                        const response = await Api().put(`/users/editProfile`, values, {
-                            headers: { 'Authorization': 'Bearer ' + session.user.token }
-                        });
+                        const response = await Api().put(
+                            `/users/editProfile`,
+                            values,
+                            {
+                                headers: {
+                                    Authorization:
+                                        "Bearer " + session.user.token,
+                                },
+                            }
+                        );
                         await updateProfile();
                         setEdit(false);
                     }
                 } catch (e) {
                     console.log(e.message);
                     if (e.response.status === 400)
-                        setErrors({ serverSide: e.response.data.message })
-                    if(e.response.status === 401)
-                        router.push('/login')
+                        setErrors({ serverSide: e.response.data.message });
+                    if (e.response.status === 401) router.push("/login");
                     return false;
                 }
             }}
@@ -87,8 +113,8 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
             {({ submitForm, isSubmitting, values, handleChange, errors }) => (
                 <Form className={classes.form}>
                     <div>
-                        {
-                            !edit && <Field
+                        {!edit && (
+                            <Field
                                 className={classes.formControl}
                                 component={TextField}
                                 name="email"
@@ -96,7 +122,7 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
                                 label="Email"
                                 fullWidth
                             />
-                        }
+                        )}
                     </div>
                     <div>
                         <Field
@@ -109,8 +135,8 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
                         />
                     </div>
                     <div>
-                        {
-                            !edit && <Field
+                        {!edit && (
+                            <Field
                                 className={classes.formControl}
                                 component={TextField}
                                 name="company"
@@ -118,11 +144,11 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
                                 label="Nombre del Estudio"
                                 fullWidth
                             />
-                        }
+                        )}
                     </div>
                     <div>
-                        {
-                            edit && <Field
+                        {edit && (
+                            <Field
                                 className={classes.formControl}
                                 component={TextField}
                                 name="phone"
@@ -130,11 +156,11 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
                                 label="Telefono"
                                 fullWidth
                             />
-                        }
+                        )}
                     </div>
                     <div>
-                        {
-                            edit && <Field
+                        {edit && (
+                            <Field
                                 className={classes.formControl}
                                 component={TextField}
                                 name="address"
@@ -142,12 +168,17 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
                                 label="Direccion"
                                 fullWidth
                             />
-                        }
+                        )}
                     </div>
                     <div>
-                        {
-                            edit && <FormControl className={classes.formControl}>
-                                <InputLabel id="province-select">Provincia</InputLabel>
+                        {edit && (
+                            <FormControl
+                                className={classes.formControl}
+                                style={{ width: "100%" }}
+                            >
+                                <InputLabel id="province-select">
+                                    Provincia
+                                </InputLabel>
                                 <Select
                                     labelId="province-select"
                                     id="province"
@@ -155,16 +186,24 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
                                     value={values.province}
                                     onChange={handleChange}
                                 >
-                                    <MenuItem value="" key="">Ninguno</MenuItem>
-                                    <MenuItem value="La Habana">La Habana</MenuItem>
+                                    <MenuItem value="" key="">
+                                        Ninguno
+                                    </MenuItem>
+                                    <MenuItem value="La Habana">
+                                        La Habana
+                                    </MenuItem>
                                 </Select>
-                                {errors.price ? <FormHelperText style={{ color: 'red' }}>{errors.price}</FormHelperText> : null}
+                                {errors.price ? (
+                                    <FormHelperText style={{ color: "red" }}>
+                                        {errors.price}
+                                    </FormHelperText>
+                                ) : null}
                             </FormControl>
-                        }
+                        )}
                     </div>
                     <div>
-                        {
-                            edit && <Field
+                        {edit && (
+                            <Field
                                 className={classes.formControl}
                                 component={TextField}
                                 name="nitOnat"
@@ -172,35 +211,40 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
                                 label="NIT ONAT"
                                 fullWidth
                             />
-                        }
+                        )}
                     </div>
                     <div>
-                        {!edit && <Field
-                            className={classes.formControl}
-                            component={TextField}
-                            type="password"
-                            label="Password"
-                            name="password"
-                            fullWidth
-                        />
-                        }
+                        {!edit && (
+                            <Field
+                                className={classes.formControl}
+                                component={TextField}
+                                type="password"
+                                label="Password"
+                                name="password"
+                                fullWidth
+                            />
+                        )}
                     </div>
                     <div>
-                        {!edit && <Field
-                            className={classes.formControl}
-                            component={TextField}
-                            type="password"
-                            label="Repetir Contraseña"
-                            name="checkPassword"
-                            fullWidth
-                        />
-                        }
+                        {!edit && (
+                            <Field
+                                className={classes.formControl}
+                                component={TextField}
+                                type="password"
+                                label="Repetir Contraseña"
+                                name="checkPassword"
+                                fullWidth
+                            />
+                        )}
                     </div>
                     <br />
-                    <div style={{ color: 'red' }}>
-                        {
-                            errors.serverSide && errors.serverSide.map((item, idx) => <Typography key={idx} variant="body1">{item}</Typography>)
-                        }
+                    <div style={{ color: "red" }}>
+                        {errors.serverSide &&
+                            errors.serverSide.map((item, idx) => (
+                                <Typography key={idx} variant="body1">
+                                    {item}
+                                </Typography>
+                            ))}
                     </div>
                     <br />
                     <div>
@@ -210,8 +254,9 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
                             color="primary"
                             className={classes.submit}
                             disabled={isSubmitting}
-                            onClick={submitForm}>
-                            {edit ? 'Guardar' : 'Crear cuenta'}
+                            onClick={submitForm}
+                        >
+                            {edit ? "Guardar" : "Crear cuenta"}
                         </Button>
                     </div>
                     <div>
@@ -221,22 +266,21 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile }) => {
                             color="secondary"
                             className={classes.submit}
                             onClick={() => {
-                                if (edit)
-                                    setEdit(false);
-                                else
-                                    router.push('/login')
-                            }}>
+                                if (edit) setEdit(false);
+                                else router.push("/login");
+                            }}
+                        >
                             Cancelar
                         </Button>
                     </div>
                 </Form>
             )}
         </Formik>
-    )
-}
+    );
+};
 
 ProfileForm.protoTypes = {
-    edit: PropTypes.any
-}
+    edit: PropTypes.any,
+};
 
 export default ProfileForm;

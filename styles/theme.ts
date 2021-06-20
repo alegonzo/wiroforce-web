@@ -16,6 +16,9 @@ const theme = createMuiTheme({
             default: "#17171f",
         },
     },
+    typography: {
+        fontFamily: ['"Rubik"', "sans-serif"].join(","),
+    },
 });
 
 export default theme;
