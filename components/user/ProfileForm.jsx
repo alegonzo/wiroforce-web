@@ -16,12 +16,9 @@ import {
 import { useRouter } from "next/router";
 import Api from "../../utils/api";
 import { useSession } from "next-auth/client";
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
     form: {
         width: "100%", // Fix IE 11 issue.
         marginTop: theme.spacing(2),
@@ -86,8 +83,8 @@ const ProfileForm = ({ edit, user, setEdit, updateProfile, setShowDialog }) => {
                 }
                 try {
                     if (!edit) {
-                        const response = await Api().post(
-                            "/auth/signup",
+                        const response = await axios.post(
+                            `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`,
                             values
                         );
                         setShowDialog(true);
