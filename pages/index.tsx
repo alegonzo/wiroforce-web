@@ -15,9 +15,26 @@ import {
 import Head from "next/head";
 import { Facebook, Instagram, Twitter } from "@material-ui/icons";
 
-export default function Index(props) {
-    const router = useRouter();
+Index.getInitialProps = ({ req }) => {
+    let userAgent;
+    if (req) {
+        // if you are on the server and you get a 'req' property from your context
+        userAgent = req.headers["user-agent"]; // get the user-agent from the headers
+    } else {
+        userAgent = navigator.userAgent; // if you are on the client you can access the navigator from the window object
+    }
 
+    let isMobile = Boolean(
+        userAgent.match(
+            /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+        )
+    );
+
+    return { isMobile };
+};
+
+export default function Index({ isMobile }) {
+    const router = useRouter();
     const goSignup = () => {
         router.push("/signup");
     };
@@ -54,49 +71,53 @@ export default function Index(props) {
                     </Button>
                 </Toolbar>
             </AppBar>
-            <img
-                style={{
-                    width: "25%",
-                    height: "40%",
-                    position: "absolute",
-                    transform: "rotate(-78deg)",
-                    top: "660px",
-                }}
-                src="/wiroforce/images/arrowWhite.png"
-                alt="Image"
-            />
-            <img
-                style={{
-                    width: "25%",
-                    height: "40%",
-                    position: "absolute",
-                    top: "1340px",
-                    right: "0px",
-                }}
-                src="/wiroforce/images/arrowWhite.png"
-                alt="Image"
-            />
-            <img
-                style={{
-                    width: "25%",
-                    height: "40%",
-                    position: "absolute",
-                    top: "3580px",
-                }}
-                src="/wiroforce/images/arrowOrange.png"
-                alt="Image"
-            />
-            <img
-                style={{
-                    width: "25%",
-                    height: "40%",
-                    position: "absolute",
-                    top: "3820px",
-                    right: "13px",
-                }}
-                src="/wiroforce/images/arrowDarkBlue.png"
-                alt="Image"
-            />
+            {isMobile ? null : (
+                <>
+                    <img
+                        style={{
+                            width: "25%",
+                            height: "40%",
+                            position: "absolute",
+                            transform: "rotate(-78deg)",
+                            top: "660px",
+                        }}
+                        src="/wiroforce/images/arrowWhite.png"
+                        alt="Image"
+                    />
+                    <img
+                        style={{
+                            width: "25%",
+                            height: "40%",
+                            position: "absolute",
+                            top: "1340px",
+                            right: "0px",
+                        }}
+                        src="/wiroforce/images/arrowWhite.png"
+                        alt="Image"
+                    />
+                    <img
+                        style={{
+                            width: "25%",
+                            height: "40%",
+                            position: "absolute",
+                            top: "3580px",
+                        }}
+                        src="/wiroforce/images/arrowOrange.png"
+                        alt="Image"
+                    />
+                    <img
+                        style={{
+                            width: "25%",
+                            height: "40%",
+                            position: "absolute",
+                            top: "3820px",
+                            right: "13px",
+                        }}
+                        src="/wiroforce/images/arrowDarkBlue.png"
+                        alt="Image"
+                    />
+                </>
+            )}
             {/*Seccion 1*/}
             <Container maxWidth="lg" style={{ paddingTop: 80, height: 750 }}>
                 <Grid
@@ -123,7 +144,9 @@ export default function Index(props) {
                             }}
                         >
                             <Typography variant="body1" gutterBottom>
-                                Trabajamos para impulsar el desarrollo de videojuegos y aplicaciones en Cuba creando herramientas que lo guiarán al éxito.
+                                Trabajamos para impulsar el desarrollo de
+                                videojuegos y aplicaciones en Cuba creando
+                                herramientas que lo guiarán al éxito.
                             </Typography>
                         </Box>
                         <Button
@@ -175,7 +198,9 @@ export default function Index(props) {
                         alt="Image"
                     />
                     <Typography variant="body1" gutterBottom>
-                        Soñamos con que los desarrolladores de videojuegos y aplicaciones puedan hacer rentables y escalables sus creaciones.
+                        Soñamos con que los desarrolladores de videojuegos y
+                        aplicaciones puedan hacer rentables y escalables sus
+                        creaciones.
                     </Typography>
                 </Grid>
             </Container>
@@ -215,7 +240,10 @@ export default function Index(props) {
                             <Typography variant="body1" gutterBottom>
                                 Integración de diferentes métodos de pagos que
                                 te permitirán monetizar tus creaciones mediante
-                                micropagos de manera sencilla, además podrás lanzar campañas de publicidad de aplicaciones para generar instalaciones, aumentar las conversiones y mejorar su rentabilidad.
+                                micropagos de manera sencilla, además podrás
+                                lanzar campañas de publicidad de aplicaciones
+                                para generar instalaciones, aumentar las
+                                conversiones y mejorar su rentabilidad.
                             </Typography>
                         </Box>
                         <Button
@@ -277,7 +305,9 @@ export default function Index(props) {
                                 }}
                             >
                                 <Typography variant="body1" gutterBottom>
-                                    Las decisiones deben ser tomadas rápidamente y de manera certera para redireccionar el trabajo en la dirección correcta.
+                                    Las decisiones deben ser tomadas rápidamente
+                                    y de manera certera para redireccionar el
+                                    trabajo en la dirección correcta.
                                 </Typography>
                             </Box>
                             <Button
