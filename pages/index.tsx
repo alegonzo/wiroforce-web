@@ -13,6 +13,7 @@ import {
     IconButton,
 } from "@material-ui/core";
 import Head from "next/head";
+import Fade from "react-reveal/Fade";
 import { Facebook, Instagram, Twitter } from "@material-ui/icons";
 
 export default function Index(props) {
@@ -122,51 +123,53 @@ export default function Index(props) {
             )}
             {/*Seccion 1*/}
             <Container maxWidth="lg" style={{ paddingTop: 80, height: 750 }}>
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                >
+                <Fade bottom>
                     <Grid
-                        item
-                        md={5}
-                        xs={12}
-                        sm={12}
-                        lg={5}
-                        style={{ padding: 20 }}
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="center"
                     >
-                        <Typography variant="h4">
-                            Fuerza de Crecimiento
-                        </Typography>
-                        <Box
-                            style={{
-                                marginTop: "20px",
-                                marginBottom: "30px",
-                            }}
+                        <Grid
+                            item
+                            md={5}
+                            xs={12}
+                            sm={12}
+                            lg={5}
+                            style={{ padding: 20 }}
                         >
-                            <Typography variant="body1" gutterBottom>
-                                Trabajamos para impulsar el desarrollo de
-                                videojuegos y aplicaciones en Cuba creando
-                                herramientas que lo guiarán al éxito.
+                            <Typography variant="h4">
+                                Fuerza de Crecimiento
                             </Typography>
-                        </Box>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={goSignup}
-                        >
-                            Comienza ahora
-                        </Button>
+                            <Box
+                                style={{
+                                    marginTop: "20px",
+                                    marginBottom: "30px",
+                                }}
+                            >
+                                <Typography variant="body1" gutterBottom>
+                                    Trabajamos para impulsar el desarrollo de
+                                    videojuegos y aplicaciones en Cuba creando
+                                    herramientas que lo guiarán al éxito.
+                                </Typography>
+                            </Box>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={goSignup}
+                            >
+                                Comienza ahora
+                            </Button>
+                        </Grid>
+                        <Grid item md={7} xs={12} sm={12} lg={7}>
+                            <img
+                                style={{ width: "100%", height: "100%" }}
+                                src="/wiroforce/images/mobilePicture.png"
+                                alt="Image"
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid item md={7} xs={12} sm={12} lg={7}>
-                        <img
-                            style={{ width: "100%", height: "100%" }}
-                            src="/wiroforce/images/mobilePicture.png"
-                            alt="Image"
-                        />
-                    </Grid>
-                </Grid>
+                </Fade>
             </Container>
             {/*Seccion 2*/}
             <Container
@@ -178,85 +181,90 @@ export default function Index(props) {
                 }}
                 maxWidth={false}
             >
-                <Grid
-                    container
-                    item
-                    md={12}
-                    xs={12}
-                    sm={12}
-                    lg={12}
-                    direction="column"
-                    justify="space-around"
-                    alignItems="center"
-                >
-                    <img
-                        style={{
-                            width: "100%",
-                            maxWidth: 400,
-                            marginTop: 100,
-                            marginBottom: 100,
-                        }}
-                        src="/wiroforce/images/wiroforceLogo.png"
-                        alt="Image"
-                    />
-                    <Typography variant="body1" gutterBottom>
-                        Soñamos con que los desarrolladores de videojuegos y
-                        aplicaciones puedan hacer rentables y escalables sus
-                        creaciones.
-                    </Typography>
-                </Grid>
+                <Fade bottom>
+                    <Grid
+                        container
+                        item
+                        md={12}
+                        xs={12}
+                        sm={12}
+                        lg={12}
+                        direction="column"
+                        justify="space-around"
+                        alignItems="center"
+                    >
+                        <img
+                            style={{
+                                width: "100%",
+                                maxWidth: 400,
+                                marginTop: 100,
+                                marginBottom: 100,
+                            }}
+                            src="/wiroforce/images/wiroforceLogo.png"
+                            alt="Image"
+                        />
+                        <Typography variant="body1" gutterBottom>
+                            Soñamos con que los desarrolladores de videojuegos y
+                            aplicaciones puedan hacer rentables y escalables sus
+                            creaciones.
+                        </Typography>
+                    </Grid>
+                </Fade>
             </Container>
             {/*Seccion 3*/}
             <Container maxWidth="lg">
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                >
-                    <Grid item md={6} xs={12} sm={12} lg={6}>
-                        <img
-                            style={{ width: "100%", height: "100%" }}
-                            src="/wiroforce/images/graph1Picture.png"
-                            alt="Image"
-                        />
-                    </Grid>
+                <Fade bottom>
                     <Grid
-                        item
-                        md={6}
-                        xs={12}
-                        sm={12}
-                        lg={6}
-                        style={{ padding: 20, paddingBottom: 40 }}
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="center"
                     >
-                        <Typography variant="h4">
-                            Convierta sus videojuegos y aplicaciones en un
-                            negocio rentable
-                        </Typography>
-                        <Box
-                            style={{
-                                marginTop: "20px",
-                                marginBottom: "30px",
-                            }}
+                        <Grid item md={6} xs={12} sm={12} lg={6}>
+                            <img
+                                style={{ width: "100%", height: "100%" }}
+                                src="/wiroforce/images/graph1Picture.png"
+                                alt="Image"
+                            />
+                        </Grid>
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                            sm={12}
+                            lg={6}
+                            style={{ padding: 20, paddingBottom: 40 }}
                         >
-                            <Typography variant="body1" gutterBottom>
-                                Integración de diferentes métodos de pagos que
-                                te permitirán monetizar tus creaciones mediante
-                                micropagos de manera sencilla, además podrás
-                                lanzar campañas de publicidad de aplicaciones
-                                para generar instalaciones, aumentar las
-                                conversiones y mejorar su rentabilidad.
+                            <Typography variant="h4">
+                                Convierta sus videojuegos y aplicaciones en un
+                                negocio rentable
                             </Typography>
-                        </Box>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={goSignup}
-                        >
-                            Comienza ahora
-                        </Button>
+                            <Box
+                                style={{
+                                    marginTop: "20px",
+                                    marginBottom: "30px",
+                                }}
+                            >
+                                <Typography variant="body1" gutterBottom>
+                                    Integración de diferentes métodos de pagos
+                                    que te permitirán monetizar tus creaciones
+                                    mediante micropagos de manera sencilla,
+                                    además podrás lanzar campañas de publicidad
+                                    de aplicaciones para generar instalaciones,
+                                    aumentar las conversiones y mejorar su
+                                    rentabilidad.
+                                </Typography>
+                            </Box>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={goSignup}
+                            >
+                                Comienza ahora
+                            </Button>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Fade>
             </Container>
             {/*Seccion 4*/}
             <Container
@@ -268,6 +276,118 @@ export default function Index(props) {
                 maxWidth={false}
             >
                 <Container maxWidth="lg">
+                    <Fade bottom>
+                        <Grid
+                            container
+                            direction="row"
+                            justify="center"
+                            alignItems="center"
+                        >
+                            <Grid
+                                item
+                                md={6}
+                                xs={12}
+                                sm={12}
+                                lg={6}
+                                style={{ padding: 20 }}
+                            >
+                                <img
+                                    style={{ width: "100%", height: "100%" }}
+                                    src="/wiroforce/images/graph2Picture.png"
+                                    alt="Image"
+                                />
+                            </Grid>
+                            <Grid
+                                item
+                                md={6}
+                                xs={12}
+                                sm={12}
+                                lg={6}
+                                style={{ padding: 10 }}
+                            >
+                                <Typography variant="h4">
+                                    Toma decisiones rápidas y certeras para
+                                    redireccionar su trabajo
+                                </Typography>
+                                <Box
+                                    style={{
+                                        marginTop: "20px",
+                                        marginBottom: "30px",
+                                    }}
+                                >
+                                    <Typography variant="body1" gutterBottom>
+                                        Las decisiones deben ser tomadas
+                                        rápidamente y de manera certera para
+                                        redireccionar el trabajo en la dirección
+                                        correcta.
+                                    </Typography>
+                                </Box>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={goSignup}
+                                >
+                                    Comienza ahora
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Fade>
+                </Container>
+            </Container>
+            {/*Seccion 5*/}
+            <Container
+                style={{ textAlign: "center", paddingTop: 100 }}
+                maxWidth={false}
+            >
+                <Fade bottom>
+                    <Grid
+                        container
+                        item
+                        md={12}
+                        xs={12}
+                        sm={12}
+                        lg={12}
+                        direction="column"
+                        justify="space-around"
+                        alignItems="center"
+                    >
+                        <Typography variant="h4">
+                            Potencie sus ingresos con configuraciones remotas de
+                            IAP
+                        </Typography>
+                        <Typography
+                            variant="body1"
+                            gutterBottom
+                            style={{ marginTop: 40 }}
+                        >
+                            Actualiza los productos y crea ofertas especiales
+                            dentro de la tienda de manera remota sin tener que
+                            lanzar una nueva versión permitiendo aumentar tus
+                            ingresos
+                        </Typography>
+                        <img
+                            style={{
+                                width: "100%",
+                                maxWidth: 600,
+                                marginTop: 100,
+                                marginBottom: 100,
+                            }}
+                            src="/wiroforce/images/gameMobilePicture.png"
+                            alt="Image"
+                        />
+                    </Grid>
+                </Fade>
+            </Container>
+            {/*Seccion 6*/}
+            <Container
+                style={{
+                    backgroundColor: "#21222D",
+                    paddingTop: 100,
+                    paddingBottom: 100,
+                }}
+                maxWidth={false}
+            >
+                <Fade bottom>
                     <Grid
                         container
                         direction="row"
@@ -280,25 +400,11 @@ export default function Index(props) {
                             xs={12}
                             sm={12}
                             lg={6}
-                            style={{ padding: 20 }}
-                        >
-                            <img
-                                style={{ width: "100%", height: "100%" }}
-                                src="/wiroforce/images/graph2Picture.png"
-                                alt="Image"
-                            />
-                        </Grid>
-                        <Grid
-                            item
-                            md={6}
-                            xs={12}
-                            sm={12}
-                            lg={6}
-                            style={{ padding: 10 }}
+                            style={{ padding: 40 }}
                         >
                             <Typography variant="h4">
-                                Toma decisiones rápidas y certeras para
-                                redireccionar su trabajo
+                                Obtenga los mayores rendimientos de sus campañas
+                                de publicidad
                             </Typography>
                             <Box
                                 style={{
@@ -307,9 +413,10 @@ export default function Index(props) {
                                 }}
                             >
                                 <Typography variant="body1" gutterBottom>
-                                    Las decisiones deben ser tomadas rápidamente
-                                    y de manera certera para redireccionar el
-                                    trabajo en la dirección correcta.
+                                    Mira de manera efectiva las campañas de
+                                    adquisición de usuarios que le permitirán
+                                    tomar las mejores decisiones para optimizar
+                                    las campañas de videojuegos y aplicaciones
                                 </Typography>
                             </Box>
                             <Button
@@ -320,153 +427,64 @@ export default function Index(props) {
                                 Comienza ahora
                             </Button>
                         </Grid>
-                    </Grid>
-                </Container>
-            </Container>
-            {/*Seccion 5*/}
-            <Container
-                style={{ textAlign: "center", paddingTop: 100 }}
-                maxWidth={false}
-            >
-                <Grid
-                    container
-                    item
-                    md={12}
-                    xs={12}
-                    sm={12}
-                    lg={12}
-                    direction="column"
-                    justify="space-around"
-                    alignItems="center"
-                >
-                    <Typography variant="h4">
-                        Potencie sus ingresos con configuraciones remotas de IAP
-                    </Typography>
-                    <Typography
-                        variant="body1"
-                        gutterBottom
-                        style={{ marginTop: 40 }}
-                    >
-                        Actualiza los productos y crea ofertas especiales dentro
-                        de la tienda de manera remota sin tener que lanzar una
-                        nueva versión permitiendo aumentar tus ingresos
-                    </Typography>
-                    <img
-                        style={{
-                            width: "100%",
-                            maxWidth: 600,
-                            marginTop: 100,
-                            marginBottom: 100,
-                        }}
-                        src="/wiroforce/images/gameMobilePicture.png"
-                        alt="Image"
-                    />
-                </Grid>
-            </Container>
-            {/*Seccion 6*/}
-            <Container
-                style={{
-                    backgroundColor: "#21222D",
-                    paddingTop: 100,
-                    paddingBottom: 100,
-                }}
-                maxWidth={false}
-            >
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                >
-                    <Grid
-                        item
-                        md={6}
-                        xs={12}
-                        sm={12}
-                        lg={6}
-                        style={{ padding: 40 }}
-                    >
-                        <Typography variant="h4">
-                            Obtenga los mayores rendimientos de sus campañas de
-                            publicidad
-                        </Typography>
-                        <Box
-                            style={{
-                                marginTop: "20px",
-                                marginBottom: "30px",
-                            }}
+                        <Grid
+                            item
+                            md={6}
+                            xs={12}
+                            sm={12}
+                            lg={6}
+                            style={{ padding: 40, zIndex: 10 }}
                         >
-                            <Typography variant="body1" gutterBottom>
-                                Mira de manera efectiva las campañas de
-                                adquisición de usuarios que le permitirán tomar
-                                las mejores decisiones para optimizar las
-                                campañas de videojuegos y aplicaciones
-                            </Typography>
-                        </Box>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={goSignup}
-                        >
-                            Comienza ahora
-                        </Button>
-                    </Grid>
-                    <Grid
-                        item
-                        md={6}
-                        xs={12}
-                        sm={12}
-                        lg={6}
-                        style={{ padding: 40, zIndex: 10 }}
-                    >
-                        <Box
-                            style={{
-                                marginTop: "20px",
-                                marginBottom: "30px",
-                                marginLeft: "20px",
-                            }}
-                        >
-                            <Typography
-                                variant="body1"
-                                gutterBottom
-                                style={{ fontSize: "large" }}
+                            <Box
+                                style={{
+                                    marginTop: "20px",
+                                    marginBottom: "30px",
+                                    marginLeft: "20px",
+                                }}
                             >
-                                Conozca la cantidad de instalaciones por canal
-                                de publicidad
-                            </Typography>
-                        </Box>
-                        <Box
-                            style={{
-                                marginTop: "20px",
-                                marginBottom: "30px",
-                                marginLeft: "40px",
-                            }}
-                        >
-                            <Typography
-                                variant="body1"
-                                gutterBottom
-                                style={{ fontSize: "large" }}
+                                <Typography
+                                    variant="body1"
+                                    gutterBottom
+                                    style={{ fontSize: "large" }}
+                                >
+                                    Conozca la cantidad de instalaciones por
+                                    canal de publicidad
+                                </Typography>
+                            </Box>
+                            <Box
+                                style={{
+                                    marginTop: "20px",
+                                    marginBottom: "30px",
+                                    marginLeft: "40px",
+                                }}
                             >
-                                Convenciones he ingresos por cada canal
-                            </Typography>
-                        </Box>
-                        <Box
-                            style={{
-                                marginTop: "20px",
-                                marginBottom: "30px",
-                                marginLeft: "60px",
-                            }}
-                        >
-                            <Typography
-                                variant="body1"
-                                gutterBottom
-                                style={{ fontSize: "large" }}
+                                <Typography
+                                    variant="body1"
+                                    gutterBottom
+                                    style={{ fontSize: "large" }}
+                                >
+                                    Convenciones he ingresos por cada canal
+                                </Typography>
+                            </Box>
+                            <Box
+                                style={{
+                                    marginTop: "20px",
+                                    marginBottom: "30px",
+                                    marginLeft: "60px",
+                                }}
                             >
-                                Mida su rendimiento mediante KPI de marketing
-                            </Typography>
-                        </Box>
+                                <Typography
+                                    variant="body1"
+                                    gutterBottom
+                                    style={{ fontSize: "large" }}
+                                >
+                                    Mida su rendimiento mediante KPI de
+                                    marketing
+                                </Typography>
+                            </Box>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Fade>
             </Container>
             {/*Footer*/}
             <AppBar
