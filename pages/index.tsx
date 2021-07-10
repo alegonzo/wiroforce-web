@@ -15,6 +15,7 @@ import {
 import Head from "next/head";
 import Fade from "react-reveal/Fade";
 import { Facebook, Instagram, Twitter } from "@material-ui/icons";
+import moment from 'moment'
 
 export default function Index(props) {
     const router = useRouter();
@@ -542,7 +543,7 @@ export default function Index(props) {
                                                 marginTop: 10,
                                             }}
                                         >
-                                            @2019 Logo Here. All Rights Reserved
+                                            @{moment().format('YYYY')} Logo Here. All Rights Reserved
                                         </Typography>
                                     </Grid>
                                 </Grid>
