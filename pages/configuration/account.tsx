@@ -4,7 +4,7 @@ import Api from '../../utils/api';
 import UserProfile from '../../components/user/UserProfile';
 import { useRouter } from 'next/router';
 import Layout from '../../components/layouts/Layout';
-import { getSession, useSession } from 'next-auth/client';
+import { getSession, signOut, useSession } from 'next-auth/client';
 
 const AccountConfig = ({ session }) => {
     const router = useRouter();
@@ -29,7 +29,8 @@ const AccountConfig = ({ session }) => {
             setUser(user);
             setLoading(false);
         } catch (e) {
-            console.log(e.message);
+            if (e.response.status === 401)
+                signOut()
         }
         setLoading(false);
     }

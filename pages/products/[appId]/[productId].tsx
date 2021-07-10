@@ -27,7 +27,8 @@ const Product = ({ session }) => {
             });
             setProduct(response.data);
         } catch (e) {
-            console.log(e.message);
+            if (e.response.status === 401)
+                router.push('/login')
         }
         setLoading(false);
     }

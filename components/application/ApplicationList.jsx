@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { List, ListItem, makeStyles, ListItemText, ListItemIcon, Divider } from '@material-ui/core';
 import Api from '../../utils/api';
-import { useSession } from 'next-auth/client';
+import { signOut, useSession } from 'next-auth/client';
 import ApplicationListItem from './ApplicationListItem';
 import ApplicationForm from './ApplicationForm';
 import { Add } from '@material-ui/icons';
@@ -31,7 +31,8 @@ const ApplicationList = () => {
             });
             setApplications(response.data);
         } catch (e) {
-            console.log(e.message)
+            if (e.response.status === 401)
+                signOut()
         }
     }
 

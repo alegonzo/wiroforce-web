@@ -4,7 +4,7 @@ import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, IconButton, LinearProgress, makeStyles, Snackbar } from '@material-ui/core';
 import Api from '../../utils/api';
-import { useSession } from 'next-auth/client';
+import { signOut, useSession } from 'next-auth/client';
 import { Close } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +34,7 @@ const ApplicationForm = ({ showForm, setShowForm, callback }) => {
 
     return (
         <>
-            <Dialog className={classes.form} open={showForm}  aria-labelledby="form-dialog-title">
+            <Dialog className={classes.form} open={showForm} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Registrar Aplicación</DialogTitle>
                 <Formik
                     initialValues={{ name: '' }}
@@ -64,7 +64,7 @@ const ApplicationForm = ({ showForm, setShowForm, callback }) => {
                             if (e.response.status === 400)
                                 setErrors({ name: e.response.data.message });
                             if (e.response.status === 401)
-                                router.push('/login')
+                                signOut()
                             return false;
                         }
                     }}>

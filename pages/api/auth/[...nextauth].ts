@@ -26,6 +26,7 @@ export default NextAuth({
     ],
     pages: {
         signIn: '/login',
+        error: '/wiroforce/login'
     },
     callbacks: {
         // async signIn(user, account, profile) { return true },

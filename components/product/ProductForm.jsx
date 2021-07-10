@@ -6,6 +6,7 @@ import { Field, Form, Formik } from 'formik';
 import { TextField, CheckboxWithLabel } from 'formik-material-ui';
 import Api from '../../utils/api';
 import { useRouter } from 'next/router';
+import { signOut } from 'next-auth/client';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -83,7 +84,7 @@ const ProductForm = ({ session, handleSubmit, handleCloseForm, appId, edit, prod
                         setErrors(e.response.data.errors);
                     }
                     if (e.response.status === 401)
-                        router.push('/login');
+                        signOut()
                     return false;
                 }
             }}

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Breadcrumbs, Typography, Button, Container, Dialog, DialogTitle, Grid, IconButton, makeStyles, Snackbar } from '@material-ui/core';
-import LoaderBar from '../../../components/generic/LoaderBar';
-import Api from '../../../utils/api';
+import LoaderBar from '../../components/generic/LoaderBar';
+import Api from '../../utils/api';
 import { Close } from '@material-ui/icons';
-import ProductTable from '../../../components/product/ProductTable';
-import ProductForm from '../../../components/product/ProductForm';
-import Layout from '../../../components/layouts/Layout';
 import { useRouter } from 'next/router';
 import { getSession, signOut, useSession } from 'next-auth/client';
+import Layout from '../../components/layouts/Layout';
+import UsersTable from '../../components/user/UsersTable';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -19,20 +18,20 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Products = ({ session }) => {
+const Users = ({ session }) => {
     const router = useRouter();
     const classes = useStyles();
-    const { appId } = router.query;
     const [loading, setLoading] = useState(true);
-    const [showForm, setShowForm] = useState(false);
-    const [products, setProducts] = useState([]);
+    const [users, setUsers] = useState([]);
     const [openToast, setOpenToast] = useState(false);
-    const [toastMessage, setToastMessage] = useState('Producto insertado!!!');
+    const [toastMessage, setToastMessage] = useState('Usuario insertado!!!');
+    const [page, setPage] = useState(0)
+    const [size, setSize] = useState(5)
 
     useEffect(() => {
-        getProducts();
+        getUsers();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [appId]);
+    }, []);
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -41,20 +40,20 @@ const Products = ({ session }) => {
         setOpenToast(false);
     };
 
-    const updateActiveProduct = async (id, listIndex, active) => {
+    const updateActiveUser = async (id, active) => {
         try {
-            await Api().put(`/products/${id}`, { active: !active }, {
+            const response = await Api().put(`/users/${id}/updateStatus`, { active: !active }, {
                 headers: {
                     'Authorization': 'Bearer ' + session.user.token
                 }
             });
-            let updatedList = products.map(item => {
+            let updatedList = users.map(item => {
                 if (item.id === id) {
-                    return { ...item, active: !item.active };
+                    return { ...item, active: response.data.active };
                 }
                 return item;
             });
-            setProducts(updatedList);
+            setUsers(updatedList);
         } catch (e) {
             setToastMessage(e.message);
             setOpenToast(true);
@@ -63,15 +62,14 @@ const Products = ({ session }) => {
         }
     }
 
-    const getProducts = async () => {
+    const getUsers = async () => {
         setLoading(true);
         try {
-            const response = await Api().get(`/products`, {
+            const response = await Api().get(`/users`, {
                 headers: { 'Authorization': 'Bearer ' + session.user.token },
-                params: { appId: appId }
+                params: { page: page, size: size }
             });
-            setProducts(response.data);
-            setShowForm(false);
+            setUsers(response.data);
         } catch (e) {
             setToastMessage(e.message);
             setOpenToast(true);
@@ -79,47 +77,22 @@ const Products = ({ session }) => {
                 signOut()
         }
         setLoading(false);
-    }
-
-    const handleSubmit = async (message) => {
-        setLoading(true);
-        await getProducts();
-        setToastMessage(message);
-        setOpenToast(true);
-        setShowForm(false);
-        setLoading(false);
-    }
-
-    const handleCloseForm = () => {
-        setShowForm(!showForm);
     }
 
     return (
-        <Layout title={`Productos - ${appId}`}>
+        <Layout title={`Usuarios`}>
             <Grid container spacing={3} style={{ marginTop: 20, paddingLeft: 20, paddingRight: 20 }}>
                 <Grid item xs={12} sm={12} md={12}>
                     <Breadcrumbs aria-label="breadcrumb" style={{ marginBottom: 20, marginTop: 20 }}>
                         <Button variant="text" onClick={() => router.push('/dashboard')}>
                             Dashboard
                             </Button>
-                        <Typography color="textPrimary">{appId}</Typography>
-                        <Typography color="textPrimary">Productos</Typography>
+                        <Typography color="textPrimary">Usuarios</Typography>
                     </Breadcrumbs>
-                    <Button variant="contained" color="primary" onClick={handleCloseForm}>
-                        Registrar Producto
-                        </Button>
-                    <Dialog className={classes.form} open={showForm} onClose={handleCloseForm} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">Registrar Producto</DialogTitle>
-                        {showForm && <ProductForm
-                            session={session}
-                            appId={appId}
-                            handleSubmit={handleSubmit}
-                            handleCloseForm={handleCloseForm} />}
-                    </Dialog>
-                    {products ? <ProductTable
-                        products={products}
-                        updateActiveProduct={updateActiveProduct}
-                        appId={appId} /> : <LoaderBar />}
+                    {users ? <UsersTable
+                        users={users}
+                        updateActiveUser={updateActiveUser}
+                    /> : <LoaderBar />}
 
                     <Snackbar
                         anchorOrigin={{
@@ -132,6 +105,7 @@ const Products = ({ session }) => {
                         message={toastMessage}
                         action={
                             <React.Fragment>
+                                {/*@ts-ignore*/}
                                 <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
                                     <Close fontSize="small" />
                                 </IconButton>
@@ -154,4 +128,4 @@ export async function getServerSideProps(context) {
     }
 }
 
-export default Products;
+export default Users;

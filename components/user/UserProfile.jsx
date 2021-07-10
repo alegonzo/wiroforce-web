@@ -21,6 +21,7 @@ import Typography from "@material-ui/core/Typography";
 import moment from "moment";
 import { ArrowBack, Edit, Help } from "@material-ui/icons";
 import ProfileForm from "./ProfileForm";
+import UserProfileTable from './UserProfileTable'
 
 const useStyles = makeStyles({
     root: {
@@ -65,116 +66,7 @@ const UserProfile = ({ user, getProfile }) => {
         <>
             {!edit && (
                 <div style={{ width: "100%" }}>
-                    <TableContainer
-                        component={Paper}
-                        style={{ marginTop: "25px" }}
-                    >
-                        <Table
-                            className={classes.table}
-                            aria-label="simple table"
-                        >
-                            <TableBody>
-                                <TableRow key="Id">
-                                    <TableCell
-                                        component="th"
-                                        scope="row"
-                                        style={{ fontWeight: "bold" }}
-                                    >
-                                        Nombre Completo
-                                    </TableCell>
-                                    <TableCell align="start">
-                                        {user.fullName}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow key="Nombre">
-                                    <TableCell
-                                        component="th"
-                                        scope="row"
-                                        style={{ fontWeight: "bold" }}
-                                    >
-                                        Email
-                                    </TableCell>
-                                    <TableCell align="start">
-                                        {user.email}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow key="Cantidad de recursos">
-                                    <TableCell
-                                        component="th"
-                                        scope="row"
-                                        style={{ fontWeight: "bold" }}
-                                    >
-                                        Estudio
-                                    </TableCell>
-                                    <TableCell align="start">
-                                        {user.company.name}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow key="Precio">
-                                    <TableCell
-                                        component="th"
-                                        scope="row"
-                                        style={{ fontWeight: "bold" }}
-                                    >
-                                        Fecha de registro
-                                    </TableCell>
-                                    <TableCell align="start">
-                                        {moment(user.createdAt).format(
-                                            "MMM Do YY"
-                                        )}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow key="Activo">
-                                    <TableCell
-                                        component="th"
-                                        scope="row"
-                                        style={{ fontWeight: "bold" }}
-                                    >
-                                        Dirección
-                                    </TableCell>
-                                    <TableCell align="start">
-                                        {user.address}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow key="Offline">
-                                    <TableCell
-                                        component="th"
-                                        scope="row"
-                                        style={{ fontWeight: "bold" }}
-                                    >
-                                        Provincia
-                                    </TableCell>
-                                    <TableCell align="start">
-                                        {user.province}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow key="Cantidad de recursos">
-                                    <TableCell
-                                        component="th"
-                                        scope="row"
-                                        style={{ fontWeight: "bold" }}
-                                    >
-                                        Teléfono
-                                    </TableCell>
-                                    <TableCell align="start">
-                                        {user.phone}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow key="Cantidad de recursos">
-                                    <TableCell
-                                        component="th"
-                                        scope="row"
-                                        style={{ fontWeight: "bold" }}
-                                    >
-                                        Nit ONAT
-                                    </TableCell>
-                                    <TableCell align="start">
-                                        {user.nitOnat}
-                                    </TableCell>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                   <UserProfileTable user={user}/>
                     <br />
                     <Button
                         variant="contained"

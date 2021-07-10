@@ -42,10 +42,7 @@ const useStyles = makeStyles((theme) => ({
 const Login: NextPage<Props> = () => {
     const classes = useStyles();
     const router = useRouter();
-
-    useEffect(() => {
-        //mandar pal dashboard si esta logueado
-    });
+    const { error } = router.query
 
     return (
         <LoginLayout title="Wiroforce - Login">
@@ -57,6 +54,7 @@ const Login: NextPage<Props> = () => {
                             Login
                     </Typography>
                         <LoginForm />
+                        {error && <p style={{ color: 'red' }}>Credenciales incorrectas o cuenta no activa</p>}
                         <Button variant="text" onClick={() => router.push('/signup')}>Crear cuenta</Button>
                     </CardContent>
                 </Card>

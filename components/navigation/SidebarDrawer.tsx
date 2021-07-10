@@ -10,12 +10,14 @@ import {
     ExpandLess,
     ExpandMore,
     AccountBox,
-    Assessment
+    Assessment,
+    Group
 } from '@material-ui/icons';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Collapse, Drawer, Hidden, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import ApplicationList from '../application/ApplicationList'
+import { useSession } from 'next-auth/client';
 
 const drawerWidth = 240;
 
@@ -45,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SidebarDrawer = (props) => {
     const { window } = props;
+    const [session, loading] = useSession();
     const classes = useStyles();
     const router = useRouter();
     const theme = useTheme();
@@ -58,27 +61,40 @@ const SidebarDrawer = (props) => {
                     <ListItemIcon><DashboardIcon /></ListItemIcon>
                     <ListItemText primary={'Dashboard'} />
                 </ListItem>
-                <ListItem button onClick={() => setAppsOpen(!appsOpen)}>
-                    <ListItemIcon><AppsIcon /></ListItemIcon>
-                    <ListItemText primary={'Aplicaciones'} />
-                    {appsOpen ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={appsOpen} timeout="auto" unmountOnExit>
-                    <ApplicationList />
-                </Collapse>
-                <Divider />
-                <ListItem button onClick={() => router.push('/configuration/account')}>
-                    <ListItemIcon>
-                        <AccountBox />
-                    </ListItemIcon>
-                    <ListItemText primary="Cuenta" />
-                </ListItem>
-                <ListItem button onClick={() => console.log('asd')}>
-                    <ListItemIcon>
-                        <Assessment />
-                    </ListItemIcon>
-                    <ListItemText primary="Reportes" />
-                </ListItem>
+                {/*@ts-ignore*/}
+                {session.user?.roles === 'client' && <>
+                    <ListItem button onClick={() => setAppsOpen(!appsOpen)}>
+                        <ListItemIcon><AppsIcon /></ListItemIcon>
+                        <ListItemText primary={'Aplicaciones'} />
+                        {appsOpen ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={appsOpen} timeout="auto" unmountOnExit>
+                        <ApplicationList />
+                    </Collapse>
+                    <Divider />
+                    <ListItem button onClick={() => router.push('/configuration/account')}>
+                        <ListItemIcon>
+                            <AccountBox />
+                        </ListItemIcon>
+                        <ListItemText primary="Cuenta" />
+                    </ListItem>
+                    {/*<ListItem button onClick={() => console.log('asd')}>
+                        <ListItemIcon>
+                            <Assessment />
+                        </ListItemIcon>
+                        <ListItemText primary="Reportes" />
+                        </ListItem>*/}
+                </>}
+                {/*@ts-ignore*/}
+                {session.user?.roles === 'admin' && <>
+                    <ListItem button onClick={() => router.push('/users')}>
+                        <ListItemIcon>
+                            <Group />
+                        </ListItemIcon>
+                        <ListItemText primary="Usuarios" />
+                    </ListItem>
+                </>}
+
             </List>
         </div>
     );
