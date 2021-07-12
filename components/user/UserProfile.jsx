@@ -1,27 +1,16 @@
 import {
     Button,
-    Chip,
     Grid,
     makeStyles,
-    colors,
-    Tooltip,
     Box,
-    CardHeader,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableRow,
-    Paper,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import moment from "moment";
-import { ArrowBack, Edit, Help } from "@material-ui/icons";
+import { Edit } from "@material-ui/icons";
 import ProfileForm from "./ProfileForm";
 import UserProfileTable from './UserProfileTable'
+import ChangePasswordForm from './ChangePasswordForm'
 
 const useStyles = makeStyles({
     root: {
@@ -66,7 +55,7 @@ const UserProfile = ({ user, getProfile }) => {
         <>
             {!edit && (
                 <div style={{ width: "100%" }}>
-                   <UserProfileTable user={user}/>
+                    <UserProfileTable user={user} />
                     <br />
                     <Button
                         variant="contained"
@@ -75,6 +64,7 @@ const UserProfile = ({ user, getProfile }) => {
                     >
                         <Edit /> Editar
                     </Button>
+                    <ChangePasswordForm />
                 </div>
             )}
 

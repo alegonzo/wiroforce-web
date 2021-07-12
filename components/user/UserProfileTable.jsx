@@ -63,11 +63,11 @@ const UserProfileTable = ({ user }) => {
                         >
                             Nombre Completo
                                     </TableCell>
-                        <TableCell align="start">
+                        <TableCell align="left">
                             {user.fullName}
                         </TableCell>
                     </TableRow>
-                    <TableRow key="Nombre">
+                    <TableRow key="email">
                         <TableCell
                             component="th"
                             scope="row"
@@ -75,11 +75,11 @@ const UserProfileTable = ({ user }) => {
                         >
                             Email
                                     </TableCell>
-                        <TableCell align="start">
+                        <TableCell align="left">
                             {user.email}
                         </TableCell>
                     </TableRow>
-                    <TableRow key="Cantidad de recursos">
+                    <TableRow key="estudio">
                         <TableCell
                             component="th"
                             scope="row"
@@ -87,11 +87,11 @@ const UserProfileTable = ({ user }) => {
                         >
                             Estudio
                                     </TableCell>
-                        <TableCell align="start">
+                        <TableCell align="left">
                             {user.company.name}
                         </TableCell>
                     </TableRow>
-                    <TableRow key="Precio">
+                    <TableRow key="fecha">
                         <TableCell
                             component="th"
                             scope="row"
@@ -99,13 +99,13 @@ const UserProfileTable = ({ user }) => {
                         >
                             Fecha de registro
                                     </TableCell>
-                        <TableCell align="start">
+                        <TableCell align="left">
                             {moment(user.createdAt).format(
                                 "MMM Do YY"
                             )}
                         </TableCell>
                     </TableRow>
-                    <TableRow key="Activo">
+                    <TableRow key="direccion">
                         <TableCell
                             component="th"
                             scope="row"
@@ -113,11 +113,11 @@ const UserProfileTable = ({ user }) => {
                         >
                             Dirección
                                     </TableCell>
-                        <TableCell align="start">
+                        <TableCell align="left">
                             {user.address}
                         </TableCell>
                     </TableRow>
-                    <TableRow key="Offline">
+                    <TableRow key="provincia">
                         <TableCell
                             component="th"
                             scope="row"
@@ -125,11 +125,11 @@ const UserProfileTable = ({ user }) => {
                         >
                             Provincia
                                     </TableCell>
-                        <TableCell align="start">
+                        <TableCell align="left">
                             {user.province}
                         </TableCell>
                     </TableRow>
-                    <TableRow key="Cantidad de recursos">
+                    <TableRow key="telefono">
                         <TableCell
                             component="th"
                             scope="row"
@@ -137,11 +137,11 @@ const UserProfileTable = ({ user }) => {
                         >
                             Teléfono
                                     </TableCell>
-                        <TableCell align="start">
+                        <TableCell align="left">
                             {user.phone}
                         </TableCell>
                     </TableRow>
-                    <TableRow key="Cantidad de recursos">
+                    <TableRow key="nitOnat">
                         <TableCell
                             component="th"
                             scope="row"
@@ -149,7 +149,7 @@ const UserProfileTable = ({ user }) => {
                         >
                             Nit ONAT
                                     </TableCell>
-                        <TableCell align="start">
+                        <TableCell align="left">
                             {user.nitOnat}
                         </TableCell>
                     </TableRow>
