@@ -61,6 +61,7 @@ const UserProfile = ({ user, getProfile }) => {
                         variant="contained"
                         color="primary"
                         onClick={() => setEdit(true)}
+                        style={{ marginRight: 20 }}
                     >
                         <Edit /> Editar
                     </Button>

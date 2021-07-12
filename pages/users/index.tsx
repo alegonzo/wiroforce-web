@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { getSession, signOut, useSession } from 'next-auth/client';
 import Layout from '../../components/layouts/Layout';
 import UsersTable from '../../components/user/UsersTable';
+import ChangePasswordForm from '../../components/user/ChangePasswordForm';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -89,6 +90,10 @@ const Users = ({ session }) => {
                             </Button>
                         <Typography color="textPrimary">Usuarios</Typography>
                     </Breadcrumbs>
+                    <ChangePasswordForm />
+                    <div style={{ marginBottom: 20 }}></div>
+                    <br />
+
                     {users ? <UsersTable
                         users={users}
                         updateActiveUser={updateActiveUser}

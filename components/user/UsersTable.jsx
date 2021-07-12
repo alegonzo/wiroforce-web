@@ -45,7 +45,7 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.roles}
         </TableCell>
-        <TableCell align="right">{row.company.name}</TableCell>
+        <TableCell align="right">{row.company?.name || '-'}</TableCell>
         <TableCell align="right">
           <Switch
             checked={row.active}

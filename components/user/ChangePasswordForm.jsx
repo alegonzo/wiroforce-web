@@ -38,7 +38,6 @@ const ChangePasswordForm = () => {
             <Button
                 variant="contained"
                 color="secondary"
-                style={{ marginLeft: 20 }}
                 onClick={() => setShowForm(true)}
             >
                 Cambiar contraseña
@@ -46,7 +45,7 @@ const ChangePasswordForm = () => {
             <Dialog className={classes.form} open={showForm} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Cambiar contraseña</DialogTitle>
                 <Formik
-                    initialValues={{ oldPassowrd: '', newPassword: '', repeatNewPassword: '' }}
+                    initialValues={{ oldPassword: '', newPassword: '', repeatNewPassword: '' }}
                     validationSchema={Yup.object({
                         oldPassword: Yup.string().required('Requerido'),
                         newPassword: Yup.string().required('Requerido'),
