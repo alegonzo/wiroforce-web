@@ -15,7 +15,7 @@ import {
 import Head from "next/head";
 import Fade from "react-reveal/Fade";
 import { Facebook, Instagram, Twitter } from "@material-ui/icons";
-import moment from 'moment'
+import moment from "moment";
 
 export default function Index(props) {
     const router = useRouter();
@@ -104,18 +104,18 @@ export default function Index(props) {
                             width: "25%",
                             height: "40%",
                             position: "absolute",
-                            top: "3580px",
+                            top: "3340",
                         }}
                         src="/wiroforce/images/arrowOrange.png"
                         alt="Image"
                     />
                     <img
                         style={{
-                            width: "25%",
-                            height: "40%",
+                            width: "60%",
+                            height: "100%",
                             position: "absolute",
-                            top: "3820px",
-                            right: "13px",
+                            top: "3620px",
+                            right: "0px",
                         }}
                         src="/wiroforce/images/arrowDarkBlue.png"
                         alt="Image"
@@ -440,7 +440,6 @@ export default function Index(props) {
                                 style={{
                                     marginTop: "20px",
                                     marginBottom: "30px",
-                                    marginLeft: "20px",
                                 }}
                             >
                                 <Typography
@@ -456,7 +455,7 @@ export default function Index(props) {
                                 style={{
                                     marginTop: "20px",
                                     marginBottom: "30px",
-                                    marginLeft: "40px",
+                                    marginLeft: "30px",
                                 }}
                             >
                                 <Typography
@@ -471,7 +470,7 @@ export default function Index(props) {
                                 style={{
                                     marginTop: "20px",
                                     marginBottom: "30px",
-                                    marginLeft: "60px",
+                                    marginLeft: "75px",
                                 }}
                             >
                                 <Typography
@@ -543,7 +542,8 @@ export default function Index(props) {
                                                 marginTop: 10,
                                             }}
                                         >
-                                            @{moment().format('YYYY')} Logo Here. All Rights Reserved
+                                            @{moment().format("YYYY")} Logo
+                                            Here. All Rights Reserved
                                         </Typography>
                                     </Grid>
                                 </Grid>
