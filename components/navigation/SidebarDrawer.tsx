@@ -10,11 +10,11 @@ import {
     ExpandLess,
     ExpandMore,
     AccountBox,
-    Assessment,
-    Group
+    Group,
+    Collections
 } from '@material-ui/icons';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Collapse, Drawer, Hidden, Typography } from '@material-ui/core';
+import { Collapse, Drawer, Hidden } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import ApplicationList from '../application/ApplicationList'
 import { useSession } from 'next-auth/client';
@@ -92,6 +92,12 @@ const SidebarDrawer = (props) => {
                             <Group />
                         </ListItemIcon>
                         <ListItemText primary="Usuarios" />
+                    </ListItem>
+                    <ListItem button onClick={() => router.push('/full-products')}>
+                        <ListItemIcon>
+                            <Collections />
+                        </ListItemIcon>
+                        <ListItemText primary="Productos" />
                     </ListItem>
                 </>}
 
