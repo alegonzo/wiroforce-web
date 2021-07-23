@@ -15,7 +15,7 @@ const FullProducts = ({ iframeUrl }) => {
             <Layout title="Productos">
                 <Grid container>
                     <Grid item md={12} xs={12} lg={12}>
-                        {iFrameUrl && <IframeResizer
+                        {iframeUrl && <IframeResizer
                             src={iframeUrl}
                             frameBorder={0}
                             style={{ width: '1px', minWidth: '100%' }}
