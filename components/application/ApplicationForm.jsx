@@ -119,7 +119,7 @@ const ApplicationForm = ({ showForm, setShowForm }) => {
                   </FormControl>
                 </div>
 
-                <br />
+                {/*<br />
                 <Divider />
                 <br />
 
@@ -140,7 +140,7 @@ const ApplicationForm = ({ showForm, setShowForm }) => {
                     <Typography>Cantidad a pagar</Typography>
                     <Typography>500 CUP</Typography>
                   </Grid>
-                </Grid>
+                </Grid>*/}
                 {isSubmitting && <LinearProgress />}
               </DialogContent>
 
