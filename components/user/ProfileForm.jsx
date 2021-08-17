@@ -136,7 +136,7 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
             setEdit(false)
           } else {
             await axios.post(
-              'http://localhost:3001/api/v1/auth/signup', //`https://conwiro.nat.cu/wiroforce-api/api/v1/auth/signup`,
+              `https://conwiro.nat.cu/wiroforce-api/api/v1/auth/signup`,
               values
             )
             setShowDialog(true)
