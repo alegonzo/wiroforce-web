@@ -47,6 +47,7 @@ const ApplicationCard = ({ application }) => {
             alt="Imagen de producto"
           />
         </Box>
+
         <Box p={2}>
           <Typography variant="body1" className={classes.pos}>
             {application.name}

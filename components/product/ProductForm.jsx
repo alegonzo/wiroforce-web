@@ -17,7 +17,7 @@ import { TextField, CheckboxWithLabel } from 'formik-material-ui'
 import Api from '../../utils/api'
 import { useRouter } from 'next/router'
 import { useQueryClient } from 'react-query'
-import { PRODUCTS_URL } from '../../utils/constants'
+import { PRODUCTS_URL, SPECIAL_CHARS_REGEXP } from '../../utils/constants'
 import useAppContext from '../AppContext'
 
 const useStyles = makeStyles((theme) => ({
@@ -51,14 +51,18 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
   let formSchema = Yup.object({
     name: Yup.string()
       .required('Requerido')
-      .max(10, 'No puede tener más de 10 caracteres'),
+      .max(25, 'No puede tener más de 25 caracteres')
+      .matches(SPECIAL_CHARS_REGEXP, 'No se permiten caracteres especiales'),
     itemId: Yup.string()
       .required('Requerido')
-      .max(10, 'No puede tener más de 10 caracteres'),
+      .max(10, 'No puede tener más de 10 caracteres')
+      .matches(SPECIAL_CHARS_REGEXP, 'No se permiten caracteres especiales'),
     price: Yup.number()
       .required('Requerido')
       .oneOf([4, 25], 'Deben ser 4 o 25 CUP'),
-    description: Yup.string().length(80, 'No puede tener más de 80 caracteres'),
+    description: Yup.string()
+      .max(80, 'No puede tener más de 80 caracteres')
+      .matches(SPECIAL_CHARS_REGEXP, 'No se permiten caracteres especiales'),
     resourceAmount: Yup.string()
       .required('Requerido')
       .max(45, 'No puede tener más de 45 caracteres'),
@@ -69,11 +73,10 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
   if (product) {
     values = product
     formSchema = Yup.object({
-      description: Yup.string().length(
-        80,
-        'No puede tener más de 80 caracteres'
-      ),
-      resourceAmount: Yup.string().length(
+      description: Yup.string()
+        .max(80, 'No puede tener más de 80 caracteres')
+        .matches(SPECIAL_CHARS_REGEXP, 'No se permiten caracteres especiales'),
+      resourceAmount: Yup.string().max(
         45,
         'No puede tener más de 45 caracteres'
       ),

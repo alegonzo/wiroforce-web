@@ -18,7 +18,11 @@ import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
 import axios from 'axios'
 import { useQueryClient } from 'react-query'
-import { USER_URL } from '../../utils/constants'
+import {
+  SPECIAL_CHARS_REGEXP,
+  USER_URL,
+  PROVINCES,
+} from '../../utils/constants'
 import useAppContext from '../AppContext'
 import api from '../../utils/api'
 
@@ -35,25 +39,6 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 300,
   },
 }))
-
-const provinces = [
-  'Pinar del Río',
-  'Artemisa',
-  'La Habana',
-  'Mayabeque',
-  'Matanzas',
-  'Cienfuegos',
-  'Villa Clara',
-  'Sancti Spíritus',
-  'Ciego de Ávila',
-  'Camagüey',
-  'Las Tunas',
-  'Holguín',
-  'Granma',
-  'Santiago de Cuba',
-  'Guantánamo',
-  'Isla de la Juventud',
-]
 
 const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
   const router = useRouter()
@@ -79,15 +64,16 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
       }
   const validationSchema = edit
     ? Yup.object({
-        //password: Yup.string().required('Requerido'),
-        //checkPassword: Yup.string(),
         phone: Yup.string().matches(
           /^[0-9]{8}$/,
           'Debe cumplir con el formato de número de teléfono'
         ),
         address: Yup.string().max(80, 'No puede tener más de 80 caracteres'),
-        province: Yup.string().oneOf(provinces),
-        nitOnat: Yup.string(),
+        province: Yup.string().oneOf(PROVINCES),
+        nitOnat: Yup.string().matches(
+          SPECIAL_CHARS_REGEXP,
+          'No se permiten caracteres especiales'
+        ),
         bankCard: Yup.string().matches(
           /^[0-9]{16}$/,
           'Debe cumplir con el formato de número de tarjeta'
@@ -96,10 +82,15 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
     : Yup.object({
         fullName: Yup.string()
           .required('Requerido')
-          .length(100, 'No puede tener más de 100 caracteres'),
+          .length(100, 'No puede tener más de 100 caracteres')
+          .matches(
+            SPECIAL_CHARS_REGEXP,
+            'No se permiten caracteres especiales'
+          ),
         email: Yup.string()
           .email('No es un email válido')
           .length(30, 'No puede tener más de 100 caracteres')
+          .matches(SPECIAL_CHARS_REGEXP, 'No se permiten caracteres especiales')
           .required('Requerido'),
         password: Yup.string()
           .required('Requerido')
@@ -107,6 +98,7 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
         checkPassword: Yup.string().required('Requerido'),
         company: Yup.string()
           .required('Requerido')
+          .matches(SPECIAL_CHARS_REGEXP, 'No se permiten caracteres especiales')
           .length(30, 'No puede tener más de 30 caracteres'),
       })
   return (
@@ -136,7 +128,7 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
             setEdit(false)
           } else {
             await axios.post(
-              `https://conwiro.nat.cu/wiroforce-api/api/v1/auth/signup`,
+              `http://localhost:3001/api/v1/auth/signup`, //`https://conwiro.nat.cu/wiroforce-api/api/v1/auth/signup`,
               values
             )
             setShowDialog(true)
@@ -236,7 +228,7 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
                   <MenuItem value="" key="">
                     Ninguno
                   </MenuItem>
-                  {provinces.map((item, idx) => (
+                  {PROVINCES.map((item, idx) => (
                     <MenuItem value={item} key={idx}>
                       {item}
                     </MenuItem>

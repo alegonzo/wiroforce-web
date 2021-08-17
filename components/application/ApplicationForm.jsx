@@ -17,7 +17,7 @@ import {
   Typography,
 } from '@material-ui/core'
 import { useSession } from 'next-auth/client'
-import { APPLICATIONS_URL } from '../../utils/constants'
+import { APPLICATIONS_URL, SPECIAL_CHARS_REGEXP } from '../../utils/constants'
 import api from '../../utils/api'
 import useAppContext from '../AppContext'
 import { useQueryClient } from 'react-query'
@@ -58,7 +58,11 @@ const ApplicationForm = ({ showForm, setShowForm }) => {
           validationSchema={Yup.object({
             name: Yup.string()
               .required('Requerido')
-              .max(30, 'No puede tener más de 30 caracteres'),
+              .max(30, 'No puede tener más de 30 caracteres')
+              .matches(
+                SPECIAL_CHARS_REGEXP,
+                'No se permiten caracteres especiales'
+              ),
           })}
           onSubmit={async (values, { setSubmitting, setErrors }) => {
             const formBody = new FormData()

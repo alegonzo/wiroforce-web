@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Link from '@material-ui/core/Link'
 import Box from '@material-ui/core/Box'
@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+// eslint-disable-next-line react/display-name
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
 ))
