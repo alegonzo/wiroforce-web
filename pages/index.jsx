@@ -306,7 +306,7 @@ export default function Index() {
             sm={12}
             lg={12}
             direction="column"
-            justify="space-around"
+            justifyContent="space-around"
             alignItems="center"
           >
             <Typography variant="h4">
@@ -340,7 +340,12 @@ export default function Index() {
         maxWidth={false}
       >
         <Fade bottom>
-          <Grid container direction="row" justify="center" alignItems="center">
+          <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
             <Grid item md={6} xs={12} sm={12} lg={6} style={{ padding: 40 }}>
               <Typography variant="h4">
                 Obtenga los mayores rendimientos de sus campañas de publicidad
@@ -424,7 +429,7 @@ export default function Index() {
       >
         <Fade bottom>
           <Typography variant="h4" style={{ marginBottom: 40 }}>
-            Costos el servicio por niveles
+            Costos del servicio por niveles
           </Typography>
           <Grid container spacing={3}>
             <Grid item lg={4} xs={12} md={4} xl={4}>
@@ -445,7 +450,7 @@ export default function Index() {
           <Grid
             container
             direction="row"
-            justify="center"
+            justifyContent="center"
             alignItems="center"
             style={{
               marginTop: 10,
@@ -464,7 +469,7 @@ export default function Index() {
                 <Grid
                   container
                   direction="row"
-                  justify="center"
+                  justifyContent="center"
                   alignItems="center"
                   style={{
                     marginTop: 10,
@@ -509,7 +514,7 @@ export default function Index() {
                 <Grid
                   container
                   direction="row"
-                  justify="center"
+                  justifyContent="center"
                   alignItems="center"
                   style={{
                     marginTop: 10,

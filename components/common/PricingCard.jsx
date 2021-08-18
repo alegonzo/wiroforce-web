@@ -57,7 +57,7 @@ export default function PricingCard({ pricing: { title, data, footer } }) {
           </div>
         </Grid>
         {footer.map((item, _idx) => (
-          <Typography variant="body" key={_idx} style={{ display: 'block' }}>
+          <Typography variant="body1" key={_idx} style={{ display: 'block' }}>
             {item}
           </Typography>
         ))}
