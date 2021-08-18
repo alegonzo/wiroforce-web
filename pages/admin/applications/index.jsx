@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid, Paper, Switch } from '@material-ui/core'
 import LoaderBar from '../../../components/common/LoaderBar'
 import { getSession } from 'next-auth/client'
@@ -18,21 +18,38 @@ const Applications = ({ session }) => {
   const queryClient = useQueryClient()
   const { setMessage, setShowBackdrop } = useAppContext()
   const [page, setPage] = useState(0)
-  const [size, setSize] = useState(10)
+  const [size, setSize] = useState(5)
   const [search, setSearch] = useState('')
   const [selectedCompany, setSelectedCompany] = useState('')
 
   const { data: companies } = useCompanies({ token: session.user.token })
 
-  const { data: applications, isFetching } = useApps({
-    token: session.user.token,
-    params: {
-      page,
-      size,
-      search,
-      companyId: selectedCompany,
+  const {
+    data: applications,
+    isFetching,
+    error,
+  } = useApps(
+    {
+      token: session.user.token,
+      params: {
+        page,
+        size,
+        search,
+        companyId: selectedCompany,
+      },
     },
-  })
+    {
+      keepPreviousData: true,
+    }
+  )
+
+  useEffect(() => {
+    if (error?.message)
+      setMessage({
+        show: true,
+        text: 'Ha ocurrido un error',
+      })
+  }, [error])
 
   const updateActiveApplication = async (id, active) => {
     try {
@@ -50,7 +67,7 @@ const Applications = ({ session }) => {
         show: true,
         text: 'Acción realizada con éxito',
       })
-      queryClient.invalidateQueries(APPLICATIONS_URL)
+      await queryClient.invalidateQueries(APPLICATIONS_URL)
     } catch (e) {
       setMessage({
         show: true,

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Container from '@material-ui/core/Container'
-import { signIn, signOut, useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import {
   Grid,
-  Divider,
   Button,
   Typography,
   Box,
@@ -15,9 +13,11 @@ import {
 import Head from 'next/head'
 import Fade from 'react-reveal/Fade'
 import { Facebook, Instagram, Twitter } from '@material-ui/icons'
-import moment from 'moment'
+import { format } from 'date-fns'
+import PricingCard from '../components/common/PricingCard'
+import { PRICES } from '../utils/constants'
 
-export default function Index(props) {
+export default function Index() {
   const router = useRouter()
   const [isMobile, setIsMobile] = useState(false)
   const goSignup = () => {
@@ -122,7 +122,12 @@ export default function Index(props) {
       {/*Seccion 1*/}
       <Container maxWidth="lg" style={{ paddingTop: 80, height: 750 }}>
         <Fade bottom>
-          <Grid container direction="row" justify="center" alignItems="center">
+          <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
             <Grid item md={5} xs={12} sm={12} lg={5} style={{ padding: 20 }}>
               <Typography variant="h4">Fuerza de Crecimiento</Typography>
               <Box
@@ -170,7 +175,7 @@ export default function Index(props) {
             sm={12}
             lg={12}
             direction="column"
-            justify="space-around"
+            justifyContent="space-around"
             alignItems="center"
           >
             <img
@@ -193,7 +198,12 @@ export default function Index(props) {
       {/*Seccion 3*/}
       <Container maxWidth="lg">
         <Fade bottom>
-          <Grid container direction="row" justify="center" alignItems="center">
+          <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
             <Grid item md={6} xs={12} sm={12} lg={6}>
               <img
                 style={{ width: '100%', height: '100%' }}
@@ -247,7 +257,7 @@ export default function Index(props) {
             <Grid
               container
               direction="row"
-              justify="center"
+              justifyContent="center"
               alignItems="center"
             >
               <Grid item md={6} xs={12} sm={12} lg={6} style={{ padding: 20 }}>
@@ -342,7 +352,7 @@ export default function Index(props) {
                 }}
               >
                 <Typography variant="body1" gutterBottom>
-                  Mira de manera efectiva las campañas de adquisición de
+                  Mire de manera efectiva las campañas de adquisición de
                   usuarios que le permitirán tomar las mejores decisiones para
                   optimizar las campañas de videojuegos y aplicaciones
                 </Typography>
@@ -385,7 +395,7 @@ export default function Index(props) {
                   gutterBottom
                   style={{ fontSize: 'large' }}
                 >
-                  Convenciones he ingresos por cada canal
+                  Converciones e ingresos por cada canal
                 </Typography>
               </Box>
               <Box
@@ -403,6 +413,28 @@ export default function Index(props) {
                   Mida su rendimiento mediante KPI de marketing
                 </Typography>
               </Box>
+            </Grid>
+          </Grid>
+        </Fade>
+      </Container>
+      {/*Pricing*/}
+      <Container
+        maxWidth={false}
+        style={{ textAlign: 'center', paddingTop: 70, marginBottom: 50 }}
+      >
+        <Fade bottom>
+          <Typography variant="h4" style={{ marginBottom: 40 }}>
+            Costos el servicio por niveles
+          </Typography>
+          <Grid container spacing={3}>
+            <Grid item lg={4} xs={12} md={4} xl={4}>
+              <PricingCard pricing={PRICES[0]} />
+            </Grid>
+            <Grid item lg={4} xs={12} md={4} xl={4}>
+              <PricingCard pricing={PRICES[1]} />
+            </Grid>
+            <Grid item lg={4} xs={12} md={4} xl={4}>
+              <PricingCard pricing={PRICES[2]} />
             </Grid>
           </Grid>
         </Fade>
@@ -443,7 +475,7 @@ export default function Index(props) {
                   </Grid>
                   <Grid item md={6} xs={12} sm={12} lg={6}>
                     <Typography variant="body2" style={{ fontSize: 'small' }}>
-                      info@wiroforce.com
+                      wiroforce@gmail.com
                     </Typography>
                   </Grid>
                   <Grid item md={12} xs={12} sm={12} lg={12}>
@@ -454,7 +486,8 @@ export default function Index(props) {
                         marginTop: 10,
                       }}
                     >
-                      @{moment().format('YYYY')} Logo Here. All Rights Reserved
+                      @{format(new Date(), 'yyyy')} Logo Here. All Rights
+                      Reserved
                     </Typography>
                   </Grid>
                 </Grid>

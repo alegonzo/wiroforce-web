@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid } from '@material-ui/core'
 import LoaderBar from '../../../components/common/LoaderBar'
 import { getSession } from 'next-auth/client'
@@ -17,12 +17,25 @@ const Users = ({ session }) => {
   const [page, setPage] = useState(0)
   const [size, setSize] = useState(5)
   const [search, setSearch] = useState('')
-  const { data: users } = useUsers({
-    token: session.user.token,
-    page,
-    size,
-    search,
-  })
+  const { data: users, error } = useUsers(
+    {
+      token: session.user.token,
+      page,
+      size,
+      search,
+    },
+    {
+      keepPreviousData: true,
+    }
+  )
+
+  useEffect(() => {
+    if (error?.message)
+      setMessage({
+        show: true,
+        text: 'Ha ocurrido un error',
+      })
+  }, [error])
 
   const updateActiveUser = async (id, active) => {
     const r = confirm('Esta acción enviará un email al usuario. Está seguro?')
@@ -42,7 +55,7 @@ const Users = ({ session }) => {
           show: true,
           text: 'Acción realizada con éxito',
         })
-        queryClient.invalidateQueries(USERS_URL)
+        await queryClient.invalidateQueries(USERS_URL)
       } catch (e) {
         setMessage({
           show: true,
@@ -71,8 +84,7 @@ const Users = ({ session }) => {
         <Grid item xs={12} sm={12} md={12}>
           <SearchField placeholder="Buscar Usuario" setValue={setSearch} />
 
-          <div style={{ marginBottom: 20 }}></div>
-          <br />
+          <br style={{ marginBottom: 20 }} />
 
           {users ? (
             <UsersTable

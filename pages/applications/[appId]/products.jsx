@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Button,
   Dialog,
@@ -45,7 +45,11 @@ const Products = ({ session }) => {
   const [page, setPage] = useState(0)
   const [size, setSize] = useState(10)
   const [search, setSearch] = useState('')
-  const { data: products, isFetching } = useProducts(
+  const {
+    data: products,
+    isFetching,
+    error,
+  } = useProducts(
     {
       token: session.user.token,
       appId,
@@ -55,8 +59,17 @@ const Products = ({ session }) => {
     },
     {
       enabled: appId !== '',
+      keepPreviousData: true,
     }
   )
+
+  useEffect(() => {
+    if (error?.message)
+      setMessage({
+        show: true,
+        text: 'Ha ocurrido un error',
+      })
+  }, [error])
 
   const updateActiveProduct = async (id, listIndex, active) => {
     try {
@@ -73,7 +86,7 @@ const Products = ({ session }) => {
         show: true,
         text: !active ? 'Producto Habilitado' : 'Producto Deshabilitado',
       })
-      queryClient.invalidateQueries(PRODUCTS_URL)
+      await queryClient.invalidateQueries(PRODUCTS_URL)
     } catch (e) {
       setMessage({
         show: true,

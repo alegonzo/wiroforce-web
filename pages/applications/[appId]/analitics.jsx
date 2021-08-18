@@ -62,7 +62,6 @@ export async function getServerSideProps(context) {
       const response = await axios.get(
         `${process.env.API_INTERNAL_URL}/applications/${appId}`,
         {
-          //@ts-ignore
           headers: { Authorization: 'Bearer ' + session.user.token },
         }
       )
@@ -74,9 +73,8 @@ export async function getServerSideProps(context) {
       ? generateDashboard(
           { dashboard: 2 },
           {
-            //@ts-ignore
             id: session.user.company.id,
-            id_1: application.id,
+            id_1: application?.id,
           }
         )
       : null

@@ -1,9 +1,10 @@
+/* eslint-disable react/display-name */
 /* eslint-disable jsx-a11y/anchor-has-content */
 import * as React from 'react'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
-import NextLink, { LinkProps as NextLinkProps } from 'next/link'
-import MuiLink, { LinkProps as MuiLinkProps } from '@material-ui/core/Link'
+import NextLink from 'next/link'
+import MuiLink from '@material-ui/core/Link'
 
 const NextComposed = React.forwardRef((props, ref) => {
   const { as, href, replace, scroll, passHref, shallow, prefetch, ...other } =
