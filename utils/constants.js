@@ -30,7 +30,7 @@ export const PRICES = [
     data: [
       {
         available: true,
-        text: 'Un juego',
+        text: 'Dos juegos gratis',
       },
       {
         available: true,
@@ -49,7 +49,11 @@ export const PRICES = [
         text: 'Gestión de tienda de manera remota',
       },
     ],
-    footer: ['Ingresos inferiores a 5000 CUP', 'Un juego gratis', ''],
+    footer: [
+      'Ingresos mensuales de 0 a 5000 CUP en el mes',
+      '3% de regalías',
+      '2 juegos gratis',
+    ],
   },
   {
     title: 'Nivel 2',
@@ -76,9 +80,9 @@ export const PRICES = [
       },
     ],
     footer: [
-      'Ingresos inferiores superiores a 5000 CUP',
+      'Ingresos mensuales de 5001 a 10000 CUP en el mes',
       '6% de regalías',
-      '500 CUP / Juego',
+      '400 CUP / Juego',
     ],
   },
   {
@@ -106,9 +110,9 @@ export const PRICES = [
       },
     ],
     footer: [
-      'Ingresos inferiores superiores a 10000 CUP',
+      'Ingresos mensuales superiores a 10000 CUP',
       '12% de regalías',
-      '200 CUP / Juego',
+      '400 CUP / Juego',
     ],
   },
 ]
