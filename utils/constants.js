@@ -48,10 +48,6 @@ export const PRICES = [
         available: true,
         text: 'Gestión de tienda de manera remota',
       },
-      {
-        available: false,
-        text: 'Herramientas de publicidad',
-      },
     ],
     footer: ['Ingresos inferiores a 5000 CUP', 'Un juego gratis', ''],
   },
@@ -78,10 +74,6 @@ export const PRICES = [
         available: true,
         text: 'Gestión de tienda de manera remota',
       },
-      {
-        available: false,
-        text: 'Herramientas de publicidad',
-      },
     ],
     footer: [
       'Ingresos inferiores superiores a 5000 CUP',
@@ -94,7 +86,7 @@ export const PRICES = [
     data: [
       {
         available: true,
-        text: 'Un juego',
+        text: 'Juegos ilimitados',
       },
       {
         available: true,
@@ -111,10 +103,6 @@ export const PRICES = [
       {
         available: true,
         text: 'Gestión de tienda de manera remota',
-      },
-      {
-        available: true,
-        text: 'Herramientas de publicidad',
       },
     ],
     footer: [
