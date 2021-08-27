@@ -91,7 +91,6 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
         email: Yup.string()
           .email('No es un email válido')
           .max(30, 'No puede tener más de 30 caracteres')
-          .matches(SPECIAL_CHARS_REGEXP, 'No se permiten caracteres especiales')
           .required('Requerido'),
         password: Yup.string()
           .required('Requerido')
