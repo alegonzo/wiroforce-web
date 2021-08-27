@@ -226,7 +226,7 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
 
             <div style={{ marginTop: 10 }}>
               <InputLabel style={{ marginTop: 30, paddingLeft: 8 }}>
-                Imagen
+                {!edit ? 'Imagen' : 'Cambiar imagen'}
               </InputLabel>
               <FormControl className={classes.formControl}>
                 <input
@@ -237,8 +237,21 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
                 />
               </FormControl>
               <Typography variant="body2" style={{ paddingLeft: 8 }}>
-                Máx. 300 KB/PNG
+                Máx. 300 KB/PNG. No es obligatoria
               </Typography>
+
+              {edit && product.imageUrl !== null && (
+                <img
+                  src={product.imageUrl}
+                  style={{
+                    height: 100,
+                    width: 100,
+                    marginTop: 20,
+                    borderRadius: 14,
+                    marginLeft: 8,
+                  }}
+                />
+              )}
             </div>
 
             {errors.serverSide && (

@@ -67,7 +67,10 @@ const ApplicationList = () => {
         <ApplicationForm
           showForm={showForm}
           setShowForm={setShowForm}
-          paid={applications?.length >= 2}
+          paid={
+            applications?.length >= 2 &&
+            session?.user.company.name !== 'Conwiro'
+          }
         />
       )}
     </>

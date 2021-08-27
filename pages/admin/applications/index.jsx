@@ -54,31 +54,34 @@ const Applications = ({ session }) => {
   }, [error])
 
   const updateActiveApplication = async (id, active) => {
-    try {
-      setShowBackdrop(true)
-      await api().put(
-        `/applications/${id}/updateStatus`,
-        { active: !active },
-        {
-          headers: {
-            Authorization: 'Bearer ' + session.user.token,
-          },
-        }
-      )
-      setMessage({
-        show: true,
-        text: 'Acción realizada con éxito',
-        type: 'success',
-      })
-      await queryClient.invalidateQueries(APPLICATIONS_URL)
-    } catch (e) {
-      setMessage({
-        show: true,
-        text: 'Ha ocurrido un error',
-        type: 'error',
-      })
-    } finally {
-      setShowBackdrop(false)
+    const r = confirm('Esta acción enviará un email al usuario. Está seguro?')
+    if (r === true) {
+      try {
+        setShowBackdrop(true)
+        await api().put(
+          `/applications/${id}/updateStatus`,
+          { active: !active },
+          {
+            headers: {
+              Authorization: 'Bearer ' + session.user.token,
+            },
+          }
+        )
+        setMessage({
+          show: true,
+          text: 'Acción realizada con éxito',
+          type: 'success',
+        })
+        await queryClient.invalidateQueries(APPLICATIONS_URL)
+      } catch (e) {
+        setMessage({
+          show: true,
+          text: 'Ha ocurrido un error',
+          type: 'error',
+        })
+      } finally {
+        setShowBackdrop(false)
+      }
     }
   }
 
@@ -122,7 +125,7 @@ const Applications = ({ session }) => {
       id: 'receipt',
       name: 'Recibo',
       custom: function CustomCell(row) {
-        return <ApplicationReceipt url={row.receiptUrl} />
+        return <ApplicationReceipt application={row} />
       },
       maxWidth: 250,
     },
