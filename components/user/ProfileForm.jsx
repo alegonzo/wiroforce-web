@@ -83,14 +83,14 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
     : Yup.object({
         fullName: Yup.string()
           .required('Requerido')
-          .length(100, 'No puede tener más de 100 caracteres')
+          .max(100, 'No puede tener más de 100 caracteres')
           .matches(
             SPECIAL_CHARS_REGEXP,
             'No se permiten caracteres especiales'
           ),
         email: Yup.string()
           .email('No es un email válido')
-          .length(30, 'No puede tener más de 100 caracteres')
+          .max(30, 'No puede tener más de 30 caracteres')
           .matches(SPECIAL_CHARS_REGEXP, 'No se permiten caracteres especiales')
           .required('Requerido'),
         password: Yup.string()
@@ -100,7 +100,7 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
         company: Yup.string()
           .required('Requerido')
           .matches(SPECIAL_CHARS_REGEXP, 'No se permiten caracteres especiales')
-          .length(30, 'No puede tener más de 30 caracteres'),
+          .max(30, 'No puede tener más de 30 caracteres'),
       })
   return (
     <Formik
