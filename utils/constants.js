@@ -1,10 +1,12 @@
 export const APPLICATIONS_URL = '/applications'
+export const APPLICATIONS_RECEIPT_URL = (id) => `/applications/${id}/receipt`
 export const PRODUCTS_URL = '/products'
 export const PRODUCT_URL = (id) => `/products/${id}`
 export const USERS_URL = `/users`
 export const USER_URL = '/users/profile'
 export const COMPANIES_URL = '/companies'
 export const SPECIAL_CHARS_REGEXP = /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/
+export const SPECIAL_CHARS_REGEXP_NO_SPACE = /^[A-Za-z0-9]*$/
 export const PROVINCES = [
   'Pinar del Río',
   'Artemisa',

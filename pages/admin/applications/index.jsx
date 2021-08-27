@@ -13,6 +13,7 @@ import CustomTable from '../../../components/common/CustomTable'
 import CustomSelect from '../../../components/common/CustomSelect'
 import { format } from 'date-fns'
 import useCompanies from '../../../hooks/company/useCompanies'
+import ApplicationReceipt from '../../../components/application/ApplicationReceipt'
 
 const Applications = ({ session }) => {
   const queryClient = useQueryClient()
@@ -48,6 +49,7 @@ const Applications = ({ session }) => {
       setMessage({
         show: true,
         text: 'Ha ocurrido un error',
+        type: 'error',
       })
   }, [error])
 
@@ -66,12 +68,14 @@ const Applications = ({ session }) => {
       setMessage({
         show: true,
         text: 'Acción realizada con éxito',
+        type: 'success',
       })
       await queryClient.invalidateQueries(APPLICATIONS_URL)
     } catch (e) {
       setMessage({
         show: true,
         text: 'Ha ocurrido un error',
+        type: 'error',
       })
     } finally {
       setShowBackdrop(false)
@@ -111,6 +115,14 @@ const Applications = ({ session }) => {
       name: 'Fecha de registro',
       custom: function CustomCell(row) {
         return format(new Date(row.createdAt), 'dd-MM-yyyy')
+      },
+      maxWidth: 250,
+    },
+    {
+      id: 'receipt',
+      name: 'Recibo',
+      custom: function CustomCell(row) {
+        return <ApplicationReceipt url={row.receiptUrl} />
       },
       maxWidth: 250,
     },

@@ -10,15 +10,21 @@ import {
   LinearProgress,
   MenuItem,
   Select,
+  Typography,
 } from '@material-ui/core'
 import * as Yup from 'yup'
 import { Field, Form, Formik } from 'formik'
 import { TextField, CheckboxWithLabel } from 'formik-material-ui'
-import Api from '../../utils/api'
 import { useRouter } from 'next/router'
 import { useQueryClient } from 'react-query'
-import { PRODUCTS_URL, SPECIAL_CHARS_REGEXP } from '../../utils/constants'
+import {
+  PRODUCTS_URL,
+  SPECIAL_CHARS_REGEXP,
+  SPECIAL_CHARS_REGEXP_NO_SPACE,
+} from '../../utils/constants'
 import useAppContext from '../AppContext'
+import api from '../../utils/api'
+import Alert from '@material-ui/lab/Alert'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -56,7 +62,10 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
     itemId: Yup.string()
       .required('Requerido')
       .max(10, 'No puede tener más de 10 caracteres')
-      .matches(SPECIAL_CHARS_REGEXP, 'No se permiten caracteres especiales'),
+      .matches(
+        SPECIAL_CHARS_REGEXP_NO_SPACE,
+        'No se permiten caracteres especiales'
+      ),
     price: Yup.number()
       .required('Requerido')
       .oneOf([4, 25], 'Deben ser 4 o 25 CUP'),
@@ -99,12 +108,12 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
         let response = ''
         try {
           if (edit) {
-            await Api().put(`/products/${product.id}`, formBody, {
+            await api().put(`/products/${product.id}`, formBody, {
               headers: { Authorization: 'Bearer ' + session.user.token },
             })
             response = 'Producto Actualizado'
           } else {
-            await Api().post('/products', formBody, {
+            await api().post('/products', formBody, {
               headers: { Authorization: 'Bearer ' + session.user.token },
             })
             response = 'Producto Insertado'
@@ -113,20 +122,25 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
           setMessage({
             show: true,
             text: response,
+            type: 'success',
           })
           setSubmitting(false)
           handleCloseForm()
         } catch (e) {
           if (e.response.status === 400) {
-            setSubmitting(false)
-            setErrors(e.response.data.errors)
+            setErrors(e.response.data?.errors)
+          } else if (e.response.status === 413) {
+            setErrors({ serverSide: 'Imagen muy grande' })
           } else {
             setMessage({
               show: true,
               text: 'Ha ocurrido un error',
+              type: 'error',
             })
           }
           return false
+        } finally {
+          setSubmitting(false)
         }
       }}
     >
@@ -202,6 +216,12 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
                 name="offline"
                 Label={{ label: 'Producto Offline' }}
               />
+              {values.offline === true && (
+                <Alert variant="outlined" severity="warning">
+                  Los productos offline no serán actualizados dinámicamente en
+                  línea
+                </Alert>
+              )}
             </div>
 
             <div style={{ marginTop: 10 }}>
@@ -209,9 +229,23 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
                 Imagen
               </InputLabel>
               <FormControl className={classes.formControl}>
-                <input type="file" name="imageFile" ref={imageFile} />
+                <input
+                  type="file"
+                  name="imageFile"
+                  ref={imageFile}
+                  accept="image/png"
+                />
               </FormControl>
+              <Typography variant="body2" style={{ paddingLeft: 8 }}>
+                Máx. 300 KB/PNG
+              </Typography>
             </div>
+
+            {errors.serverSide && (
+              <Alert variant="outlined" severity="error">
+                {errors.serverSide}
+              </Alert>
+            )}
 
             {isSubmitting && <LinearProgress />}
 

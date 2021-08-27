@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   List,
   ListItem,
@@ -12,6 +12,7 @@ import ApplicationListItem from './ApplicationListItem'
 import ApplicationForm from './ApplicationForm'
 import { Add } from '@material-ui/icons'
 import useApps from '../../hooks/app/useApps'
+import useAppContext from '../AppContext'
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ApplicationList = () => {
   const [session, loading] = useSession()
+  const { setMessage } = useAppContext()
   const [showForm, setShowForm] = useState(false)
   const classes = useStyles()
 
@@ -30,6 +32,15 @@ const ApplicationList = () => {
       enabled: !loading,
     }
   )
+
+  useEffect(() => {
+    if (error?.message)
+      setMessage({
+        show: true,
+        text: 'Ha ocurrido un error',
+        type: 'error',
+      })
+  }, [error])
 
   return (
     <>
@@ -52,7 +63,13 @@ const ApplicationList = () => {
         }) || ''}
       </List>
 
-      <ApplicationForm showForm={showForm} setShowForm={setShowForm} />
+      {applications && (
+        <ApplicationForm
+          showForm={showForm}
+          setShowForm={setShowForm}
+          paid={applications?.length >= 2}
+        />
+      )}
     </>
   )
 }

@@ -116,7 +116,7 @@ function Row(props) {
                         },
                         {
                           id: 'bankCard',
-                          label: 'Tarjeta de Banco (CUP)',
+                          label: 'Tarjeta de Banco (Cuenta corriente CUP)',
                           text: row.profile?.bankCard || '-',
                         },
                       ]

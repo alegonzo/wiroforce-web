@@ -14,6 +14,7 @@ import {
   Select,
   Grid,
 } from '@material-ui/core'
+import Alert from '@material-ui/lab/Alert'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
 import axios from 'axios'
@@ -124,11 +125,12 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
             setMessage({
               show: true,
               text: 'Perfil Editado',
+              type: 'success',
             })
             setEdit(false)
           } else {
             await axios.post(
-              `http://localhost:3001/api/v1/auth/signup`, //`https://conwiro.nat.cu/wiroforce-api/api/v1/auth/signup`,
+              `https://conwiro.nat.cu/wiroforce-api/api/v1/auth/signup`,
               values
             )
             setShowDialog(true)
@@ -140,6 +142,7 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
             setMessage({
               show: true,
               text: 'Ha ocurrido un error',
+              type: 'error',
             })
           }
           return false
@@ -261,7 +264,7 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
                 component={TextField}
                 name="bankCard"
                 type="text"
-                label="Tarjeta de Banco (CUP)"
+                label="Tarjeta de Banco (Cuenta corriente CUP)"
                 fullWidth
               />
             )}
@@ -299,6 +302,18 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
                 </Typography>
               ))}
           </div>
+
+          <br />
+
+          {!edit && (
+            <Alert variant="outlined" severity="warning">
+              Para activar los servicios y cobrar las ganancias generadas en la
+              plataforma el usuario debe tener los permisos de TCP, Creador
+              Audiovisual Independiente o ser una SLR, luego de registrar su
+              cuenta debe contactar al equipo de Conwiro para completar el
+              proceso
+            </Alert>
+          )}
 
           <br />
 

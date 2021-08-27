@@ -80,6 +80,7 @@ const ChangePasswordForm = () => {
               setMessage({
                 show: true,
                 text: 'Contraseña cambiada con éxito',
+                type: 'success',
               })
               setShowForm(false)
             } catch (e) {
@@ -89,6 +90,7 @@ const ChangePasswordForm = () => {
                 setMessage({
                   show: true,
                   text: 'Ha ocurrido un error',
+                  type: 'error',
                 })
               }
               return false

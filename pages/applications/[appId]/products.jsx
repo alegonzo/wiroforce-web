@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Products = ({ session }) => {
   const classes = useStyles()
-  const { setMessage } = useAppContext()
+  const { setMessage, setShowBackdrop } = useAppContext()
   const router = useRouter()
   const { appId } = router.query
   const queryClient = useQueryClient()
@@ -68,11 +68,13 @@ const Products = ({ session }) => {
       setMessage({
         show: true,
         text: 'Ha ocurrido un error',
+        type: 'error',
       })
   }, [error])
 
   const updateActiveProduct = async (id, listIndex, active) => {
     try {
+      setShowBackdrop(true)
       await api().put(
         PRODUCT_URL(id),
         { active: !active },
@@ -85,13 +87,17 @@ const Products = ({ session }) => {
       setMessage({
         show: true,
         text: !active ? 'Producto Habilitado' : 'Producto Deshabilitado',
+        type: 'success',
       })
       await queryClient.invalidateQueries(PRODUCTS_URL)
     } catch (e) {
       setMessage({
         show: true,
         text: 'Ha ocurrido un error',
+        type: 'error',
       })
+    } finally {
+      setShowBackdrop(false)
     }
   }
 

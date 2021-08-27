@@ -1,13 +1,14 @@
-import { IconButton, Snackbar } from '@material-ui/core'
-import { Close } from '@material-ui/icons'
+import { Snackbar } from '@material-ui/core'
 import React from 'react'
 import useAppContext from '../AppContext'
+import Alert from '@material-ui/lab/Alert'
 
 const Notification = () => {
   const { message, setMessage } = useAppContext()
 
   const handleClose = () => {
     setMessage({
+      ...message,
       show: false,
       text: '',
     })
@@ -22,20 +23,11 @@ const Notification = () => {
       open={message.show}
       autoHideDuration={6000}
       onClose={handleClose}
-      message={message.text}
-      action={
-        <>
-          <IconButton
-            size="small"
-            aria-label="close"
-            color="inherit"
-            onClick={handleClose}
-          >
-            <Close fontSize="small" />
-          </IconButton>
-        </>
-      }
-    />
+    >
+      <Alert variant="filled" onClose={handleClose} severity={message.type}>
+        {message.text}
+      </Alert>
+    </Snackbar>
   )
 }
 

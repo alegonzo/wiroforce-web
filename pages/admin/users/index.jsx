@@ -34,6 +34,7 @@ const Users = ({ session }) => {
       setMessage({
         show: true,
         text: 'Ha ocurrido un error',
+        type: 'error',
       })
   }, [error])
 
@@ -54,12 +55,14 @@ const Users = ({ session }) => {
         setMessage({
           show: true,
           text: 'Acción realizada con éxito',
+          type: 'success',
         })
         await queryClient.invalidateQueries(USERS_URL)
       } catch (e) {
         setMessage({
           show: true,
           text: 'Ha ocurrido un error',
+          type: 'error',
         })
       } finally {
         setShowBackdrop(false)

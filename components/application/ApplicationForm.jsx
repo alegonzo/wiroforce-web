@@ -10,12 +10,12 @@ import {
   DialogTitle,
   Divider,
   FormControl,
-  Grid,
   InputLabel,
   LinearProgress,
   makeStyles,
   Typography,
 } from '@material-ui/core'
+import Alert from '@material-ui/lab/Alert'
 import { useSession } from 'next-auth/client'
 import { APPLICATIONS_URL, SPECIAL_CHARS_REGEXP } from '../../utils/constants'
 import api from '../../utils/api'
@@ -32,17 +32,17 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 500,
   },
   formControl: {
-    margin: theme.spacing(1),
     minWidth: 500,
   },
 }))
 
-const ApplicationForm = ({ showForm, setShowForm }) => {
+const ApplicationForm = ({ showForm, setShowForm, paid }) => {
   const classes = useStyles()
   const queryClient = useQueryClient()
   const [session] = useSession()
   const { setMessage } = useAppContext()
   const imageFile = useRef()
+  const receiptFile = useRef()
 
   return (
     <>
@@ -74,6 +74,13 @@ const ApplicationForm = ({ showForm, setShowForm }) => {
             } else {
               return false
             }
+            if (paid === true) {
+              if (receiptFile.current.files.length > 0) {
+                formBody.append('receipt', receiptFile.current.files[0])
+              } else {
+                return false
+              }
+            }
             try {
               await api().post(APPLICATIONS_URL, formBody, {
                 headers: { Authorization: 'Bearer ' + session.user.token },
@@ -82,6 +89,7 @@ const ApplicationForm = ({ showForm, setShowForm }) => {
               setMessage({
                 show: true,
                 text: 'Aplicación creada',
+                type: 'success',
               })
               queryClient.invalidateQueries(APPLICATIONS_URL)
               setShowForm(false)
@@ -89,16 +97,19 @@ const ApplicationForm = ({ showForm, setShowForm }) => {
               if (e.response.status === 400) {
                 setErrors({ name: e.response.data.message })
                 setSubmitting(false)
+              } else if (e.response.status === 413) {
+                setErrors({ serverSide: 'Imagen muy grande' })
               } else {
                 setMessage({
                   show: true,
                   text: 'Ha ocurrido un error',
+                  type: 'error',
                 })
               }
             }
           }}
         >
-          {({ submitForm, isSubmitting }) => (
+          {({ errors, submitForm, isSubmitting }) => (
             <Form>
               <DialogContent>
                 <Field
@@ -110,41 +121,64 @@ const ApplicationForm = ({ showForm, setShowForm }) => {
                 />
 
                 <div>
-                  <InputLabel style={{ marginTop: 30, paddingLeft: 10 }}>
-                    Icono
-                  </InputLabel>
+                  <InputLabel style={{ marginTop: 30 }}>Icono</InputLabel>
                   <FormControl>
                     <input
                       type="file"
                       name="imageFile"
                       ref={imageFile}
-                      className={classes.formControl}
+                      accept="image/png,image/jpg,image/jpeg"
+                      style={{ marginTop: 10 }}
                     />
                   </FormControl>
                 </div>
-
-                {/*<br />
-                <Divider />
                 <br />
+                {paid && (
+                  <>
+                    <Divider />
+                    <br />
 
-                <Typography>Información de pago</Typography>
-                <Grid
-                  container
-                  justifyContent="space-between"
-                  style={{ paddingTop: 30 }}
-                >
-                  <QRCode
-                    value={'055940b9f56a914f3286e2d4ffff013b50'}
-                    size={180}
-                    bgColor="#282c34"
-                    fgColor="#fff"
-                    level="H"
-                  />
-                  <Grid>
-                    <Typography>Cantidad a pagar</Typography>
-                    <Typography>500 CUP</Typography>
-                  </Grid>
-                </Grid>*/}
+                    <Typography>Información de pago</Typography>
+                    <Alert variant="outlined" severity="warning">
+                      Ha excedido el límite de 2 aplicaciones gratis. Debe
+                      abonar la cantidad de 400 CUP a través de la función de QR
+                      de ENZONA para registrar la aplicación. Luego de realizar
+                      la comprobación por parte del equipo de soporte se
+                      procederá a su activación y estará disponible en la lista
+                      de aplicaciones
+                    </Alert>
+
+                    <div style={{ marginTop: 20 }}>
+                      <QRCode
+                        value={'055940b9f56a914f3286e2d4ffff013b50'}
+                        size={180}
+                        bgColor="#282c34"
+                        fgColor="#fff"
+                        level="H"
+                      />
+                      <InputLabel style={{ marginTop: 30 }}>
+                        Subir captura de pantalla de ENZONA de confirmación de
+                        pago
+                      </InputLabel>
+                      <FormControl>
+                        <input
+                          type="file"
+                          name="receiptFile"
+                          ref={receiptFile}
+                          accept="image/png,image/jpg,image/jpeg"
+                          style={{ marginTop: 10 }}
+                        />
+                      </FormControl>
+                    </div>
+                  </>
+                )}
+
+                {errors.serverSide && (
+                  <Alert variant="outlined" severity="error">
+                    {errors.serverSide}
+                  </Alert>
+                )}
+
                 {isSubmitting && <LinearProgress />}
               </DialogContent>
 

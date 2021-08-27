@@ -100,7 +100,7 @@ const AccountConfig = ({ session }) => {
                   },
                   {
                     id: 'bankCard',
-                    label: 'Tarjeta de Banco (CUP)',
+                    label: 'Tarjeta de Banco (Cuenta corriente CUP)',
                     text: user.profile?.bankCard || '-',
                   },
                 ]}
