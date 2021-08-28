@@ -26,95 +26,40 @@ export const PROVINCES = [
   'Isla de la Juventud',
 ]
 
+export const PLATFORM_FUNCTIONALITIES = [
+  {
+    available: true,
+    text: 'Dos juegos gratis. 400 CUP x juego a partir de 2',
+  },
+  {
+    available: true,
+    text: 'Soporte personalizado',
+  },
+  {
+    available: true,
+    text: 'Monetización por SMS',
+  },
+  {
+    available: true,
+    text: 'Acceso a analítica de ventas',
+  },
+  {
+    available: true,
+    text: 'Gestión de tienda de manera remota',
+  },
+]
+
 export const PRICES = [
   {
     title: 'Nivel 1',
-    data: [
-      {
-        available: true,
-        text: 'Dos juegos gratis',
-      },
-      {
-        available: true,
-        text: 'Soporte personalizado',
-      },
-      {
-        available: true,
-        text: 'Monetización por SMS',
-      },
-      {
-        available: true,
-        text: 'Acceso a analítica de Marketing',
-      },
-      {
-        available: true,
-        text: 'Gestión de tienda de manera remota',
-      },
-    ],
-    footer: [
-      'Ingresos mensuales de 0 a 5000 CUP en el mes',
-      '3% de regalías',
-      '2 juegos gratis',
-    ],
+    data: ['Ingresos mensuales de 0 a 4999 CUP', '3% de regalías'],
   },
   {
     title: 'Nivel 2',
-    data: [
-      {
-        available: true,
-        text: 'Juegos ilimitados',
-      },
-      {
-        available: true,
-        text: 'Soporte personalizado',
-      },
-      {
-        available: true,
-        text: 'Monetización por SMS',
-      },
-      {
-        available: true,
-        text: 'Acceso a analítica de Marketing',
-      },
-      {
-        available: true,
-        text: 'Gestión de tienda de manera remota',
-      },
-    ],
-    footer: [
-      'Ingresos mensuales de 5001 a 10000 CUP en el mes',
-      '6% de regalías',
-      '400 CUP / Juego',
-    ],
+    data: ['Ingresos mensuales de 5000 a 9999 CUP', '6% de regalías'],
   },
   {
     title: 'Nivel 3',
-    data: [
-      {
-        available: true,
-        text: 'Juegos ilimitados',
-      },
-      {
-        available: true,
-        text: 'Soporte personalizado',
-      },
-      {
-        available: true,
-        text: 'Monetización por SMS',
-      },
-      {
-        available: true,
-        text: 'Acceso a analítica de Marketing',
-      },
-      {
-        available: true,
-        text: 'Gestión de tienda de manera remota',
-      },
-    ],
-    footer: [
-      'Ingresos mensuales superiores a 10000 CUP',
-      '12% de regalías',
-      '400 CUP / Juego',
-    ],
+    data: ['Ingresos mensuales superiores a 10000 CUP', '12% de regalías'],
   },
 ]

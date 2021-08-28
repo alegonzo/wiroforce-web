@@ -9,13 +9,24 @@ import {
   AppBar,
   Toolbar,
   IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from '@material-ui/core'
 import Head from 'next/head'
 import Fade from 'react-reveal/Fade'
-import { Facebook, Instagram, Twitter } from '@material-ui/icons'
+import {
+  Check,
+  Close,
+  Facebook,
+  Instagram,
+  Telegram,
+  Twitter,
+} from '@material-ui/icons'
 import { format } from 'date-fns'
 import PricingCard from '../components/common/PricingCard'
-import { PRICES } from '../utils/constants'
+import { PLATFORM_FUNCTIONALITIES, PRICES } from '../utils/constants'
 
 export default function Index() {
   const router = useRouter()
@@ -429,8 +440,30 @@ export default function Index() {
       >
         <Fade bottom>
           <Typography variant="h4" style={{ marginBottom: 40 }}>
-            Costos del servicio por niveles
+            Funcionalidades y costos del servicio por niveles
           </Typography>
+
+          <Grid
+            container
+            spacing={3}
+            justifyContent="center"
+            style={{ marginBottom: 50 }}
+          >
+            <List dense={true}>
+              {PLATFORM_FUNCTIONALITIES.map((item, idx) => (
+                <ListItem key={idx}>
+                  <ListItemIcon>
+                    {item.available ? (
+                      <Check style={{ color: '#20BB8C' }} />
+                    ) : (
+                      <Close />
+                    )}
+                  </ListItemIcon>
+                  <ListItemText primary={item.text} />
+                </ListItem>
+              ))}
+            </List>
+          </Grid>
           <Grid container spacing={3}>
             <Grid item lg={4} xs={12} md={4} xl={4}>
               <PricingCard pricing={PRICES[0]} />
@@ -491,8 +524,7 @@ export default function Index() {
                         marginTop: 10,
                       }}
                     >
-                      @{format(new Date(), 'yyyy')} Logo Here. All Rights
-                      Reserved
+                      @{format(new Date(), 'yyyy')} Conwiro. All Rights Reserved
                     </Typography>
                   </Grid>
                 </Grid>
@@ -531,9 +563,11 @@ export default function Index() {
                       justifyContent: 'center',
                     }}
                   >
-                    <IconButton>
-                      <Facebook />
-                    </IconButton>
+                    <a href="https://www.facebook.com/WiroForce/">
+                      <IconButton>
+                        <Facebook />
+                      </IconButton>
+                    </a>
                   </Grid>
                   <Grid
                     item
@@ -546,24 +580,11 @@ export default function Index() {
                       justifyContent: 'center',
                     }}
                   >
-                    <IconButton>
-                      <Twitter />
-                    </IconButton>
-                  </Grid>
-                  <Grid
-                    item
-                    md={4}
-                    xs={4}
-                    sm={4}
-                    lg={4}
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <IconButton>
-                      <Instagram />
-                    </IconButton>
+                    <a href="https://t.me/wiroforce">
+                      <IconButton>
+                        <Telegram />
+                      </IconButton>
+                    </a>
                   </Grid>
                 </Grid>
               </Box>

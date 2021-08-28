@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
 })
 
-export default function PricingCard({ pricing: { title, data, footer } }) {
+export default function PricingCard({ pricing: { title, data } }) {
   const classes = useStyles()
 
   return (
@@ -39,24 +39,8 @@ export default function PricingCard({ pricing: { title, data, footer } }) {
           <Typography variant="h6" className={classes.title}>
             {title}
           </Typography>
-          <div>
-            <List dense={true}>
-              {data.map((item, idx) => (
-                <ListItem key={idx}>
-                  <ListItemIcon>
-                    {item.available ? (
-                      <Check style={{ color: '#20BB8C' }} />
-                    ) : (
-                      <Close />
-                    )}
-                  </ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItem>
-              ))}
-            </List>
-          </div>
         </Grid>
-        {footer.map((item, _idx) => (
+        {data.map((item, _idx) => (
           <Typography variant="body1" key={_idx} style={{ display: 'block' }}>
             {item}
           </Typography>
