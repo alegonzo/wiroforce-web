@@ -16,14 +16,7 @@ import {
 } from '@material-ui/core'
 import Head from 'next/head'
 import Fade from 'react-reveal/Fade'
-import {
-  Check,
-  Close,
-  Facebook,
-  Instagram,
-  Telegram,
-  Twitter,
-} from '@material-ui/icons'
+import { Check, Close, Facebook, Telegram, Twitter } from '@material-ui/icons'
 import { format } from 'date-fns'
 import PricingCard from '../components/common/PricingCard'
 import { PLATFORM_FUNCTIONALITIES, PRICES } from '../utils/constants'
@@ -360,6 +353,7 @@ export default function Index() {
             <Grid item md={6} xs={12} sm={12} lg={6} style={{ padding: 40 }}>
               <Typography variant="h4">
                 Obtenga los mayores rendimientos de sus campañas de publicidad
+                (Próximamente)
               </Typography>
               <Box
                 style={{
@@ -411,7 +405,7 @@ export default function Index() {
                   gutterBottom
                   style={{ fontSize: 'large' }}
                 >
-                  Converciones e ingresos por cada canal
+                  Conversiones e ingresos por cada canal
                 </Typography>
               </Box>
               <Box
@@ -583,6 +577,23 @@ export default function Index() {
                     <a href="https://t.me/wiroforce">
                       <IconButton>
                         <Telegram />
+                      </IconButton>
+                    </a>
+                  </Grid>
+                  <Grid
+                    item
+                    md={4}
+                    xs={4}
+                    sm={4}
+                    lg={4}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <a href="https://twitter.com/WiroForce?s=09">
+                      <IconButton>
+                        <Twitter />
                       </IconButton>
                     </a>
                   </Grid>

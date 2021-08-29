@@ -150,7 +150,7 @@ const ApplicationForm = ({ showForm, setShowForm, paid }) => {
 
                     <div style={{ marginTop: 20 }}>
                       <QRCode
-                        value={'055940b9f56a914f3286e2d4ffff013b50'}
+                        value={'051fab4770b0b84f91b3091eb76073d8ab'}
                         size={180}
                         bgColor="#282c34"
                         fgColor="#fff"
