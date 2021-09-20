@@ -246,7 +246,7 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
 
               {edit && product?.imageUrl !== null && (
                 <img
-                  src={product.imageUrl}
+                  src={product?.imageUrl || ''}
                   style={{
                     height: 100,
                     width: 100,
