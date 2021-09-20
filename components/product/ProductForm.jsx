@@ -102,7 +102,7 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
         const formBody = new FormData()
         for (let key in values) formBody.append(key, values[key])
 
-        if (imageFile.current.files.length > 0)
+        if (imageFile?.current?.files?.length > 0)
           formBody.append('image', imageFile.current.files[0])
 
         let response = ''
