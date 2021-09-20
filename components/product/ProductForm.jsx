@@ -127,8 +127,12 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
           setSubmitting(false)
           handleCloseForm()
         } catch (e) {
-          if (e.response.status === 400) {
-            setErrors(e.response.data?.errors)
+          if (e?.response?.status === 400) {
+            if (e?.response?.data?.message?.length > 0) {
+              setErrors({ serverSide: e?.response?.data?.message[0] })
+            } else {
+              setErrors(e.response.data?.errors)
+            }
           } else if (e.response.status === 413) {
             setErrors({ serverSide: 'Imagen muy grande' })
           } else {
@@ -180,7 +184,7 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
                   <MenuItem value={4}>4 CUP</MenuItem>
                   <MenuItem value={25}>25 CUP</MenuItem>
                 </Select>
-                {errors && errors.price ? (
+                {errors && errors?.price ? (
                   <FormHelperText style={{ color: 'red' }}>
                     {errors.price}
                   </FormHelperText>
@@ -204,7 +208,7 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
                 multiline
                 rows={2}
                 type="text"
-                label="Descripcion"
+                label="Descripción"
                 style={{ marginTop: 20, width: '100%' }}
               />
             </div>
@@ -254,9 +258,9 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
               )}
             </div>
 
-            {errors.serverSide && (
+            {errors?.serverSide && (
               <Alert variant="outlined" severity="error">
-                {errors.serverSide}
+                {errors?.serverSide}
               </Alert>
             )}
 
