@@ -244,7 +244,7 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
                 Máx. 300 KB/PNG. No es obligatoria
               </Typography>
 
-              {edit && product.imageUrl !== null && (
+              {edit && product?.imageUrl !== null && (
                 <img
                   src={product.imageUrl}
                   style={{
