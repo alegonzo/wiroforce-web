@@ -32,6 +32,7 @@ const Rankings = () => {
   const classes = useStyles()
   const { setMessage } = useAppContext()
   const router = useRouter()
+  console.log(router.query)
   const { appId: applicationId } = router.query
 
   const [showRankModal, setShowRankModal] = useState(false)
@@ -43,15 +44,10 @@ const Rankings = () => {
     data: rankings,
     isFetching,
     error,
-  } = useRankings(
-    {
-      applicationId,
-    },
-    {
-      enabled: applicationId !== '',
-      keepPreviousData: true,
-    }
-  )
+  } = useRankings(applicationId, {
+    enabled: applicationId !== '' && applicationId !== undefined,
+    keepPreviousData: true,
+  })
 
   useEffect(() => {
     if (error?.message)
@@ -152,7 +148,7 @@ const Rankings = () => {
 
   return (
     <Layout
-      title={`Productos - ${applicationId}`}
+      title={`Ranking - ${applicationId}`}
       breadcrumbs={[
         {
           text: 'Dashboard',
