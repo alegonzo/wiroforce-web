@@ -16,7 +16,6 @@ import {
 } from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/client'
 import axios from 'axios'
 import { useQueryClient } from 'react-query'
 import {
@@ -25,7 +24,7 @@ import {
   PROVINCES,
 } from '../../utils/constants'
 import useAppContext from '../AppContext'
-import api from '../../utils/api'
+import { api } from '../../utils/api'
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -43,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
   const router = useRouter()
-  const [session] = useSession()
   const classes = useStyles()
   const queryClient = useQueryClient()
   const { setMessage } = useAppContext()
@@ -115,10 +113,9 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
         }
         try {
           if (edit) {
-            await api().put(`/users/editProfile`, values, {
-              headers: {
-                Authorization: 'Bearer ' + session.user.token,
-              },
+            await api(`/users/editProfile`, {
+              method: 'put',
+              data: values,
             })
             queryClient.invalidateQueries(USER_URL)
             setMessage({
@@ -128,10 +125,7 @@ const ProfileForm = ({ edit, user, setEdit, setShowDialog }) => {
             })
             setEdit(false)
           } else {
-            await axios.post(
-              `https://conwiro.nat.cu/wiroforce-api/api/v1/auth/signup`,
-              values
-            )
+            await axios.post(process.env.NEXT_PUBLIC_SIGNUP_URL, values)
             setShowDialog(true)
           }
         } catch (e) {

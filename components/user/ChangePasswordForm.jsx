@@ -11,9 +11,8 @@ import {
   LinearProgress,
   makeStyles,
 } from '@material-ui/core'
-import { useSession } from 'next-auth/client'
 import useAppContext from '../AppContext'
-import api from '../../utils/api'
+import { api } from '../../utils/api'
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -31,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ChangePasswordForm = () => {
   const classes = useStyles()
-  const [session] = useSession()
   const [showForm, setShowForm] = useState(false)
   const [serverErrors, setServerErrors] = useState([])
   const { setMessage } = useAppContext()
@@ -73,8 +71,9 @@ const ChangePasswordForm = () => {
                 })
                 return false
               }
-              await api().put('/auth/changePassword', values, {
-                headers: { Authorization: 'Bearer ' + session.user.token },
+              await api('/auth/changePassword', {
+                method: 'put',
+                data: values,
               })
               setSubmitting(false)
               setMessage({

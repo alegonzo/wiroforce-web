@@ -16,12 +16,11 @@ import {
   Typography,
 } from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
-import { useSession } from 'next-auth/client'
 import { APPLICATIONS_URL, SPECIAL_CHARS_REGEXP } from '../../utils/constants'
-import api from '../../utils/api'
 import useAppContext from '../AppContext'
 import { useQueryClient } from 'react-query'
 import QRCode from 'react-qr-code'
+import { api } from '../../utils/api'
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -39,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
 const ApplicationForm = ({ showForm, setShowForm, paid }) => {
   const classes = useStyles()
   const queryClient = useQueryClient()
-  const [session] = useSession()
   const { setMessage } = useAppContext()
   const imageFile = useRef()
   const receiptFile = useRef()
@@ -82,8 +80,9 @@ const ApplicationForm = ({ showForm, setShowForm, paid }) => {
               }
             }
             try {
-              await api().post(APPLICATIONS_URL, formBody, {
-                headers: { Authorization: 'Bearer ' + session.user.token },
+              await api(APPLICATIONS_URL, {
+                method: 'post',
+                data: formBody,
               })
               setSubmitting(false)
               setMessage({

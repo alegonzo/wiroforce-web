@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core'
+import { signIn, useSession } from 'next-auth/client'
 import Head from 'next/head'
 import React, { useState } from 'react'
 import CustomBreadcrumbs from '../common/CustomBreadcrumbs'
@@ -28,6 +29,16 @@ const Layout = ({ children, title, breadcrumbs }) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
+  const [session, loading] = useSession()
+
+  if (loading) return null
+
+  if (!loading && !session) {
+    signIn('wiroforce', {}, { prompt: false })
+    return null
+  }
+
+  if (session) console.log(session)
 
   return (
     <div className={classes.root}>

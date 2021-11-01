@@ -23,8 +23,8 @@ import {
   SPECIAL_CHARS_REGEXP_NO_SPACE,
 } from '../../utils/constants'
 import useAppContext from '../AppContext'
-import api from '../../utils/api'
 import Alert from '@material-ui/lab/Alert'
+import { api } from '../../utils/api'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ProductForm = ({ session, handleCloseForm, edit, product }) => {
+const ProductForm = ({ handleCloseForm, edit, product }) => {
   const classes = useStyles()
   const { setMessage } = useAppContext()
   const router = useRouter()
@@ -108,13 +108,15 @@ const ProductForm = ({ session, handleCloseForm, edit, product }) => {
         let response = ''
         try {
           if (edit) {
-            await api().put(`/products/${product.id}`, formBody, {
-              headers: { Authorization: 'Bearer ' + session.user.token },
+            await api(`/products/${product.id}`, {
+              method: 'put',
+              data: formBody,
             })
             response = 'Producto Actualizado'
           } else {
-            await api().post('/products', formBody, {
-              headers: { Authorization: 'Bearer ' + session.user.token },
+            await api('/products', {
+              method: 'post',
+              data: formBody,
             })
             response = 'Producto Insertado'
           }

@@ -1,14 +1,12 @@
 import { useQuery } from 'react-query'
-import api from '../../utils/api'
+import { api } from '../../utils/api'
 import { COMPANIES_URL } from '../../utils/constants'
 
-const getCompanies = async ({ queryKey: [url, token] }) => {
-  const { data } = await api().get(url, {
-    headers: { Authorization: 'Bearer ' + token },
-  })
+const getCompanies = async ({ queryKey: [url] }) => {
+  const { data } = await api(url)
   return data
 }
 
-export default function useCompanies({ token }, options = {}) {
-  return useQuery([COMPANIES_URL, token], getCompanies, options)
+export default function useCompanies(options = {}) {
+  return useQuery([COMPANIES_URL], getCompanies, options)
 }

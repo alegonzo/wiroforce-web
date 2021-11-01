@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Card, CardContent, makeStyles } from '@material-ui/core'
 import Layout from '../../components/layouts/Layout'
-import { getSession } from 'next-auth/client'
 import useUser from '../../hooks/user/useUser'
 import DetailTable from '../../components/common/DetailTable'
 import { Edit } from '@material-ui/icons'
@@ -39,10 +38,10 @@ const useStyles = makeStyles({
   },
 })
 
-const AccountConfig = ({ session }) => {
+const AccountConfig = () => {
   const classes = useStyles()
   const [edit, setEdit] = useState(false)
-  const { data: user } = useUser(session.user.token)
+  const { data: user } = useUser()
 
   return (
     <Layout
@@ -134,17 +133,6 @@ const AccountConfig = ({ session }) => {
       )}
     </Layout>
   )
-}
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context)
-  if (session) return { props: { session } }
-  return {
-    redirect: {
-      destination: '/login',
-      permanent: false,
-    },
-  }
 }
 
 export default AccountConfig

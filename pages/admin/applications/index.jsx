@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Paper, Switch } from '@material-ui/core'
+import { Grid, Paper, Switch, Typography } from '@material-ui/core'
 import LoaderBar from '../../../components/common/LoaderBar'
 import { getSession } from 'next-auth/client'
 import Layout from '../../../components/layouts/Layout.jsx'
-import api from '../../../utils/api'
 import SearchField from '../../../components/common/SearchField'
 import { useQueryClient } from 'react-query'
 import { APPLICATIONS_URL } from '../../../utils/constants'
@@ -14,8 +13,9 @@ import CustomSelect from '../../../components/common/CustomSelect'
 import { format } from 'date-fns'
 import useCompanies from '../../../hooks/company/useCompanies'
 import ApplicationReceipt from '../../../components/application/ApplicationReceipt'
+import { api } from '../../../utils/api'
 
-const Applications = ({ session }) => {
+const Applications = () => {
   const queryClient = useQueryClient()
   const { setMessage, setShowBackdrop } = useAppContext()
   const [page, setPage] = useState(0)
@@ -23,7 +23,7 @@ const Applications = ({ session }) => {
   const [search, setSearch] = useState('')
   const [selectedCompany, setSelectedCompany] = useState('')
 
-  const { data: companies } = useCompanies({ token: session.user.token })
+  const { data: companies } = useCompanies()
 
   const {
     data: applications,
@@ -31,13 +31,10 @@ const Applications = ({ session }) => {
     error,
   } = useApps(
     {
-      token: session.user.token,
-      params: {
-        page,
-        size,
-        search,
-        companyId: selectedCompany,
-      },
+      page,
+      size,
+      search,
+      companyId: selectedCompany,
     },
     {
       keepPreviousData: true,
@@ -58,15 +55,10 @@ const Applications = ({ session }) => {
     if (r === true) {
       try {
         setShowBackdrop(true)
-        await api().put(
-          `/applications/${id}/updateStatus`,
-          { active: !active },
-          {
-            headers: {
-              Authorization: 'Bearer ' + session.user.token,
-            },
-          }
-        )
+        await api(`/applications/${id}/updateStatus`, {
+          method: 'put',
+          data: { active: !active },
+        })
         setMessage({
           show: true,
           text: 'Acción realizada con éxito',
@@ -167,7 +159,6 @@ const Applications = ({ session }) => {
           </Grid>
           <div style={{ marginBottom: 20 }}></div>
           <br />
-
           {applications?.result?.length > 0 && !isFetching ? (
             <CustomTable
               data={applications.result}
@@ -181,8 +172,13 @@ const Applications = ({ session }) => {
               }}
             />
           ) : (
-            <LoaderBar />
-          )}
+            <Grid justifyContent="center" container>
+              <Typography style={{ marginTop: 150, textAlign: 'center' }}>
+                No hay aplicaciones
+              </Typography>
+            </Grid>
+          )}{' '}
+          {isFetching && <LoaderBar />}
         </Grid>
       </Grid>
     </Layout>

@@ -14,13 +14,9 @@ export default function ApplicationReceipt({ application }) {
   const { setMessage } = useAppContext()
   const [image, setImage] = useState(null)
   const [session] = useSession()
-  const { data: receipt, error } = useReceipt(
-    application.id,
-    session?.user?.token,
-    {
-      enabled: session && application.receiptUrl !== null,
-    }
-  )
+  const { data: receipt, error } = useReceipt(application.id, {
+    enabled: session && application.receiptUrl !== null,
+  })
 
   const handleClickOpen = () => {
     setOpen(true)

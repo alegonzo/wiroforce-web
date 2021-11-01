@@ -9,16 +9,14 @@ import {
   Typography,
 } from '@material-ui/core'
 import LoaderBar from '../../../components/common/LoaderBar'
-import ProductForm from '../../../components/product/ProductForm'
 import Layout from '../../../components/layouts/Layout'
 import { useRouter } from 'next/router'
-import useProducts from '../../../hooks/product/useProducts'
 import { useQueryClient } from 'react-query'
-import { PRODUCTS_URL, PRODUCT_URL } from '../../../utils/constants'
 import useAppContext from '../../../components/AppContext'
-import SearchField from '../../../components/common/SearchField'
 import CustomTable from '../../../components/common/CustomTable'
-import { api } from '../../../utils/api'
+import useRankings from '../../../hooks/ranking/useRankings'
+import RankingForm from '../../../components/ranking/RankingForm'
+import RankingListModal from '../../../components/ranking/RankingListModal'
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -30,33 +28,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Products = () => {
+const Rankings = () => {
   const classes = useStyles()
-  const { setMessage, setShowBackdrop } = useAppContext()
+  const { setMessage } = useAppContext()
   const router = useRouter()
-  const { appId } = router.query
-  const queryClient = useQueryClient()
+  const { appId: applicationId } = router.query
 
+  const [showRankModal, setShowRankModal] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [editMode, setEditMode] = useState(false)
-  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [selectedRanking, setSelectedRanking] = useState(null)
 
-  const [page, setPage] = useState(0)
-  const [size, setSize] = useState(10)
-  const [search, setSearch] = useState('')
   const {
-    data: products,
+    data: rankings,
     isFetching,
     error,
-  } = useProducts(
+  } = useRankings(
     {
-      appId,
-      page,
-      size,
-      search,
+      applicationId,
     },
     {
-      enabled: appId !== '',
+      enabled: applicationId !== '',
       keepPreviousData: true,
     }
   )
@@ -70,7 +62,7 @@ const Products = () => {
       })
   }, [error])
 
-  const updateActiveProduct = async (id, listIndex, active) => {
+  /*const updateActiveProduct = async (id, listIndex, active) => {
     try {
       setShowBackdrop(true)
       await api(PRODUCT_URL(id), { method: 'put', data: { active: !active } })
@@ -89,37 +81,33 @@ const Products = () => {
     } finally {
       setShowBackdrop(false)
     }
-  }
+  }*/
 
   const handleCloseForm = () => {
     setShowForm(!showForm)
-    setSelectedProduct(null)
+    setSelectedRanking(null)
     setEditMode(false)
   }
 
   const handleEdit = (value) => {
-    setSelectedProduct(value)
+    setSelectedRanking(value)
     setShowForm(true)
     setEditMode(true)
+  }
+
+  const handleView = (value) => {
+    setSelectedRanking(value)
+    setShowRankModal(true)
+    setEditMode(false)
   }
 
   const columns = [
     {
       id: 'name',
       name: 'Nombre',
-      maxWidth: 250,
+      maxWidth: 600,
     },
-    {
-      id: 'itemId',
-      name: 'Id',
-      maxWidth: 250,
-    },
-    {
-      id: 'price',
-      name: 'Precio (CUP)',
-      maxWidth: 250,
-    },
-    {
+    /*{
       id: 'active',
       name: 'Activo',
       custom: function CustomCell(row, idx) {
@@ -135,7 +123,7 @@ const Products = () => {
         )
       },
       maxWidth: 200,
-    },
+    },*/
     {
       id: '',
       name: '',
@@ -146,20 +134,32 @@ const Products = () => {
           </Button>
         )
       },
-      maxWidth: 100,
+      maxWidth: 80,
+    },
+    {
+      id: '',
+      name: '',
+      custom: function CustomCell(row) {
+        return (
+          <Button color="primary" onClick={() => handleView(row)}>
+            Ver
+          </Button>
+        )
+      },
+      maxWidth: 80,
     },
   ]
 
   return (
     <Layout
-      title={`Productos - ${appId}`}
+      title={`Productos - ${applicationId}`}
       breadcrumbs={[
         {
           text: 'Dashboard',
           page: '/dashboard',
         },
         {
-          text: appId,
+          text: applicationId,
         },
         { text: 'Productos' },
       ]}
@@ -172,10 +172,8 @@ const Products = () => {
               color="primary"
               onClick={handleCloseForm}
             >
-              Registrar Producto
+              Registrar Ranking
             </Button>
-
-            <SearchField placeholder="Buscar Producto" setValue={setSearch} />
           </Grid>
 
           <Dialog
@@ -183,40 +181,47 @@ const Products = () => {
             open={showForm}
             onClose={handleCloseForm}
             aria-labelledby="form-dialog-title"
+            fullWidth={true}
+            maxWidth="md"
           >
             <DialogTitle id="form-dialog-title">
-              {!editMode ? 'Registrar Producto' : 'Editar Producto'}
+              {!editMode ? 'Registrar Ranking' : 'Editar Ranking'}
+              {editMode && selectedRanking && (
+                <Typography>id: {selectedRanking.id}</Typography>
+              )}
             </DialogTitle>
 
-            <ProductForm
+            <RankingForm
               handleCloseForm={handleCloseForm}
               edit={editMode}
-              product={selectedProduct}
+              ranking={selectedRanking}
             />
           </Dialog>
 
           {isFetching && <LoaderBar />}
 
-          {products?.result?.length > 0 && !isFetching ? (
+          {rankings?.length > 0 && !isFetching ? (
             <CustomTable
-              data={products.result}
+              data={rankings}
               columns={columns}
-              pagination={{
-                count: products.count,
-                page,
-                size,
-                setSize,
-                setPage,
-              }}
+              paginated={false}
+              pagination={{}}
             />
-          ) : products?.result?.length === 0 && !isFetching ? (
+          ) : rankings?.length === 0 && !isFetching ? (
             <Grid justifyContent="center" container>
               <Typography style={{ marginTop: 150, textAlign: 'center' }}>
-                No hay productos
+                No hay rankings
               </Typography>
             </Grid>
           ) : (
             ''
+          )}
+          {selectedRanking && (
+            <RankingListModal
+              handleCloseForm={() => setShowRankModal(!showRankModal)}
+              showForm={showRankModal}
+              ranking={selectedRanking}
+            />
           )}
         </Grid>
       </Grid>
@@ -224,4 +229,4 @@ const Products = () => {
   )
 }
 
-export default Products
+export default Rankings

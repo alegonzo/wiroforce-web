@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import LoaderBar from '../../../components/common/LoaderBar'
-import { getSession } from 'next-auth/client'
 import Layout from '../../../components/layouts/Layout.jsx'
 import UsersTable from '../../../components/user/UsersTable'
-import api from '../../../utils/api'
 import useUsers from '../../../hooks/user/useUsers'
 import SearchField from '../../../components/common/SearchField'
 import { useQueryClient } from 'react-query'
 import { USERS_URL } from '../../../utils/constants'
 import useAppContext from '../../../components/AppContext'
+import { api } from '../../../utils/api'
 
-const Users = ({ session }) => {
+const Users = () => {
   const queryClient = useQueryClient()
   const { setMessage, setShowBackdrop } = useAppContext()
   const [page, setPage] = useState(0)
   const [size, setSize] = useState(5)
   const [search, setSearch] = useState('')
-  const { data: users, error } = useUsers(
+  const {
+    data: users,
+    error,
+    isFetching,
+  } = useUsers(
     {
-      token: session.user.token,
       page,
       size,
       search,
@@ -43,15 +45,10 @@ const Users = ({ session }) => {
     if (r === true) {
       try {
         setShowBackdrop(true)
-        await api().put(
-          `/users/${id}/updateStatus`,
-          { active: !active },
-          {
-            headers: {
-              Authorization: 'Bearer ' + session.user.token,
-            },
-          }
-        )
+        await api(`/users/${id}/updateStatus`, {
+          method: 'put',
+          data: { active: !active },
+        })
         setMessage({
           show: true,
           text: 'Acción realizada con éxito',
@@ -89,7 +86,7 @@ const Users = ({ session }) => {
 
           <br style={{ marginBottom: 20 }} />
 
-          {users ? (
+          {users?.result?.length > 0 && !isFetching ? (
             <UsersTable
               users={users}
               updateActiveUser={updateActiveUser}
@@ -99,22 +96,17 @@ const Users = ({ session }) => {
               setSize={setSize}
             />
           ) : (
-            <LoaderBar />
+            <Grid justifyContent="center" container>
+              <Typography style={{ marginTop: 150, textAlign: 'center' }}>
+                No hay usuarios
+              </Typography>
+            </Grid>
           )}
+          {isFetching && <LoaderBar />}
         </Grid>
       </Grid>
     </Layout>
   )
-}
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context)
-  if (session?.user?.roles === 'admin') {
-    return { props: { session } }
-  }
-  return {
-    redirect: { destination: '/login', permanent: false },
-  }
 }
 
 export default Users

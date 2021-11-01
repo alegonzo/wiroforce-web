@@ -5,6 +5,10 @@ export const PRODUCT_URL = (id) => `/products/${id}`
 export const USERS_URL = `/users`
 export const USER_URL = '/users/profile'
 export const COMPANIES_URL = '/companies'
+export const RANKINGS_URL = '/rankings'
+export const RANKING_COUNT_URL = (id) => `/rankings/count/${id}`
+export const RANKING_URL = (id) => `/rankings/${id}`
+export const RANKING_PLAYERS_URL = '/rankings/players'
 export const SPECIAL_CHARS_REGEXP = /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/
 export const SPECIAL_CHARS_REGEXP_NO_SPACE = /^[A-Za-z0-9]*$/
 export const PROVINCES = [

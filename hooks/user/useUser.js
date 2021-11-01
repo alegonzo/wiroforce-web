@@ -1,15 +1,12 @@
 import { useQuery } from 'react-query'
-import api from '../../utils/api'
+import { api } from '../../utils/api'
 import { USER_URL } from '../../utils/constants'
 
-const getUser = async ({ queryKey }) => {
-  const token = queryKey[1]
-  const { data } = await api().get(USER_URL, {
-    headers: { Authorization: 'Bearer ' + token },
-  })
+const getUser = async ({ queryKey: [url] }) => {
+  const { data } = await api(url)
   return data
 }
 
-export default function useUser(token, options = {}) {
-  return useQuery([USER_URL, token], getUser, options)
+export default function useUser(options = {}) {
+  return useQuery([USER_URL], getUser, options)
 }

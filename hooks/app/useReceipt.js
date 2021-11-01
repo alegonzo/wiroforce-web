@@ -1,15 +1,14 @@
 import { useQuery } from 'react-query'
-import api from '../../utils/api'
+import { api } from '../../utils/api'
 import { APPLICATIONS_RECEIPT_URL } from '../../utils/constants'
 
-const getReceipt = async ({ queryKey: [url, token] }) => {
-  const { data } = await api().get(url, {
-    headers: { Authorization: 'Bearer ' + token },
+const getReceipt = async ({ queryKey: [url] }) => {
+  const { data } = await api(url, {
     responseType: 'blob',
   })
   return data
 }
 
-export default function useReceipt(id, token, options = {}) {
-  return useQuery([APPLICATIONS_RECEIPT_URL(id), token], getReceipt, options)
+export default function useReceipt(id, options = {}) {
+  return useQuery([APPLICATIONS_RECEIPT_URL(id)], getReceipt, options)
 }

@@ -21,17 +21,12 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const ApplicationList = () => {
-  const [session, loading] = useSession()
+  const [session] = useSession()
   const { setMessage } = useAppContext()
   const [showForm, setShowForm] = useState(false)
   const classes = useStyles()
 
-  const { data: applications, error } = useApps(
-    { token: session.user.token },
-    {
-      enabled: !loading,
-    }
-  )
+  const { data: applications, error } = useApps()
 
   useEffect(() => {
     if (error?.message)

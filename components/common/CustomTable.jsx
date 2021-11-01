@@ -21,6 +21,7 @@ const useStyles = makeStyles({
 const CustomTable = ({
   data,
   columns,
+  paginated = true,
   pagination: { count, page, size, setPage, setSize },
 }) => {
   const classes = useStyles()
@@ -60,20 +61,22 @@ const CustomTable = ({
           ))}
         </TableBody>
         <TableFooter>
-          <TableRow>
-            <TablePagination
-              count={count}
-              page={page}
-              rowsPerPage={size}
-              rowsPerPageOptions={[5, 10, 20]}
-              onPageChange={(e, page) => {
-                setPage(page)
-              }}
-              onRowsPerPageChange={(e) => {
-                setSize(e.target.value)
-              }}
-            />
-          </TableRow>
+          {paginated && (
+            <TableRow>
+              <TablePagination
+                count={count}
+                page={page}
+                rowsPerPage={size}
+                rowsPerPageOptions={[5, 10, 20]}
+                onPageChange={(e, page) => {
+                  setPage(page)
+                }}
+                onRowsPerPageChange={(e) => {
+                  setSize(e.target.value)
+                }}
+              />
+            </TableRow>
+          )}
         </TableFooter>
       </Table>
     </TableContainer>

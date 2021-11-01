@@ -11,7 +11,9 @@ import {
   ExpandMore,
   Collections,
   TrendingUp,
+  Equalizer,
 } from '@material-ui/icons'
+import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
@@ -25,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const ApplicationListItem = ({ application }) => {
+  const [session] = useSession()
   const [expanded, setExpanded] = useState(false)
   const router = useRouter()
   const classes = useStyles()
@@ -67,6 +70,21 @@ const ApplicationListItem = ({ application }) => {
             </ListItemIcon>
             <ListItemText primary="Productos" />
           </ListItem>
+
+          {session?.user?.company?.name === 'Conwiro' && (
+            <ListItem
+              button
+              className={classes.nestedMore}
+              onClick={() =>
+                router.push(`/applications/${application.appId}/rankings`)
+              }
+            >
+              <ListItemIcon>
+                <Equalizer />
+              </ListItemIcon>
+              <ListItemText primary="Rankings" />
+            </ListItem>
+          )}
         </List>
       </Collapse>
     </>
