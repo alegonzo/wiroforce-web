@@ -153,7 +153,7 @@ const RankingListModal = ({ showForm, handleCloseForm, ranking }) => {
                 {players.map((row) => (
                   <TableRow key={row.name}>
                     <TableCell>{row.rank}</TableCell>
-                    <TableCell>{row.id}</TableCell>
+                    <TableCell>{row.username}</TableCell>
                     <TableCell align="right">{row.score}</TableCell>
                   </TableRow>
                 ))}
